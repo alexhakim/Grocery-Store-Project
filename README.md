@@ -6,22 +6,19 @@ The purpose of this project is to develop a grocery store android application, l
 
 ## Features
 
-1. Items scanned with the barcode scanner will be displayed on the app, providing a total list of the user's bag.
-2. Cost & Nutritional info for each time and total will be implemented.
-3. Login & Checkout
-4. ...
+1. Items scanned with the barcode scanner will be displayed on the app, providing a list of the user's bag.
+2. Cost & Nutritional info for items
+3. Login/Logout & Checkout
+4. Remove items from your bag on the app 
 
-## How to link Android Studio to GitHub
+## How to import GitHub project to Android Studio on your local device
 
-1. Open your cmd and type git --version. If a version is displayed then you are good. If not, download git from this link: https://git-scm.com/downloads
-2. Open Android Studio and go to VCS -> Enable Version Control Integration
-3. Select git and click on Ok
-4. In the top left corner navigate from "Android" to "Project" by clicking on Android
-5. Right click on the module folder and go to git -> add
-6. Repeat but go to git -> commit
-7. Click on add account and add your github account
-
-
+1. On GitHub, click on Code -> Copy HTTPS link
+2. Open Android Studio and go to  File -> New -> Project from Version Control
+3. Make sure the Version Control is git, paste the previously copied URL and choose destination directory then click on Done
+4. Wait for Android Studio to import the code (progress shown @ bottom of screen)
+5. Project should now be available on Android Studio
+ 
 ## Team Members
 
 1. Alexandre Hakim
@@ -31,3 +28,4 @@ The purpose of this project is to develop a grocery store android application, l
 5. Aydin Azari Farhad
 
 
+##### Note: Stories found in Stories.txt
