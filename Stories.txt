@@ -1,3 +1,4 @@
+##### Shopper
 As a shopper I want to easily be able to sync the scanner to my personal account on my mobile phone app					
 As a shopper I want to be able to scan items that I place in my cart using the scanner					
 As a shopper I want to be able to see the list of items that I have scanned on my phone as I am shopping					
@@ -7,10 +8,8 @@ As a shopper I want to be able to log out of my account
 As a shopper I want to be able to see a page with nutrition facts driven from my past 10 shopping events					
 As a shopper I want to be able to see a graph of my spending history within the past 10 events					
 As a shopper I want to have a check out button that produces a bar code that I can use to check out with.					
-					
-					
-					
-					
+							
+##### Application					
 As the application I need to store customers data categorized based on their customer number					
 As the application I need to recieve incoming bar codes from the scanner					
 As the application I need to find and fetch from database the items that their barcodes were passed to me 					
