@@ -4,7 +4,7 @@
 
 The purpose of this project is to develop a grocery store android application, linked to a barcode scanner and development kit. 
 
-## Features
+## App Features
 
 1. Items scanned with the barcode scanner will be displayed on the app, providing a list of the user's bag.
 2. Cost & Nutritional info for items
