@@ -19,7 +19,7 @@ The purpose of this project is to develop a grocery store android application, l
 4. Wait for Android Studio to import the code (progress shown @ bottom of screen)
 5. Project should now be available on Android Studio
 
-## How to push changes from Android Studio to GitHub
+## How to push changes from Android Studio to GitHub for the first time
 
 ##### You must first import the project from GitHub to your local device
 
@@ -34,7 +34,7 @@ The purpose of this project is to develop a grocery store android application, l
 9. Go to Git -> Push
 10. Click on Define remote in the popup screen and set name to your username
 11. Copy and paste https://github.com/alexhakim/coen390 in URL
-12. You will be prompted to login to your GitHub if you are pushing changes for the first time. If logging in with your GitHub account works, you are done. If not, follow the next steps
+12. You will be prompted to login to your GitHub account since you are pushing changes for the first time. If logging in with your GitHub account works, you are done. If not, follow the next steps
 13. On GitHub, click on your profile and go to Settings -> Developer Settings -> Personal Access Tokens -> Generate New Token
 14. Call it whatever you want, set expiration to no expiration, check the repo and notifications boxes and click on generate token
 15. Paste the token link on Android Studio
