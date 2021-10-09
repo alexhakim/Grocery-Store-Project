@@ -14,18 +14,27 @@
         android:layout_marginTop="40dp"
         app:srcCompat="@drawable/appicon" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameEditText"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="230dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp" >
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +43,20 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <Button
         android:id="@+id/loginButton"
