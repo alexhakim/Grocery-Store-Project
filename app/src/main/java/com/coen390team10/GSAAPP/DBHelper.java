@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
-        super(context, "GROCERYSTORE", null, 1);
+        super(context, "DATABASETESTVERSION000000000", null, 1);
     }
 
     @Override
@@ -47,5 +47,15 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
         c.close();
         return count > 0 ? true : false;
+    }
+
+    public boolean isUsernameExists(String username){ // check if user already exists in database
+        String query = "SELECT * FROM users WHERE username =? ";
+        String[] sA = {username};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor c = sqLiteDatabase.rawQuery(query,sA);
+        int count = c.getCount();
+        c.close();
+        return count>=1;
     }
 }

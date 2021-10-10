@@ -78,8 +78,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else { // if we have both username and password
 
                     if (loginButton.getText() == "Sign Up") {
+                        boolean checkIfUserExists = sqlLiteDatabase.isUsernameExists(usernameEditText.getEditText().getText().toString());
                         boolean var = sqlLiteDatabase.registerUser(usernameEditText.getEditText().getText().toString(), passwordEditText.getEditText().getText().toString());
-                        if (var) {
+                        if (checkIfUserExists){
+                            Toast.makeText(MainActivity.this,"Error. User already exists. Please login instead.", Toast.LENGTH_LONG).show();
+                        }
+                        else if (var) {
                             Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_SHORT).show();
                             Intent afterLR = new Intent(MainActivity.this, AfterLogin.class);
                             startActivity(afterLR);
@@ -88,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     } else if (loginButton.getText() == "Login") {
                         boolean var = sqlLiteDatabase.checkUser(usernameEditText.getEditText().getText().toString(), passwordEditText.getEditText().getText().toString());
-                        if (var) {
+                        if (sqlLiteDatabase.checkUser(usernameEditText.getEditText().getText().toString(), passwordEditText.getEditText().getText().toString())) {
                             Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_SHORT).show();
                             Intent afterLR = new Intent(MainActivity.this, AfterLogin.class);
                             startActivity(afterLR);
