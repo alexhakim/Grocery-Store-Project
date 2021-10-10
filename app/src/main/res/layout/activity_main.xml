@@ -65,14 +65,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="360dp"
         android:backgroundTint="#344398"
-        android:text="Sign in" />
+        android:text="Login" />
 
     <TextView
         android:id="@+id/registerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="372dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="410dp"
         android:text="Sign Up"
         android:textColor="#344398"
         android:textSize="17sp" />
