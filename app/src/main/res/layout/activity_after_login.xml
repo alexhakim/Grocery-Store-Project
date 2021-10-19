@@ -28,6 +28,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="620dp"
         android:backgroundTint="#344398"
+        android:onClick="search"
         android:text="Search" />
 
 </RelativeLayout>

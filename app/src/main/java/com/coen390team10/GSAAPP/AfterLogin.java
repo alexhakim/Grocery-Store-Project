@@ -12,23 +12,72 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class AfterLogin extends AppCompatActivity {
 
     // TEST BLUETOOTH ACTIVITY
     // permissions added in AndroidManifest
-
+    // firebase
     // need to setup database for each user
 
     TextView connectionStatusTextView;
     ListView deviceListView;
     Button searchButton;
+    ArrayList<String> availableDevices = new ArrayList<>();
+    ArrayList<String> addresses = new ArrayList<>();
+    ArrayAdapter arrayAdapter;
     BluetoothAdapter bluetoothAdapter;
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.i("ACTION --->",action);
+
+            if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)){
+                connectionStatusTextView.setText("Search Complete.");
+                searchButton.setEnabled(true);
+            } else if (action.equals(BluetoothDevice.ACTION_FOUND)){
+                BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String deviceName = bluetoothDevice.getName();
+                String deviceAddress = bluetoothDevice.getAddress();
+                String RSSI = Integer.toString(intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE)); // get RSSI
+                Log.i("Device found","Name: " + deviceName + ", Address: " + deviceAddress + ", RSSI: " + RSSI);
+
+                if (!addresses.contains(deviceAddress)){
+                    addresses.add(deviceAddress);
+                    String deviceStr = "";
+                    if (deviceName == null || deviceName.equals("")){
+                        deviceStr = deviceAddress + " - RSSI " + RSSI + "dBm";
+                    }else {
+                        deviceStr = deviceName + " - RSSI" + RSSI + "dBm";
+                    }
+                    availableDevices.add(deviceStr);
+                    arrayAdapter.notifyDataSetChanged();
+                }
+
+
+            }
+        }
+    };
+
+    public void search(View view){
+        connectionStatusTextView.setText("Searching...");
+        searchButton.setEnabled(false);
+        availableDevices.clear();
+        addresses.clear();
+        bluetoothAdapter.startDiscovery();
+
+    }
 
 
     @Override
@@ -45,7 +94,21 @@ public class AfterLogin extends AppCompatActivity {
         deviceListView = (ListView) findViewById(R.id.deviceListView);
         searchButton = (Button) findViewById(R.id.searchButton);
 
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,availableDevices);
+        deviceListView.setAdapter(arrayAdapter);
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        /*if (bluetoothAdapter == null)
+            Log.i("TAG","Bluetooth is not supported on your device");*/
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        intentFilter.addAction(BluetoothDevice.ACTION_FOUND);
+        intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        registerReceiver(broadcastReceiver,intentFilter);
+
+
 
 
     }
