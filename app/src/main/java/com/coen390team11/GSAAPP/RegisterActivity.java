@@ -1,4 +1,4 @@
-package com.coen390team10.GSAAPP;
+package com.coen390team11.GSAAPP;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -71,6 +75,31 @@ public class RegisterActivity extends AppCompatActivity {
                         || passwordEditText.getEditText().getText().toString().isEmpty()
                         || passwordConfirmEditText.getEditText().getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please fill all fields.", Toast.LENGTH_LONG).show();
+                } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))){
+
+                    Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    String email = emailEditText.getEditText().getText().toString();
+                    String password = passwordEditText.getEditText().getText().toString();
+
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.putExtra("email_id",email);
+                                intent.putExtra("user_id",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -80,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                Intent switchToLoginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent switchToLoginIntent = new Intent(RegisterActivity.this,MainActivity.class);
                 startActivity(switchToLoginIntent);
                 //onBackPressed();
                 this.finish();

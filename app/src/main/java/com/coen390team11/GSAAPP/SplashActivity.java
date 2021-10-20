@@ -1,9 +1,8 @@
-package com.coen390team10.GSAAPP;
+package com.coen390team11.GSAAPP;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;

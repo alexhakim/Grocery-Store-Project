@@ -4,79 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lightbluebackgroundlogin"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iconImageView"
-        android:layout_width="192dp"
-        android:layout_height="173dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        app:srcCompat="@drawable/appicon" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernameEditText"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordEditText"
+    <TextView
+        android:id="@+id/connectionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="You are logged in successfully."
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="290dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:passwordToggleEnabled="true">
+        android:layout_marginTop="50dp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="360dp"
-        android:backgroundTint="#344398"
-        android:text="Login" />
 
     <TextView
-        android:id="@+id/registerTextView"
+        android:id="@+id/userIDTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="410dp"
-        android:text="Sign Up"
-        android:textColor="#344398"
-        android:textSize="17sp" />
+        android:layout_marginTop="90dp"/>
 
+    <TextView
+        android:id="@+id/emailIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp" />
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"/>
 </RelativeLayout>

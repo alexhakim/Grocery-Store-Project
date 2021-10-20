@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.coen390team10.GSAAPP">
+    package="com.coen390team11.GSAAPP">
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
@@ -16,19 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreAndroidApplication">
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.coen390team11.GSAAPP.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.coen390team11.GSAAPP.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.coen390team11.GSAAPP.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".AfterLogin"
+            android:name="com.coen390team11.GSAAPP.AfterLogin"
             android:exported="true" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.coen390team11.GSAAPP.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">

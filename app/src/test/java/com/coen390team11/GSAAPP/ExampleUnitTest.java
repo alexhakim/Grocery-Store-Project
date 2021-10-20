@@ -1,4 +1,4 @@
-package com.coen390team10.GSAAPP;
+package com.coen390team11.GSAAPP;
 
 import org.junit.Test;
 

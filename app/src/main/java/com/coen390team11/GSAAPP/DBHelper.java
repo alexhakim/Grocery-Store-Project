@@ -1,4 +1,4 @@
-package com.coen390team10.GSAAPP;
+package com.coen390team11.GSAAPP;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class DBHelper {/*extends SQLiteOpenHelper {
 
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_USERNAME = "username";
@@ -61,5 +61,5 @@ public class DBHelper extends SQLiteOpenHelper {
         int count = c.getCount();
         c.close();
         return count>=1;
-    }
+    }*/
 }
