@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -98,5 +99,15 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    void userLoggedInSuccess(User userX){
+        Log.i("First Name: ", userX.firstName);
+        Log.i("Last Name: ", userX.lastName);
+        Log.i("Email: ", userX.email);
+
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

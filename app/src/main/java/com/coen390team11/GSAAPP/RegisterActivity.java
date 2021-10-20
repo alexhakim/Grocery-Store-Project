@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,11 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -88,7 +98,43 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+
+                                User user = new User();
+                                user.email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                user.id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                user.firstName = firstNameEditText.getEditText().getText().toString();
+                                user.lastName = lastNameEditText.getEditText().getText().toString();
+
+                                // store user in cloud
+                                FirebaseFirestore.getInstance().collection("users").document(user.id)
+                                        .set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+
+                                    }
+                                });
+
+                               /* FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                String currentUserID = "";
+                                if (currentUser != null){
+                                    currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                }*/
+
+                                // fetch user from cloud
+                                /*FirebaseFirestore.getInstance().collection("users").document(currentUserID)
+                                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                    }
+                                });*/
+
+                                Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -102,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

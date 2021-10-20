@@ -10,7 +10,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +42,9 @@ public class forgotPasswordActivity extends AppCompatActivity {
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton);
 
         forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View view) {
                 if (forgotPasswordEmailEditText.getEditText().getText().toString().isEmpty()){
@@ -52,8 +58,6 @@ public class forgotPasswordActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(),"Password reset email sent.",Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Error. Please try again later.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
