@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
@@ -48,10 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         firstNameEditText = (TextInputLayout) findViewById(R.id.firstNameEditText);
-        lastNameEditText =  (TextInputLayout) findViewById(R.id.lastNameEditText);
-        emailEditText =  (TextInputLayout) findViewById(R.id.emailEditText);
+        lastNameEditText = (TextInputLayout) findViewById(R.id.lastNameEditText);
+        emailEditText = (TextInputLayout) findViewById(R.id.emailEditText);
         passwordEditText = (TextInputLayout) findViewById(R.id.passwordEditText);
-        passwordConfirmEditText =  (TextInputLayout) findViewById(R.id.passwordConfirmEditText);
+        passwordConfirmEditText = (TextInputLayout) findViewById(R.id.passwordConfirmEditText);
         registerButton = findViewById(R.id.registerButton);
         loginTextView = findViewById(R.id.loginTextView);
 
@@ -64,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent switchToLoginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent switchToLoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(switchToLoginIntent);
                 finish();
             }
@@ -85,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                         || passwordEditText.getEditText().getText().toString().isEmpty()
                         || passwordConfirmEditText.getEditText().getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Missing fields.", Toast.LENGTH_LONG).show();
-                } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))){
+                } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))) {
 
                     Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -93,10 +94,10 @@ public class RegisterActivity extends AppCompatActivity {
                     String email = emailEditText.getEditText().getText().toString();
                     String password = passwordEditText.getEditText().getText().toString();
 
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
 
                                 User user = new User();
@@ -118,23 +119,15 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                               /* FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                                 String currentUserID = "";
-                                if (currentUser != null){
+                                if (currentUser != null) {
                                     currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                }*/
+                                }
 
-                                // fetch user from cloud
-                                /*FirebaseFirestore.getInstance().collection("users").document(currentUserID)
-                                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-
-                                    }
-                                });*/
 
                                 Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
@@ -148,7 +141,31 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    
+
+    public final void getUserDetails(@NotNull final Activity activity) {
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserID = "";
+        if (currentUser != null) {
+            currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        FirebaseFirestore.getInstance().collection("users").document(currentUserID)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                User useR = documentSnapshot.toObject(User.class);
+
+                if (activity instanceof LoginActivity) {
+                    ((LoginActivity) activity).userLoggedInSuccess(useR);
+                }
+
+
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

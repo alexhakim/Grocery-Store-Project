@@ -78,6 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
+
+                                // fetch user from cloud
+                                RegisterActivity registerActivity = new RegisterActivity();
+                                registerActivity.getUserDetails(LoginActivity.this);
+
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
