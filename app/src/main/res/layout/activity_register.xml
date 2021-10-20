@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lightbluebackgroundlogin"
+    tools:context=".RegisterActivity">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="192dp"
+        android:layout_height="173dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/appicon" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/firstNameEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:ems="10"
+        android:hint="First name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="410dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordConfirmEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="470dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lastNameEditText"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
+        android:ems="10"
+        android:hint="Last name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="210dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="540dp"
+        android:backgroundTint="#344398"
+        android:text="Register" />
+
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="590dp"
+        android:text="Already have an account? Login"
+        android:textColor="#344398"
+        android:textSize="17sp" />
+
+
+</RelativeLayout>

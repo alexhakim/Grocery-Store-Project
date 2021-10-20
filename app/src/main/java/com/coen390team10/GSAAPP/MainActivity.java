@@ -19,16 +19,16 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
-    TextView registerTextView;
+    /*TextView registerTextView;
     TextInputLayout usernameEditText;
     TextInputLayout passwordEditText;
     Button loginButton;
     Boolean loginMode = true;
-    private DBHelper sqlLiteDatabase;
+    private DBHelper sqlLiteDatabase;*/
 
-    @Override
+    /*@Override
     public void onClick(View view){ // switch between sign in and sign up
         if (view.getId() == R.id.registerTextView){
 
@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 registerTextView.setText("Sign Up");
             }
         }
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameEditText = (TextInputLayout) findViewById(R.id.usernameEditText);
+        /*usernameEditText = (TextInputLayout) findViewById(R.id.usernameEditText);
         passwordEditText = (TextInputLayout) findViewById(R.id.passwordEditText);
         loginButton = (Button) findViewById(R.id.loginButton);
         registerTextView = (TextView) findViewById(R.id.registerTextView);
@@ -107,5 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+    }*/
     }
 }
