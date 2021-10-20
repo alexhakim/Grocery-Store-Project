@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
                         || emailEditText.getEditText().getText().toString().isEmpty()
                         || passwordEditText.getEditText().getText().toString().isEmpty()
                         || passwordConfirmEditText.getEditText().getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please fill all fields.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Missing fields.", Toast.LENGTH_LONG).show();
                 } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))){
 
                     Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                Intent switchToLoginIntent = new Intent(RegisterActivity.this,MainActivity.class);
+                Intent switchToLoginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(switchToLoginIntent);
                 //onBackPressed();
                 this.finish();

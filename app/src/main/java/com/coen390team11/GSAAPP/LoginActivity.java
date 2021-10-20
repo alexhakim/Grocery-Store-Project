@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout passwordEditText;
     Button loginButton;
     TextView registerTextView;
+    TextView forgotPasswordTextView;
 
 
     @Override
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = (TextInputLayout) findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
         registerTextView = findViewById(R.id.registerTextView);
+        forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView);
 
         ActionBar actionBar = getSupportActionBar();
         // changing color of action bar
@@ -85,6 +87,15 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forgotPasswordIntent = new Intent(LoginActivity.this,forgotPasswordActivity.class);
+                startActivity(forgotPasswordIntent);
+                finish();
             }
         });
     }

@@ -16,19 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreAndroidApplication">
         <activity
-            android:name="com.coen390team11.GSAAPP.RegisterActivity"
+            android:name=".forgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.coen390team11.GSAAPP.LoginActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="com.coen390team11.GSAAPP.MainActivity"
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name="com.coen390team11.GSAAPP.AfterLogin"
+            android:name=".AfterLogin"
             android:exported="true" />
         <activity
-            android:name="com.coen390team11.GSAAPP.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">

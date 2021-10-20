@@ -6,37 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/connectionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="You are logged in successfully."
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
 
-
-    <TextView
-        android:id="@+id/userIDTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"/>
-
-    <TextView
-        android:id="@+id/emailIDTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp" />
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"/>
 </RelativeLayout>

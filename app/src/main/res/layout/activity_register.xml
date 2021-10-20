@@ -17,7 +17,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/firstNameEditText"
-        android:layout_width="210dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="230dp"
@@ -27,7 +27,7 @@
         android:minHeight="48dp" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:ems="10"></com.google.android.material.textfield.TextInputEditText>
@@ -48,7 +48,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:ems="10"
@@ -69,7 +69,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:ems="10"
@@ -79,7 +79,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailEditText"
-        android:layout_width="210dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
@@ -89,7 +89,7 @@
         android:minHeight="48dp" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:ems="10"></com.google.android.material.textfield.TextInputEditText>
@@ -98,7 +98,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lastNameEditText"
-        android:layout_width="210dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="290dp"
@@ -108,7 +108,7 @@
         android:minHeight="48dp" >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="210dp"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:ems="10"></com.google.android.material.textfield.TextInputEditText>
