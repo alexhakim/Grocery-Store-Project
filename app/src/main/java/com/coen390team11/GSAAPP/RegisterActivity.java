@@ -89,8 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                                intent.putExtra("email_id",email);
-                                intent.putExtra("user_id",FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();

@@ -25,13 +25,6 @@ public class MainActivity extends AppCompatActivity {
         emailIDTextView = findViewById(R.id.emailIDTextView);
         logoutButton = findViewById(R.id.logoutButton);
 
-        Intent intent = getIntent();
-        String userID = intent.getStringExtra("user_id");
-        String email = intent.getStringExtra("email_id");
-
-        userIDTextView.setText("User ID: " + userID);
-        userIDTextView.setText("Email ID: " + email);
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
