@@ -136,16 +136,26 @@ public class bluetoothConnectActivity extends AppCompatActivity {
                 checkPermission(Manifest.permission.BLUETOOTH_ADMIN,BLUETOOTH_ADMIN_CODE);
                 checkPermission(Manifest.permission.BLUETOOTH,BLUETOOTH_CODE);
 
+                if (checkPermission(Manifest.permission.BLUETOOTH_CONNECT,BLUETOOTH_CONNECT_CODE)
+                        && checkPermission(Manifest.permission.BLUETOOTH_SCAN,BLUETOOTH_SCAN_CODE)
+                        && checkPermission(Manifest.permission.BLUETOOTH_ADVERTISE,BLUETOOTH_ADVERTISE_CODE)){
+                    Intent goToMainActivityIntent = new Intent(bluetoothConnectActivity.this,MainActivity.class);
+                    startActivity(goToMainActivityIntent);
+                }
+
+
             }
         });
     }
 
-    public void checkPermission(String permission, int requestCode){
+    public boolean checkPermission(String permission, int requestCode){
 
         if (ContextCompat.checkSelfPermission(bluetoothConnectActivity.this, permission) == PackageManager.PERMISSION_GRANTED){
             Toast.makeText(getApplicationContext(), "This permission is already granted.", Toast.LENGTH_SHORT).show();
+            return true;
         } else {
             ActivityCompat.requestPermissions(bluetoothConnectActivity.this,new String[] {permission}, requestCode);
+            return false;
         }
     }
 

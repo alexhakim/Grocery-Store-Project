@@ -11,7 +11,7 @@ public class User implements Parcelable {
     public String firstName = "";
     public String lastName = "";
     public String email = "";
-    public int mobile = 0;
+    public Long mobile = Long.valueOf(0);
     public String gender = "";
     public int profileCompleted = 0;
 
@@ -25,7 +25,7 @@ public class User implements Parcelable {
         firstName = in.readString();
         lastName = in.readString();
         email = in.readString();
-        mobile = in.readInt();
+        mobile = in.readLong();
         gender = in.readString();
         profileCompleted = in.readInt();
     }
@@ -53,7 +53,7 @@ public class User implements Parcelable {
         parcel.writeString(firstName);
         parcel.writeString(lastName);
         parcel.writeString(email);
-        parcel.writeInt(mobile);
+        parcel.writeLong(mobile);
         parcel.writeString(gender);
         parcel.writeInt(profileCompleted);
     }
