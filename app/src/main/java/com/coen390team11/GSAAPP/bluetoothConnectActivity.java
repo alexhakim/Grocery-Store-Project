@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,15 +19,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class AfterLogin extends AppCompatActivity {
+public class bluetoothConnectActivity extends AppCompatActivity {
 
-    // TEST BLUETOOTH ACTIVITY
-    // permissions added in AndroidManifest
-    // firebase
-    // need to setup database for each user
+    // needs to be tested on actual android device, does not work on emulator
+    // for now class is commented to avoid fatal exception, when enabling class
+    // change intent in "userLoggedInSuccess" from MainActivity.class
+    // to bluetoothConnectActivity.class
 
     TextView connectionStatusTextView;
     ListView deviceListView;
@@ -82,7 +84,7 @@ public class AfterLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_after_login);
+        setContentView(R.layout.activity_bluetooth_connect);
 
         ActionBar actionBar = getSupportActionBar();
         // changing color of action bar
@@ -92,6 +94,11 @@ public class AfterLogin extends AppCompatActivity {
         connectionStatusTextView = (TextView) findViewById(R.id.connectionStatusTextView);
         deviceListView = (ListView) findViewById(R.id.deviceListView);
         searchButton = (Button) findViewById(R.id.searchButton);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE);
+        String user_name = sharedPreferences.getString("logged_in_username","");
+        Toast.makeText(getApplicationContext(), "Welcome " + user_name, Toast.LENGTH_SHORT).show();
+
 
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,availableDevices);
         deviceListView.setAdapter(arrayAdapter);
@@ -106,12 +113,5 @@ public class AfterLogin extends AppCompatActivity {
         intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
         intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(broadcastReceiver,intentFilter);
-
-
-
-
     }
-
-
-
 }

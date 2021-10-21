@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                                 RegisterActivity registerActivity = new RegisterActivity();
                                 registerActivity.getUserDetails(LoginActivity.this);
 
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                                /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-                                finish();
+                                finish();*/
                             } else {
                                 Toast.makeText(getApplicationContext(), "Please verify your credentials.", Toast.LENGTH_SHORT).show();
                             }

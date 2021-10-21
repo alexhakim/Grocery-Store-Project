@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreAndroidApplication">
         <activity
+            android:name=".bluetoothConnectActivity"
+            android:exported="false" />
+        <activity
             android:name=".forgotPasswordActivity"
             android:exported="false" />
         <activity
@@ -26,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AfterLogin"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"

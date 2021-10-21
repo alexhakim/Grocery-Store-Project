@@ -119,11 +119,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                                /*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                                 String currentUserID = "";
                                 if (currentUser != null) {
                                     currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                }
+                                }*/
 
 
                                 Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
@@ -156,6 +156,11 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                 User useR = documentSnapshot.toObject(User.class);
+
+                SharedPreferences sharedPreferences = activity.getSharedPreferences("app_preferences",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("logged_in_username", useR.firstName + " " + useR.lastName);
+                editor.apply();
 
                 if (activity instanceof LoginActivity) {
                     ((LoginActivity) activity).userLoggedInSuccess(useR);
