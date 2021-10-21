@@ -89,6 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))) {
 
                     Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
+                } else if (passwordEditText.getEditText().getText().toString().length() <= 6) {
+                    Toast.makeText(getApplicationContext(), "Password length must be greater than 6.", Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     String email = emailEditText.getEditText().getText().toString();

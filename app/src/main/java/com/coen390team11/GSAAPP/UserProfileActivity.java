@@ -67,15 +67,18 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
 
         // get first name
         firstNameEditText.getEditText().setText(userDetails.firstName);
+        // color
         firstNameEditText.getEditText().setTextColor(Color.parseColor("#000000"));
 
         // get last name
         lastNameEditText.getEditText().setText(userDetails.lastName);
+        // color
         lastNameEditText.getEditText().setTextColor(Color.parseColor("#000000"));
 
 
         // get email
         emailEditText.getEditText().setText(userDetails.email);
+        // color
         emailEditText.getEditText().setTextColor(Color.parseColor("#000000"));
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +89,20 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
 
                     String phoneNumber = phoneNumberEditText.getEditText().getText().toString();
 
+                    // get gender from onItemSelected method
                     SharedPreferences sharedPreferences = getSharedPreferences("gender", Context.MODE_PRIVATE);
                     String gender = sharedPreferences.getString("gender","");
 
+                    // if phone number not empty, put in hashmap
                     if (!(phoneNumber.isEmpty())){
                         userHashMap.put("mobile",Long.parseLong(phoneNumber));
                     }
-
+                    // put gender in hashmap
                     userHashMap.put("gender",gender);
+
+                    // set profileCompleted to 1 in hashmap, meaning that the user will
+                    // not be sent to user profile screen on next login
+                    userHashMap.put("profileCompleted", 1);
 
                     // update data
                     FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance()
@@ -102,7 +111,7 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
                         @Override
                         public void onSuccess(Object o) {
                             Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
-                            // NEED TO SET PROFILECOMPLETED TO 1
+                            // if successful, go to bluetoothactivity to connect scanner
                             Intent goToBluetoothActivity = new Intent(UserProfileActivity.this,bluetoothConnectActivity.class);
                             startActivity(goToBluetoothActivity);
                             finish();
@@ -122,7 +131,7 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
 
 
     }
-
+    // get gender from spinner
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String genderSelected = adapterView.getItemAtPosition(i).toString();
@@ -134,11 +143,13 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+        // do nothing
     }
 
+    // maybe add (or if phonenumber < X digits)
     public boolean validateProfileNumber(){
         if (phoneNumberEditText.getEditText().getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter a phone number.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
