@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -111,8 +112,20 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("Last Name: ", userX.lastName);
         Log.i("Email: ", userX.email);
 
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
+        if (userX.profileCompleted == 0){
+            // if user logs in for first time they will be prompted to enter their info
+            Intent intent = new Intent(LoginActivity.this,UserProfileActivity.class);
+            // parcelable to send object type
+            intent.putExtra("extra_user_details", userX);
+            startActivity(intent);
+        } else {
+            // redirect user to bluetoothconnect activity (temporarily set to main activity)
+            Intent intent2 = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent2);
+        }
+
+        /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);*/
         finish();
     }
 }

@@ -2,7 +2,9 @@ package com.coen390team11.GSAAPP;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -26,9 +28,9 @@ import java.util.ArrayList;
 public class bluetoothConnectActivity extends AppCompatActivity {
 
     // needs to be tested on actual android device, does not work on emulator
-    // for now class is commented to avoid fatal exception, when enabling class
-    // change intent in "userLoggedInSuccess" from MainActivity.class
-    // to bluetoothConnectActivity.class
+    // for now class is not used to avoid fatal exception, when enabling class
+    // change intent in LoginActivity in method "userLoggedInSuccess" from MainActivity.class
+    // to bluetoothConnectActivity.class in else statement
 
     TextView connectionStatusTextView;
     ListView deviceListView;
@@ -91,9 +93,9 @@ public class bluetoothConnectActivity extends AppCompatActivity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
-        connectionStatusTextView = (TextView) findViewById(R.id.connectionStatusTextView);
-        deviceListView = (ListView) findViewById(R.id.deviceListView);
-        searchButton = (Button) findViewById(R.id.searchButton);
+        connectionStatusTextView = findViewById(R.id.connectionStatusTextView);
+        deviceListView = findViewById(R.id.deviceListView);
+        searchButton = findViewById(R.id.searchButton);
 
         SharedPreferences sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE);
         String user_name = sharedPreferences.getString("logged_in_username","");
@@ -113,5 +115,13 @@ public class bluetoothConnectActivity extends AppCompatActivity {
         intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
         intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(broadcastReceiver,intentFilter);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // request bluetooth permissions when search button clicked
+                // see https://github.com/M12Shehab/Class-02-Students/blob/main/AbsRuntimePermission.java
+            }
+        });
     }
 }

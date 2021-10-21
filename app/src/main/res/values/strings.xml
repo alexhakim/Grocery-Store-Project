@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Grocery Store Android Application</string>
+    
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Non-Binary</item>
+        <item>Rather Not Say</item>
+    </string-array>
 </resources>
