@@ -1,9 +1,12 @@
 package com.coen390team11.GSAAPP;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,6 +25,11 @@ public class PrimaryActivity extends AppCompatActivity {
 
         binding = ActivityPrimaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ActionBar actionBar = getSupportActionBar();
+        // changing color of action bar
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
