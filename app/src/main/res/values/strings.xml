@@ -8,7 +8,7 @@
         <item>Rather Not Say</item>
     </string-array>
     <string name="title_activity_primary">PrimaryActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_bag">Bag</string>
+    <string name="title_history">History</string>
+    <string name="title_settings">Settings</string>
 </resources>
