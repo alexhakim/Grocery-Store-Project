@@ -2,17 +2,22 @@ package com.coen390team11.GSAAPP;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.coen390team11.GSAAPP.ui.LogoutDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -100,5 +105,31 @@ public class PrimaryActivity extends AppCompatActivity {
         Log.i("User ---> ",userX.email);
     }
 
+    public void openLogoutDialog(){
+        LogoutDialog logoutDialog = new LogoutDialog();
+        logoutDialog.show(getSupportFragmentManager(),"Logout");
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_primary,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.Logout: // if user presses on "Logout" then the following
+                // will be executed:
+                openLogoutDialog();
+                return true;
+
+            case R.id.Rewards: // if user presses on "Rewards" then the following
+                // will be executed:
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
