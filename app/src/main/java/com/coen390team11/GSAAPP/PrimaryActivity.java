@@ -1,9 +1,16 @@
 package com.coen390team11.GSAAPP;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.Spinner;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,6 +21,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.coen390team11.GSAAPP.databinding.ActivityPrimaryBinding;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrimaryActivity extends AppCompatActivity {
 
@@ -40,6 +53,52 @@ public class PrimaryActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_primary);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // for settings fragment, data then passed with shared preferences to fragment
+        getUserDetails(PrimaryActivity.this);
+
+
     }
+
+    public final void getUserDetails(@NotNull Activity activity){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserID = "";
+        if (currentUser != null) {
+            currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        FirebaseFirestore.getInstance().collection("users").document(currentUserID)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                User useR = documentSnapshot.toObject(User.class);
+
+                SharedPreferences sharedPreferences = activity.getSharedPreferences("settings_fragment_info", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("get_name", useR.firstName + " " + useR.lastName);
+                editor.putString("get_email",useR.email);
+                editor.putLong("get_phone",useR.mobile);
+                editor.apply();
+
+                if (activity instanceof PrimaryActivity) {
+                    ((PrimaryActivity) activity).userDetailsSuccess(useR);
+                }
+            }
+        });
+    }
+
+    void userDetailsSuccess(User userX){
+        // Logs
+        Log.i("User ---> ",userX.firstName);
+        Log.i("User ---> ",userX.lastName);
+        try{
+            Log.i("User --->", String.valueOf(userX.mobile));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.i("User ---> ",userX.email);
+    }
+
 
 }

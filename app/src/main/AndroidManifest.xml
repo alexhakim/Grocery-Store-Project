@@ -19,7 +19,8 @@
         <activity
             android:name=".PrimaryActivity"
             android:exported="false"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UserProfileActivity"
             android:exported="false"

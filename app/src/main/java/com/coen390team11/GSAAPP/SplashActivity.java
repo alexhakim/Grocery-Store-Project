@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // set back to LoginActivity instead of PrimaryActivity
-                startActivity(new Intent(SplashActivity.this,PrimaryActivity.class));
+                startActivity(new Intent(SplashActivity.this,LoginActivity.class));
                 finish();
             }
 
