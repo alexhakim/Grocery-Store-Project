@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.databinding.FragmentSettingsBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class SettingsFragment extends Fragment {
 
@@ -80,6 +87,32 @@ public class SettingsFragment extends Fragment {
                 getPhoneNumberEditText.getEditText().setText(passPhone + "");
             }
         });
+
+        saveSettingsButton = binding.saveSettingsButton;
+        saveSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HashMap updateUserHashMap = new HashMap();
+
+                String getNewPhoneNumber = getPhoneNumberEditText.getEditText().getText().toString();
+                updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
+
+                FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance()
+                        .getCurrentUser().getUid()).update(updateUserHashMap)
+                        .addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+                                Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // do nothing
+                    }
+                });
+            }
+        });
+
         return root;
     }
 
@@ -88,4 +121,5 @@ public class SettingsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

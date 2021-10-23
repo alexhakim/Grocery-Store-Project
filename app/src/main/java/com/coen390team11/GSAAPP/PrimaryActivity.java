@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class PrimaryActivity extends AppCompatActivity {
 
     private ActivityPrimaryBinding binding;
+    User userY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +63,8 @@ public class PrimaryActivity extends AppCompatActivity {
         // for settings fragment, data then passed with shared preferences to fragment
         getUserDetails(PrimaryActivity.this);
 
-
     }
-
+    // used to display info in settings fragment
     public final void getUserDetails(@NotNull Activity activity){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUserID = "";
@@ -94,6 +94,9 @@ public class PrimaryActivity extends AppCompatActivity {
     }
 
     void userDetailsSuccess(User userX){
+
+        userY = userX; // temp
+
         // Logs
         Log.i("User ---> ",userX.firstName);
         Log.i("User ---> ",userX.lastName);
@@ -127,6 +130,7 @@ public class PrimaryActivity extends AppCompatActivity {
 
             case R.id.Rewards: // if user presses on "Rewards" then the following
                 // will be executed:
+                // start rewards activity here
 
                 return true;
         }
