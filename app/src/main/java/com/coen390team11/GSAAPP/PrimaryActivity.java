@@ -84,6 +84,7 @@ public class PrimaryActivity extends AppCompatActivity {
                 editor.putString("get_name", useR.firstName + " " + useR.lastName);
                 editor.putString("get_email",useR.email);
                 editor.putLong("get_phone",useR.mobile);
+                editor.putLong("get_rewards_number",useR.rewardsCardNumber);
                 editor.apply();
 
                 if (activity instanceof PrimaryActivity) {

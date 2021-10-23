@@ -35,6 +35,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Random;
+
 public class RegisterActivity extends AppCompatActivity {
 
     TextInputLayout firstNameEditText;
@@ -110,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 user.firstName = firstNameEditText.getEditText().getText().toString();
                                 user.lastName = lastNameEditText.getEditText().getText().toString();
+                                user.rewardsCardNumber = generateRewardsNumber();
 
                                 // store user in cloud
                                 FirebaseFirestore.getInstance().collection("users").document(user.id)
@@ -145,6 +148,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public Long generateRewardsNumber(){ // add to database to make unique
+        Random randRewards = new Random();
+        int upperBound = 999999999;
+        int lowerBound = 100000000;
+        int randomInt = randRewards.nextInt(upperBound-lowerBound) + lowerBound;
+        Long randomNumber = Long.valueOf(randomInt);
+        return randomNumber;
+
     }
 
     public final void getUserDetails(@NotNull final Activity activity) {

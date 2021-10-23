@@ -14,6 +14,7 @@ public class User implements Parcelable {
     public Long mobile = Long.valueOf(0);
     public String gender = "";
     public int profileCompleted = 0;
+    public long rewardsCardNumber = Long.valueOf(0);
 
     // constructor do not remove
     public User(){
@@ -28,6 +29,7 @@ public class User implements Parcelable {
         mobile = in.readLong();
         gender = in.readString();
         profileCompleted = in.readInt();
+        rewardsCardNumber = in.readLong();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -56,5 +58,6 @@ public class User implements Parcelable {
         parcel.writeLong(mobile);
         parcel.writeString(gender);
         parcel.writeInt(profileCompleted);
+        parcel.writeLong(rewardsCardNumber);
     }
 }

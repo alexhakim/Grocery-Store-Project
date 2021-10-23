@@ -112,7 +112,7 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
                         public void onSuccess(Object o) {
                             Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
                             // if successful, go to bluetoothactivity to connect scanner
-                            Intent goToBluetoothActivity = new Intent(UserProfileActivity.this,bluetoothConnectActivity.class);
+                            Intent goToBluetoothActivity = new Intent(UserProfileActivity.this,LoginActivity.class);
                             startActivity(goToBluetoothActivity);
                             finish();
                         }

@@ -38,7 +38,7 @@ public class SettingsFragment extends Fragment {
     TextInputLayout getNameEditText;
     TextInputLayout getEmailEditText;
     TextInputLayout getPhoneNumberEditText;
-    TextInputLayout CartlyCardNumberEditText;
+    TextInputLayout getCartlyCardNumberEditText;
     Spinner changeLanguageSpinner;
     Button saveSettingsButton;
 
@@ -85,6 +85,17 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings_fragment_info",Context.MODE_PRIVATE);
                 Long passPhone = sharedPreferences.getLong("get_phone",0);
                 getPhoneNumberEditText.getEditText().setText(passPhone + "");
+            }
+        });
+
+        getCartlyCardNumberEditText = binding.getCartlyCardNumberEditText;
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings_fragment_info",Context.MODE_PRIVATE);
+                Long passRewardsNumber = sharedPreferences.getLong("get_rewards_number",0);
+                getCartlyCardNumberEditText.getEditText().setText(passRewardsNumber + "");
+                //getEmailEditText.getEditText().setTextColor(Color.parseColor("#000000"));
             }
         });
 
