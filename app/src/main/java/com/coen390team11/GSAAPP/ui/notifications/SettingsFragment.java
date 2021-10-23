@@ -85,6 +85,7 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("settings_fragment_info",Context.MODE_PRIVATE);
                 Long passPhone = sharedPreferences.getLong("get_phone",0);
                 getPhoneNumberEditText.getEditText().setText(passPhone + "");
+
             }
         });
 
@@ -105,8 +106,13 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 HashMap updateUserHashMap = new HashMap();
 
+
                 String getNewPhoneNumber = getPhoneNumberEditText.getEditText().getText().toString();
-                updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
+                if (getNewPhoneNumber.toString().length() != 10 ) {
+                    Toast.makeText(getContext(), "Phone number must be 10 digits.", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
+
 
                 FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance()
                         .getCurrentUser().getUid()).update(updateUserHashMap)
@@ -121,6 +127,7 @@ public class SettingsFragment extends Fragment {
                         // do nothing
                     }
                 });
+                }
             }
         });
 
