@@ -13,27 +13,22 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
+import com.coen390team11.GSAAPP.databinding.FragmentHistoryBinding;
 
 public class HistoryFragment extends Fragment {
 
     private HistoryViewModel homeViewModel;
-    private FragmentBagBinding binding;
+    private FragmentHistoryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HistoryViewModel.class);
 
-        binding = FragmentBagBinding.inflate(inflater, container, false);
+        binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 

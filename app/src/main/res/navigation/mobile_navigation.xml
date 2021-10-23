@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_bag"
-        android:name="com.coen390team11.GSAAPP.ui.home.HistoryFragment"
+        android:name="com.coen390team11.GSAAPP.ui.dashboard.BagFragment"
         android:label="@string/title_bag"
         tools:layout="@layout/fragment_bag" />
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.coen390team11.GSAAPP.ui.dashboard.BagFragment"
+        android:name="com.coen390team11.GSAAPP.ui.home.HistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history" />
 

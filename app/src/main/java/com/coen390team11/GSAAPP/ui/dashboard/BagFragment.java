@@ -29,13 +29,7 @@ public class BagFragment extends Fragment {
 
 
 
-        final TextView textView = binding.textHome;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
         return root;
     }
 
