@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_after_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_afterlogin.xml" value="0.12001811594202899" />
         <entry key="app/src/main/res/layout/activity_bluetooth_connect.xml" value="0.18206521739130435" />
-        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.14628623188405798" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19972826086956522" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
