@@ -7,9 +7,11 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.19444444444444445" />
+        <entry key="app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/layout/activity_after_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_afterlogin.xml" value="0.12001811594202899" />
         <entry key="app/src/main/res/layout/activity_bluetooth_connect.xml" value="0.18206521739130435" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19972826086956522" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
