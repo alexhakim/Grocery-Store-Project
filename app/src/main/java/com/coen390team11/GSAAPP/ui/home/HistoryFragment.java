@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.databinding.FragmentHistoryBinding;
 
 public class HistoryFragment extends Fragment {

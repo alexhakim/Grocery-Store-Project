@@ -24,6 +24,7 @@ import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.databinding.FragmentSettingsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -110,7 +111,7 @@ public class SettingsFragment extends Fragment {
 
                 String getNewPhoneNumber = getPhoneNumberEditText.getEditText().getText().toString();
                 if (getNewPhoneNumber.toString().length() != 10 ) {
-                    Toast.makeText(getContext(), "Phone number must be 10 digits.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Phone number must be 10 digits.", Snackbar.LENGTH_LONG).show();
                 } else {
                     updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
 
@@ -120,7 +121,8 @@ public class SettingsFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-                                Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(view, "Succesfully updated information.", Snackbar.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
