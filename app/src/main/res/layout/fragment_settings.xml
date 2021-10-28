@@ -13,6 +13,7 @@
         android:layout_marginTop="41dp"
         android:backgroundTint="#344398"
         android:text="Save"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
         android:enabled="false"
+        android:textColor="#808080"
+        android:textColorHint="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:textColor="#808080"
+            android:textColorHint="#808080"
             android:hint="Name: " />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -40,12 +45,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:enabled="false"
+        android:textColor="#808080"
+        android:textColorHint="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#808080"
+            android:textColorHint="#808080"
             android:background="@color/white"
             android:hint="Email: " />
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,6 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="275dp"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
@@ -64,6 +75,8 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:inputType="phone"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:digits="1234567890"
             android:hint="Phone Number:" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,6 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
         android:enabled="false"
+        android:textColor="#808080"
+        android:textColorHint="#808080"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -81,6 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:textColor="#808080"
+            android:textColorHint="#808080"
             android:hint="Cartly® Rewards Card Number: " />
     </com.google.android.material.textfield.TextInputLayout>
 

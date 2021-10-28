@@ -83,20 +83,24 @@ public class RegisterActivity extends AppCompatActivity {
                 emailEditText.getEditText().onEditorAction(EditorInfo.IME_ACTION_DONE);
                 passwordEditText.getEditText().onEditorAction(EditorInfo.IME_ACTION_DONE);
 
-                // if the user did not input username/password
+                // if the user did not input in X field
                 if (firstNameEditText.getEditText().getText().toString().isEmpty()
                         || lastNameEditText.getEditText().getText().toString().isEmpty()
                         || emailEditText.getEditText().getText().toString().isEmpty()
                         || passwordEditText.getEditText().getText().toString().isEmpty()
                         || passwordConfirmEditText.getEditText().getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Missing fields.", Toast.LENGTH_LONG).show();
+
+                    // if passwords don't match
                 } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))) {
 
                     Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
+
+                    // if password length < 6
                 } else if (passwordEditText.getEditText().getText().toString().length() <= 6) {
                     Toast.makeText(getApplicationContext(), "Password length must be greater than 6.", Toast.LENGTH_SHORT).show();
 
-                } else {
+                } else { // register user
 
                     String email = emailEditText.getEditText().getText().toString();
                     String password = passwordEditText.getEditText().getText().toString();
@@ -150,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public Long generateRewardsNumber(){ // add to database to make unique
+    public Long generateRewardsNumber(){ // TODO: make unique
         Random randRewards = new Random();
         int upperBound = 999999999;
         int lowerBound = 100000000;
@@ -193,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:
+            case android.R.id.home: // if user presses on back button go back to login activity
                 Intent switchToLoginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(switchToLoginIntent);
                 //onBackPressed();

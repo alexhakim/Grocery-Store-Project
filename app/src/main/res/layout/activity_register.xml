@@ -23,14 +23,18 @@
         android:layout_marginTop="230dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:minHeight="48dp" >
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:hint="First name"
-            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"></com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,12 +48,17 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#808080"
+        android:textColor="@color/black"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:hint="Password"
             android:ems="10"
             android:inputType="textPassword" />
@@ -65,13 +74,18 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#808080"
+        android:textColor="@color/black"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:hint="Confirm Password"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -85,12 +99,16 @@
         android:layout_marginTop="350dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:minHeight="48dp" >
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:hint="Email"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:background="@color/white"
             android:ems="10"></com.google.android.material.textfield.TextInputEditText>
 
@@ -104,6 +122,8 @@
         android:layout_marginTop="290dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         android:minHeight="48dp" >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +131,9 @@
             android:layout_height="match_parent"
             android:hint="Last name"
             android:background="@color/white"
-            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+            android:ems="10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"></com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +145,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="540dp"
         android:backgroundTint="#344398"
-        android:text="Register" />
+        android:text="Register"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/loginTextView"

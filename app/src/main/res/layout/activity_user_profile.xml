@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileActivity">
+    tools:context=".UserProfileActivity"
+    android:background="@color/white">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/firstNameEditText"
@@ -14,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:background="#FFFFFF"
-        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="102dp">
 
@@ -22,6 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:background="#FFFFFF"
             android:hint="First name" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -34,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
         android:background="#FFFFFF"
-        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="102dp">
 
@@ -43,6 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="#FFFFFF"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:hint="Last name" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="210dp"
         android:background="#FFFFFF"
-        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="102dp">
 
@@ -63,6 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:background="#FFFFFF"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -93,6 +103,8 @@
         android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="370dp"
+        android:textColor="@color/black"
+        android:textColorHint="#808080"
         android:text="Gender" />
 
     <Button
@@ -100,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
         android:layout_marginTop="430dp"
         android:backgroundTint="#344398"
         android:text="Save" />
