@@ -1,5 +1,7 @@
 package com.coen390team11.GSAAPP;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +28,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Random;
@@ -46,6 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputLayout passwordConfirmEditText;
     Button registerButton;
     TextView loginTextView;
+
+    // generate random rewards number, will be checked for uniqueness in generateRewardsNumber()
+    Random randRewards = new Random();
+    int upperBound = 999999999;
+    int lowerBound = 100000000;
+    int randomInt = randRewards.nextInt(upperBound-lowerBound) + lowerBound;
+    Long randomNumber = Long.valueOf(randomInt);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,11 +169,36 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public Long generateRewardsNumber(){ // TODO: make unique
-        Random randRewards = new Random();
-        int upperBound = 999999999;
-        int lowerBound = 100000000;
-        int randomInt = randRewards.nextInt(upperBound-lowerBound) + lowerBound;
-        Long randomNumber = Long.valueOf(randomInt);
+
+        // variables declared globally to avoid inner class final keyword issue
+
+        FirebaseFirestore.getInstance().collection("users").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            // for each existing document in "users" collection
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("QUERY ---> ", document.getId() + " => " + document.getData());
+
+                                // converting all received document data to string
+                                String dataToString = document.getData().toString();
+
+                                // while document X contains generated random rewards number, regenerate new unique number
+                                while (dataToString.contains(randomNumber.toString())){
+                                    Log.i("REWARD NUMBER: ", randomNumber + " ALREADY EXISTS IN DB, REGENERATING...");
+                                    randomInt = randRewards.nextInt(upperBound-lowerBound) + lowerBound;
+                                    randomNumber = Long.valueOf(randomInt);
+                                }
+
+                            }
+                        } else {
+                            Log.d(TAG, "Error retrieving document information: ", task.getException());
+                        }
+                    }
+                });
+
         return randomNumber;
 
     }
