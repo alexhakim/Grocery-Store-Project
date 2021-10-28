@@ -168,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public Long generateRewardsNumber(){ // TODO: make unique
+    public Long generateRewardsNumber(){
 
         // variables declared globally to avoid inner class final keyword issue
 
