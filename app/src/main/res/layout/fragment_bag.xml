@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:windowSoftInputMode="adjustResize"
     android:layout_height="match_parent"
-    android:paddingBottom="?attr/actionBarSize"
+
     tools:context=".ui.dashboard.BagFragment">
 
     <TextView
@@ -27,22 +28,20 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginStart="354dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        android:layout_height="69dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="60dp"
 
+        />
     <ListView
         android:id="@+id/currentBagListView"
         android:layout_width="398dp"
         android:layout_height="618dp"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="57dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,4 +50,4 @@
         android:textColorHint="#808080"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
