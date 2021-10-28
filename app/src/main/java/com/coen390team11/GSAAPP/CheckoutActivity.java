@@ -53,8 +53,7 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 getBarcode();
                 getQRCode();
-                InputMethodManager imm = (InputMethodManager) getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
             }

@@ -125,6 +125,12 @@ public class LoginActivity extends AppCompatActivity {
             // redirect user to bluetoothconnect activity (if temporarily set to other activity)
             Intent intent2 = new Intent(LoginActivity.this,PrimaryActivity.class);
             startActivity(intent2);
+
+            /*
+            IF USER WANTS TO SEE HISTORY OR SETTINGS AND IS NOT AT THE STORE, IMPLEMENT FEATURE
+            THAT TAKES THEM TO SEE HISTORY/SETTINGS BUT DISABLES ALL OTHER FEATURES REQUIRING PRESENCE
+             */
+
         }
 
         /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);

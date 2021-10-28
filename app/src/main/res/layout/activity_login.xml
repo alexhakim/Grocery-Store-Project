@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="230dp"
         android:ems="10"
-        android:hint="Email"
+        android:alpha="1"
         android:inputType="textPersonName"
         android:minHeight="48dp" >
 
@@ -30,6 +30,8 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:hint="Email"
+            android:alpha="1"
             android:ems="10"></com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="290dp"
         android:ems="10"
-        android:hint="Password"
+        android:alpha="1"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:passwordToggleEnabled="true">
@@ -51,6 +53,8 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:hint="Password"
+            android:alpha="1"
             android:ems="10"
             android:inputType="textPassword" />
 

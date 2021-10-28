@@ -132,6 +132,8 @@ public class PrimaryActivity extends AppCompatActivity {
             case R.id.Rewards: // if user presses on "Rewards" then the following
                 // will be executed:
                 // start rewards activity here
+                Intent goToRewardsActivityIntent = new Intent(getApplicationContext(),RewardsActivity.class);
+                startActivity(goToRewardsActivityIntent);
 
                 return true;
         }
