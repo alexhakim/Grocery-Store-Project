@@ -38,6 +38,7 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     public DeviceListAdapter mDeviceListAdapter;
     ListView listView;
+    Button intentButton;
 
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -170,6 +171,8 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
         startConnectionButton = (Button) findViewById(R.id.startConnectionButton);
         sendButton = (Button) findViewById(R.id.sendButton);
         editText = (EditText) findViewById(R.id.editText);
+        intentButton = findViewById(R.id.intentButton);
+
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(mBroadcastReceiver4, filter);
@@ -197,6 +200,14 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
             public void onClick(View view) {
                 byte[] bytes = editText.getText().toString().getBytes(Charset.defaultCharset());
                 mBluetoothConnection.write(bytes);
+            }
+        });
+
+        intentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToPrimaryActivity = new Intent(BluetoothActivity.this,PrimaryActivity.class);
+                startActivity(goToPrimaryActivity);
             }
         });
 
