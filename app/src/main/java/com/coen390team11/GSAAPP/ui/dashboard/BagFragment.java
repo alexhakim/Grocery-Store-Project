@@ -1,9 +1,12 @@
 package com.coen390team11.GSAAPP.ui.dashboard;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +23,21 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coen390team11.GSAAPP.CheckoutActivity;
+import com.coen390team11.GSAAPP.Items;
+import com.coen390team11.GSAAPP.LoginActivity;
 import com.coen390team11.GSAAPP.NutritionInfoActivity;
 import com.coen390team11.GSAAPP.R;
+import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -59,15 +72,54 @@ public class BagFragment extends Fragment {
 
 
         // currently adding temp barcodes
-        barcode.add("7035020003611"); // example of baguette
-        barcode.add("0064100052079"); // rice krispies
-        barcode.add("0070038605713"); // ketchup
-        barcode.add("0768395432539"); // lollipop
-        barcode.add("0090202000083"); // soy sauce
+        barcode.add("7680801101"); // example of barilla spaghetti
+        barcode.add("5449000000996"); // coca cola
+        barcode.add("6202000084"); // nutella spread
+        barcode.add("574256195"); // compliments large white eggs
+        barcode.add("5620097439"); // french's ketchup
+
+
+
+            FirebaseFirestore.getInstance().collection("items").get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+
+                                // for each existing document in "items" collection
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //Log.d("QUERY ---> ", document.getId() + " => " + document.getData());
+
+                                    // converting all received document data to string
+                                    String dataToString = document.getData().toString();
+                                    for (int i=0;i<barcode.size();i++) {
+                                        if (dataToString.contains(barcode.get(i))){
+                                            // if document contains barcode, return name
+                                            // implement return field
+                                            Log.d("DATA ---->", dataToString);
+
+                                            String[] trim = dataToString.split(",");
+                                            String nameSegment = trim[2];
+                                            String productName = nameSegment.substring(6);
+
+                                            // display in current bag
+                                            productsInBagArrayList.add(productName);
+                                            ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
+                                            currentBagListView.setAdapter(arrayAdapter);
+                                            arrayAdapter.notifyDataSetChanged();
+                                        }
+                                    }
+
+                                }
+                            } else {
+                                Log.d(TAG, "Error retrieving document information: ", task.getException());
+                            }
+                        }
+                    });
 
 
         // use O(n^2) to traverse array for multiple quantities
-        for (int i=0;i<barcode.size();i++) {
+        /*for (int i=0;i<barcode.size();i++) {
             OkHttpClient client = new OkHttpClient();
             String url = "https://api.upcdatabase.org/product/" + barcode.get(i) + "?apikey=D46EBAD968F75DB328602AB30694737A";
 
@@ -101,18 +153,12 @@ public class BagFragment extends Fragment {
                                 currentBagListView.setAdapter(arrayAdapter);
                                 arrayAdapter.notifyDataSetChanged();
 
-                                // use https://calorieninjas.com/api api for nutritional information
-                                // or https://developer.edamam.com/food-database-api
-                                // or https://www.nutritionix.com/business/api
-
-
-
                             }
                         });
                     }
                 }
             });
-        }
+        }*/
 
 
         // go to nutritioninfo activity
