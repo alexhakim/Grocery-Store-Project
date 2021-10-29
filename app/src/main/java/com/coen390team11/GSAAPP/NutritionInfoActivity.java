@@ -68,11 +68,11 @@ public class NutritionInfoActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("product_name", Context.MODE_PRIVATE);
         String productName = sharedPreferences.getString("product_name","");
 
-        productNameTextView.setText("Product Name: " + productName);
+        productNameTextView.setText("Product Name: " + productName.substring(2));
         servingSizeTextView.setText("Serving Size: 100g");
 
         OkHttpClient client = new OkHttpClient();
-        String query = productName;
+        String query = productName.substring(2);
         String url = "https://api.calorieninjas.com/v1/nutrition?query= " + query;
 
         Request request = new Request.Builder().url(url).addHeader("X-Api-Key","vCo0UQqUblTUHhxpb1s+cw==CTYmZFM7ID8GhLSN").build();

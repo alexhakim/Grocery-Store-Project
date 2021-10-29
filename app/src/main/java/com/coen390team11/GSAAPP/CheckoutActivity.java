@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -60,6 +61,12 @@ public class CheckoutActivity extends AppCompatActivity {
         });
 
 
+        Intent intent = getIntent();
+        String stringTotalPrice = intent.getStringExtra("total_price");
+        randomEditText.setText("Total: " + stringTotalPrice);
+        randomEditText.setEnabled(false);
+
+
     }
 
     private void getBarcode(){
@@ -81,7 +88,7 @@ public class CheckoutActivity extends AppCompatActivity {
     MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
     public void setBarcode() throws WriterException {
 
-        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString(), BarcodeFormat.CODE_128,400,170,null);
+        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString().substring(7), BarcodeFormat.CODE_128,400,170,null);
         // first variable in .encode is what we want to receive, means the total price from
         // bag fragment, for now it is set to random edit text
         // second variable (BarcodeFormat.X), X is type of barcode (UPC, EAN8, EAN 13, CODE_128 etc)
