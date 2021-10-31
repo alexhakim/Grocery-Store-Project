@@ -29,7 +29,6 @@ public class CheckoutActivity extends AppCompatActivity {
     EditText randomEditText;
     private ImageView barcode;
     private ImageView qrcode;
-    Button tempButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,26 +45,14 @@ public class CheckoutActivity extends AppCompatActivity {
         barcode = findViewById(R.id.barcode);
         qrcode = findViewById(R.id.qrcode);
         randomEditText = findViewById(R.id.randomEditText);
-        tempButton = findViewById(R.id.tempButton);
-
-
-        tempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getBarcode();
-                getQRCode();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-
-            }
-        });
-
 
         Intent intent = getIntent();
         String stringTotalPrice = intent.getStringExtra("total_price");
         randomEditText.setText("Total: " + stringTotalPrice);
         randomEditText.setEnabled(false);
 
+       // getBarcode();
+        getQRCode();
 
     }
 
@@ -102,7 +89,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     public void setQRCode() throws WriterException {
 
-        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString(), BarcodeFormat.QR_CODE,350,300,null);
+        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString().substring(7), BarcodeFormat.QR_CODE,350,300,null);
         // first variable in .encode is what we want to receive, means the total price from
         // bag fragment, for now it is set to random edit text
         // second variable (BarcodeFormat.X), X is type of barcode (UPC, EAN8, EAN 13, CODE_128 etc)

@@ -2,12 +2,16 @@ package com.coen390team11.GSAAPP.ui.dashboard;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -22,6 +26,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.coen390team11.GSAAPP.CheckoutActivity;
 import com.coen390team11.GSAAPP.Items;
 import com.coen390team11.GSAAPP.LoginActivity;
@@ -74,11 +82,14 @@ public class BagFragment extends Fragment {
         binding = FragmentBagBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
         ArrayList<String> productsInBagArrayList = new ArrayList<String>();
 
         // currently adding temp barcodes
+        barcode.add("7680801101"); // example of barilla spaghetti
+        barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
@@ -90,6 +101,9 @@ public class BagFragment extends Fragment {
         barcode.add("574256195"); // compliments large white eggs
         barcode.add("5620097439"); // french's ketchup
         barcode.add("5620097439"); // french's ketchup
+        barcode.add("5900001654"); // robin hood all purpose flour
+        barcode.add("6810008424"); // kraft smooth peanut butter
+        barcode.add("6810008424"); // kraft smooth peanut butter
 
         // copy barcode arraylist into noDuplicates arraylist but without duplicates
         linkedHashSet = new LinkedHashSet<>(barcode);
@@ -149,8 +163,8 @@ public class BagFragment extends Fragment {
 
                                     }
                                 }
-
                             }
+
                             // hashMapCount size == hashMapName size since both have barcodes as keys
                             // get count for barcode from hashMapCount and get name for barcode from hashMapName
                             for (int i=0;i<hashMapCount.size();i++){
@@ -169,58 +183,13 @@ public class BagFragment extends Fragment {
                     }
                 });
 
-
-
-        // use O(n^2) to traverse array for multiple quantities
-        /*for (int i=0;i<barcode.size();i++) {
-            OkHttpClient client = new OkHttpClient();
-            String url = "https://api.upcdatabase.org/product/" + barcode.get(i) + "?apikey=D46EBAD968F75DB328602AB30694737A";
-
-            Request request = new Request.Builder().url(url).build();
-
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Request request, IOException e) {
-                    e.printStackTrace();
-                }
-
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String result = response.body().string();
-
-                        // split string into segments separated by coma
-                        String trim[] = result.split(",");
-                        String getCorrectSegment = trim[2];
-                        String getCorrectName = getCorrectSegment.substring(9, getCorrectSegment.length() - 1).substring(0, 1).toUpperCase() + getCorrectSegment.substring(10, getCorrectSegment.length() - 1).toLowerCase();
-
-                        // calling getActivity because we are currently in background thread
-                        // not doing this would cause fatal exception
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                // display in current bag
-                                productsInBagArrayList.add(getCorrectName);
-                                ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
-                                currentBagListView.setAdapter(arrayAdapter);
-                                arrayAdapter.notifyDataSetChanged();
-
-                            }
-                        });
-                    }
-                }
-            });
-        }*/
-
-
         // go to nutritioninfo activity
         currentBagListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                Intent goToNutritionInfoIntent = new Intent(getContext(), NutritionInfoActivity.class);
-                startActivity(goToNutritionInfoIntent);
+                //Intent goToNutritionInfoIntent = new Intent(getContext(), NutritionInfoActivity.class);
+                //startActivity(goToNutritionInfoIntent);
 
                 // pass data of product name to nutritional info activity
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_name", Context.MODE_PRIVATE);

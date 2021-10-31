@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         // changing color of action bar
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
         actionBar.setBackgroundDrawable(colorDrawable);
+        setTitle("Cartly");
 
 
         registerTextView.setOnClickListener(new View.OnClickListener() {
