@@ -12,12 +12,13 @@
     tools:context=".BluetoothActivity">
 
     <Button
-        android:text="TURN ON/OFF"
+        android:id="@+id/switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/switchButton"/>
+        android:backgroundTint="#344398"
+        android:text="TURN BLUETOOTH ON" />
 
     <Button
         android:id="@+id/discoverableButton"
@@ -25,34 +26,34 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@id/startConnectionButton"
         android:layout_marginTop="50dp"
+        android:backgroundTint="#344398"
         android:onClick="btnEnableDisable_Discoverable"
         android:text="Enable Discoverability" />
 
     <Button
+        android:id="@+id/findUnpairedDevicesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/findUnpairedDevicesButton"
-        android:text="Discover"
-        android:onClick="btnDiscover"/>
+        android:onClick="btnDiscover"
+        android:backgroundTint="#344398"
+        android:text="Discover devices" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="395dp"
         android:layout_height="457dp"
-        android:layout_below="@+id/startConnectionButton"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="100dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/startConnectionButton"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/findUnpairedDevicesButton"
-        android:text="Start Connection"/>
+        android:layout_marginTop="10dp"
+        android:text="Start Connection" />
 
-    <!--<EditText
+    <EditText
         android:id="@+id/editText"
         android:layout_width="250dp"
         android:layout_height="wrap_content"

@@ -27,9 +27,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class CheckoutActivity extends AppCompatActivity {
 
     EditText randomEditText;
+    EditText randomEditText2;
     private ImageView barcode;
     private ImageView qrcode;
-    //Button completePurchaseButton;
+    Button completePurchaseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +47,19 @@ public class CheckoutActivity extends AppCompatActivity {
         barcode = findViewById(R.id.barcode);
         qrcode = findViewById(R.id.qrcode);
         randomEditText = findViewById(R.id.randomEditText);
+        randomEditText2 = findViewById(R.id.randomEditText2);
         //completePurchaseButton = findViewById(R.id.completePurchaseButton);
 
         Intent intent = getIntent();
         String stringTotalPrice = intent.getStringExtra("total_price");
-        randomEditText.setText("Total: " + stringTotalPrice);
+        randomEditText.setText("Subtotal: " + stringTotalPrice);
         randomEditText.setEnabled(false);
+        Double totalDouble = Double.parseDouble(stringTotalPrice);
+        Double totalWithTax = totalDouble*1.14975;
+        randomEditText2.setText("Total: " + totalWithTax);
+        randomEditText2.setEnabled(false);
 
-       // getBarcode();
+        getBarcode();
         getQRCode();
 
 

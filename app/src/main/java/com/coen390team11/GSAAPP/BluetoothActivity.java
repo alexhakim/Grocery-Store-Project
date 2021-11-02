@@ -11,6 +11,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -177,11 +179,14 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
         discoverableButton = (Button) findViewById(R.id.discoverableButton);
         listView = (ListView) findViewById(R.id.listView);
         mBTDevices = new ArrayList<>();
-        startConnectionButton = (Button) findViewById(R.id.startConnectionButton);
+        //startConnectionButton = (Button) findViewById(R.id.startConnectionButton);
         //sendButton = (Button) findViewById(R.id.sendButton);
         //editText = (EditText) findViewById(R.id.editText);
 
         ActionBar actionBar = getSupportActionBar();
+        // changing color of action bar
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
+        actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -198,12 +203,12 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
             }
         });
 
-        startConnectionButton.setOnClickListener(new View.OnClickListener() {
+        /*startConnectionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startConnection();
             }
-        });
+        });*/
 
         /*sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

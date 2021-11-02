@@ -131,7 +131,7 @@ public class PrimaryActivity extends AppCompatActivity {
 
             case R.id.Logout: // if user presses on "Logout" then the following
                 // will be executed:
-                //openLogoutDialog();
+                //`openLogoutDialog();
                 return true;
 
             case R.id.Rewards: // if user presses on "Rewards" then the following
