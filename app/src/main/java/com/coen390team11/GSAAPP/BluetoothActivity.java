@@ -271,11 +271,11 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void btnDiscover(View view) {
-        Log.d(tag, "btnDiscover: Looking for unpaired devices.");
+        Log.d(tag, "Looking for unpaired devices.");
 
         if(bluetoothAdapter.isDiscovering()){
             bluetoothAdapter.cancelDiscovery();
-            Log.d(tag, "btnDiscover: Canceling discovery.");
+            Log.d(tag, "Canceling discovery.");
 
             checkBTPermissions();
 
@@ -312,7 +312,7 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
 
         bluetoothAdapter.cancelDiscovery();
 
-        Log.d(tag, "You Clicked on a device.");
+        Log.d(tag, "User  licked on a device.");
         String deviceName = bluetoothDevicesArrayList.get(i).getName();
         String deviceAddress = bluetoothDevicesArrayList.get(i).getAddress();
 
