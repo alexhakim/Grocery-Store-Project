@@ -259,10 +259,10 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
 
 
     public void btnEnableDisable_Discoverable(View view) {
-        Log.d(tag, "btnEnableDisable_Discoverable: Making device discoverable for 300 seconds.");
+        Log.d(tag, "Enabling discoverability for 60seconds");
 
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 60); // 60s
         startActivity(discoverableIntent);
 
         IntentFilter intentFilter = new IntentFilter(bluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
