@@ -31,6 +31,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.coen390team11.GSAAPP.CheckoutActivity;
+import com.coen390team11.GSAAPP.ItemInformation;
 import com.coen390team11.GSAAPP.Items;
 import com.coen390team11.GSAAPP.LoginActivity;
 import com.coen390team11.GSAAPP.NutritionInfoActivity;
@@ -104,6 +105,7 @@ public class BagFragment extends Fragment {
         barcode.add("5900001654"); // robin hood all purpose flour
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6810008424"); // kraft smooth peanut butter
+        barcode.add("9781119387503"); // inspired book
 
         // copy barcode arraylist into noDuplicates arraylist but without duplicates
         linkedHashSet = new LinkedHashSet<>(barcode);
@@ -151,12 +153,12 @@ public class BagFragment extends Fragment {
                                         Log.d("DATA ---->", dataToString);
 
                                         String[] trim = dataToString.split(",");
-                                        String nameSegment = trim[2];
+                                        String nameSegment = trim[3];
                                         String productName = nameSegment.substring(6);
                                         Log.i("PRODUCT: ",productName);
                                         hashMapName.put(barcode.get(i),productName);
 
-                                        String priceSegment = trim[1];
+                                        String priceSegment = trim[2];
                                         String productPrice = priceSegment.substring(7);
                                         checkoutTotalPrice+=Double.parseDouble(productPrice);
                                         Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));
@@ -190,6 +192,9 @@ public class BagFragment extends Fragment {
 
                 //Intent goToNutritionInfoIntent = new Intent(getContext(), NutritionInfoActivity.class);
                 //startActivity(goToNutritionInfoIntent);
+
+                Intent goToItemInformationIntent = new Intent(getContext(), ItemInformation.class);
+                startActivity(goToItemInformationIntent);
 
                 // pass data of product name to nutritional info activity
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_name", Context.MODE_PRIVATE);

@@ -1,5 +1,7 @@
 package com.coen390team11.GSAAPP;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -12,7 +14,9 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +42,6 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
     public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
     public DeviceListAdapter mDeviceListAdapter;
     ListView listView;
-    Button intentButton;
 
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -153,10 +156,16 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
     protected void onDestroy() {
         Log.d(TAG, "onDestroy: called.");
         super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver1);
-        unregisterReceiver(mBroadcastReceiver2);
-        unregisterReceiver(mBroadcastReceiver3);
-        unregisterReceiver(mBroadcastReceiver4);
+
+        // do we want this for cross-activity???
+        try {
+            unregisterReceiver(mBroadcastReceiver1);
+            unregisterReceiver(mBroadcastReceiver2);
+            unregisterReceiver(mBroadcastReceiver3);
+            unregisterReceiver(mBroadcastReceiver4);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         //mBluetoothAdapter.cancelDiscovery();
     }
 
@@ -169,10 +178,11 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
         listView = (ListView) findViewById(R.id.listView);
         mBTDevices = new ArrayList<>();
         startConnectionButton = (Button) findViewById(R.id.startConnectionButton);
-        sendButton = (Button) findViewById(R.id.sendButton);
-        editText = (EditText) findViewById(R.id.editText);
-        intentButton = findViewById(R.id.intentButton);
+        //sendButton = (Button) findViewById(R.id.sendButton);
+        //editText = (EditText) findViewById(R.id.editText);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(mBroadcastReceiver4, filter);
@@ -195,21 +205,13 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
             }
         });
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        /*sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 byte[] bytes = editText.getText().toString().getBytes(Charset.defaultCharset());
                 mBluetoothConnection.write(bytes);
             }
-        });
-
-        intentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToPrimaryActivity = new Intent(BluetoothActivity.this,PrimaryActivity.class);
-                startActivity(goToPrimaryActivity);
-            }
-        });
+        });*/
 
     }
 
@@ -318,5 +320,16 @@ public class BluetoothActivity extends AppCompatActivity implements AdapterView.
             mBTDevice = mBTDevices.get(i);
             mBluetoothConnection = new BluetoothConnectionService(BluetoothActivity.this);
         }
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                this.finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

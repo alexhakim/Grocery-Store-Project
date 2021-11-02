@@ -124,6 +124,11 @@ public class PrimaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.Bluetooth:
+                Intent goToBluetoothActivityIntent = new Intent(getApplicationContext(),BluetoothActivity.class);
+                startActivity(goToBluetoothActivityIntent);
+                return true;
+
             case R.id.Logout: // if user presses on "Logout" then the following
                 // will be executed:
                 //openLogoutDialog();

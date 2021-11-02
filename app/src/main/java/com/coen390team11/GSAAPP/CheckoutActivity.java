@@ -29,6 +29,7 @@ public class CheckoutActivity extends AppCompatActivity {
     EditText randomEditText;
     private ImageView barcode;
     private ImageView qrcode;
+    //Button completePurchaseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class CheckoutActivity extends AppCompatActivity {
         barcode = findViewById(R.id.barcode);
         qrcode = findViewById(R.id.qrcode);
         randomEditText = findViewById(R.id.randomEditText);
+        //completePurchaseButton = findViewById(R.id.completePurchaseButton);
 
         Intent intent = getIntent();
         String stringTotalPrice = intent.getStringExtra("total_price");
@@ -53,6 +55,14 @@ public class CheckoutActivity extends AppCompatActivity {
 
        // getBarcode();
         getQRCode();
+
+
+        /*completePurchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // save shopping event to past events
+            }
+        });*/
 
     }
 

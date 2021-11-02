@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             // redirect user to bluetoothconnect activity (if temporarily set to other activity)
-            Intent intent2 = new Intent(LoginActivity.this,BluetoothActivity.class);
+            Intent intent2 = new Intent(LoginActivity.this,PrimaryActivity.class);
             startActivity(intent2);
 
             /*
