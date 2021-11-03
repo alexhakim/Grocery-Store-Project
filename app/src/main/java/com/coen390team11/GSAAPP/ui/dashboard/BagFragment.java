@@ -204,7 +204,7 @@ public class BagFragment extends Fragment {
                                 }
                             });
 
-                            // in the if loop, not in any for loop
+
                             // storing current bag of logged in user in database
                             for (int i=0;i<hashMapCount.size();i++) {
 

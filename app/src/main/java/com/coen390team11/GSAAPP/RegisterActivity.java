@@ -23,7 +23,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -105,16 +104,19 @@ public class RegisterActivity extends AppCompatActivity {
                         || emailEditText.getEditText().getText().toString().isEmpty()
                         || passwordEditText.getEditText().getText().toString().isEmpty()
                         || passwordConfirmEditText.getEditText().getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Missing fields.", Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Missing fields.",Snackbar.LENGTH_SHORT).show();
+
 
                     // if passwords don't match
                 } else if (!(passwordEditText.getEditText().getText().toString().equals(passwordConfirmEditText.getEditText().getText().toString()))) {
 
-                    Toast.makeText(getApplicationContext(), "Password does not match.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Password does not match.",Snackbar.LENGTH_SHORT).show();
+
 
                     // if password length < 6
                 } else if (passwordEditText.getEditText().getText().toString().length() <= 6) {
-                    Toast.makeText(getApplicationContext(), "Password length must be greater than 6.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Password length must be greater than 6.",Snackbar.LENGTH_SHORT).show();
+
 
                 } else { // register user
 
@@ -150,21 +152,14 @@ public class RegisterActivity extends AppCompatActivity {
                                                                             }
                                 });
 
-                                /*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                                String currentUserID = "";
-                                if (currentUser != null) {
-                                    currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                }*/
-
-
-                                Toast.makeText(getApplicationContext(), "Registration Successful.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(android.R.id.content),"Registration Successful.",Snackbar.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(),"The email address is already in use.", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(android.R.id.content),"The email address is already in use.",Snackbar.LENGTH_SHORT).show();
                             }
                         }
                     });
