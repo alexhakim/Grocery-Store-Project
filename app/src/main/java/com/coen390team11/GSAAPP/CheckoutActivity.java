@@ -56,7 +56,7 @@ public class CheckoutActivity extends AppCompatActivity {
         randomEditText.setEnabled(false);
         Double totalDouble = Double.parseDouble(stringTotalPrice);
         Double totalWithTax = totalDouble*1.14975;
-        randomEditText2.setText("Total: " + totalWithTax);
+        randomEditText2.setText("Total: " + String.format("%.2f",totalWithTax));
         randomEditText2.setEnabled(false);
 
         getBarcode();

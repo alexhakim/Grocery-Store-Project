@@ -43,10 +43,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -74,6 +78,7 @@ public class BagFragment extends Fragment {
     LinkedHashSet<String> linkedHashSet;
     ArrayList<String> noDuplicates;
     Double checkoutTotalPrice = 0.0;
+    Gson gson;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +88,7 @@ public class BagFragment extends Fragment {
         binding = FragmentBagBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        gson = new Gson();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -130,6 +136,8 @@ public class BagFragment extends Fragment {
         // get count from hashmapCount according to barcode
         // display in arraylist
 
+        // needed to store current cart to database in case of adding/removing items and switching activities
+        Log.i("FIREBASE ID: ", String.valueOf(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
 
         // get item name based on barcode input
         FirebaseFirestore.getInstance().collection("items").get()
@@ -171,14 +179,23 @@ public class BagFragment extends Fragment {
                             // get count for barcode from hashMapCount and get name for barcode from hashMapName
                             for (int i=0;i<hashMapCount.size();i++){
                                 productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-                                Log.d("ARRL --->",hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
-                                Log.d("BARCODE ---->",noDuplicates.get(i));
+                                Log.i("ARRL --->",hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
+                                Log.i("BARCODE ---->",noDuplicates.get(i));
                             }
                             Log.d("PNM --->", hashMapName.toString());
                             ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
                             currentBagListView.setAdapter(arrayAdapter);
                             arrayAdapter.notifyDataSetChanged();
 
+                            // in the if loop, not in any for loop
+                            // storing current bag of logged in user in database
+                            for (int i=0;i<hashMapCount.size();i++) {
+
+                                Log.i("XYZ", hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
+
+                                FirebaseFirestore.getInstance().collection("itemsPerUser")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items", FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
+                            }
                         } else {
                             Log.d(TAG, "Error retrieving document information: ", task.getException());
                         }

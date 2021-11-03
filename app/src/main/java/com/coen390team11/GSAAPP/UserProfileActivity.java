@@ -151,6 +151,9 @@ public class UserProfileActivity extends AppCompatActivity implements AdapterVie
         if (phoneNumberEditText.getEditText().getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (phoneNumberEditText.getEditText().getText().toString().length() != 10){
+            Toast.makeText(getApplicationContext(), "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             return true;
         }
