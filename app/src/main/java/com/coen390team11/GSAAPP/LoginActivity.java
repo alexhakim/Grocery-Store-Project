@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView registerTextView;
     TextView forgotPasswordTextView;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -81,8 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            progressDialog = ProgressDialog.show(LoginActivity.this,"Logging you in"
+                                    ,"Please Wait...",true);
+
                             if (task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
+
+                                progressDialog.dismiss();
 
                                 // fetch user from cloud
                                 RegisterActivity registerActivity = new RegisterActivity();

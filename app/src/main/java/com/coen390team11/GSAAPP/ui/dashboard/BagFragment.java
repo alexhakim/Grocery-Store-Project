@@ -38,17 +38,21 @@ import com.coen390team11.GSAAPP.NutritionInfoActivity;
 import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
+import com.coen390team11.GSAAPP.itemsPerUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.Callback;
@@ -88,7 +92,7 @@ public class BagFragment extends Fragment {
         binding = FragmentBagBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        gson = new Gson();
+        itemsPerUser itemsPerUser = new itemsPerUser();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -187,14 +191,28 @@ public class BagFragment extends Fragment {
                             currentBagListView.setAdapter(arrayAdapter);
                             arrayAdapter.notifyDataSetChanged();
 
+                            // add document of name set to email of user to collection itemsPerUser, does not override due to merge
+                            FirebaseFirestore.getInstance().collection("itemsPerUser").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                    .set(itemsPerUser, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
                             // in the if loop, not in any for loop
                             // storing current bag of logged in user in database
                             for (int i=0;i<hashMapCount.size();i++) {
 
-                                Log.i("XYZ", hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
+                                Log.i("XYZ",hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
 
                                 FirebaseFirestore.getInstance().collection("itemsPerUser")
-                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items", FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items",
+                                        FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
                             }
                         } else {
                             Log.d(TAG, "Error retrieving document information: ", task.getException());

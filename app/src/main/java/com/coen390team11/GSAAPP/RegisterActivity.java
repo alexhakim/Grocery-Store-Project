@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputLayout passwordConfirmEditText;
     Button registerButton;
     TextView loginTextView;
+    ProgressDialog progressDialog;
 
     // generate random rewards number, will be checked for uniqueness in generateRewardsNumber()
     Random randRewards = new Random();
@@ -116,6 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 } else { // register user
 
+                    progressDialog = ProgressDialog.show(RegisterActivity.this,"Creating your account"
+                            ,"Please Wait...",true);
+
                     String email = emailEditText.getEditText().getText().toString();
                     String password = passwordEditText.getEditText().getText().toString();
 
@@ -123,7 +128,8 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Success.", Toast.LENGTH_SHORT).show();
+
+                                progressDialog.dismiss();
 
                                 User user = new User();
                                 user.email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
