@@ -147,8 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-
-                                    }
+                                                                            }
                                 });
 
                                 /*FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -164,8 +163,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             } else {
-                                Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
-
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(),"The email address is already in use.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

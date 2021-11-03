@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -78,15 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please input a username/password.", Toast.LENGTH_SHORT).show();
                 } else {
 
+                    progressDialog = ProgressDialog.show(LoginActivity.this,"Logging you in"
+                            ,"Please Wait...",true);
+
                     String email = emailEditText.getEditText().getText().toString();
                     String password = passwordEditText.getEditText().getText().toString();
 
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            progressDialog = ProgressDialog.show(LoginActivity.this,"Logging you in"
-                                    ,"Please Wait...",true);
 
                             if (task.isSuccessful()){
 
@@ -100,9 +101,15 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();*/
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Please verify your credentials.", Toast.LENGTH_SHORT).show();
                             }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Please verify your credentials.", Toast.LENGTH_SHORT).show();
+
                         }
                     });
                 }
