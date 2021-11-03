@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 // if the user did not input username/password
                 if (emailEditText.getEditText().getText().toString().isEmpty()
                         || passwordEditText.getEditText().getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please input a username/password.", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content),"Missing Fields.",Snackbar.LENGTH_SHORT).show();
                 } else {
 
                     progressDialog = ProgressDialog.show(LoginActivity.this,"Logging you in"
@@ -108,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
 
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Please verify your credentials.", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(findViewById(android.R.id.content),"Please verify your credentials.",Snackbar.LENGTH_SHORT).show();
 
                         }
                     });

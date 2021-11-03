@@ -108,14 +108,19 @@ public class BagFragment extends Fragment {
         barcode.add("5449000000996"); // coca cola
         barcode.add("5449000000996"); // coca cola
         barcode.add("5449000000996"); // coca cola
+        barcode.add("6041004701"); // lays chips
+        barcode.add("6041004701"); // lays chips
+        barcode.add("6041004701"); // lays chips
+        barcode.add("6041004701"); // lays chips
+        barcode.add("6041004701"); // lays chips
+        barcode.add("6041004701"); // lays chips
         barcode.add("6202000084"); // nutella spread
-        barcode.add("574256195"); // compliments large white eggs
         barcode.add("5620097439"); // french's ketchup
         barcode.add("5620097439"); // french's ketchup
         barcode.add("5900001654"); // robin hood all purpose flour
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6810008424"); // kraft smooth peanut butter
-        barcode.add("9781119387503"); // inspired book
+        barcode.add("554330292"); // pens
 
         // copy barcode arraylist into noDuplicates arraylist but without duplicates
         linkedHashSet = new LinkedHashSet<>(barcode);
@@ -170,10 +175,10 @@ public class BagFragment extends Fragment {
                                         Log.i("PRODUCT: ",productName);
                                         hashMapName.put(barcode.get(i),productName);
 
-                                        String priceSegment = trim[2];
+                                        /*String priceSegment = trim[2];
                                         String productPrice = priceSegment.substring(7);
                                         checkoutTotalPrice+=Double.parseDouble(productPrice);
-                                        Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));
+                                        Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));*/
 
                                     }
                                 }
@@ -191,7 +196,7 @@ public class BagFragment extends Fragment {
                             currentBagListView.setAdapter(arrayAdapter);
                             arrayAdapter.notifyDataSetChanged();
 
-                            // add document of name set to email of user to collection itemsPerUser, does not override due to merge
+                            // add document of name set to email of user to collection itemsPerUser
                             FirebaseFirestore.getInstance().collection("itemsPerUser").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                                     .set(itemsPerUser, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

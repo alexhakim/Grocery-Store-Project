@@ -44,7 +44,7 @@ public class CheckoutActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("Checkout");
 
-        barcode = findViewById(R.id.barcode);
+        //barcode = findViewById(R.id.barcode);
         qrcode = findViewById(R.id.qrcode);
         randomEditText = findViewById(R.id.randomEditText);
         randomEditText2 = findViewById(R.id.randomEditText2);
@@ -59,26 +59,26 @@ public class CheckoutActivity extends AppCompatActivity {
         randomEditText2.setText("Total: " + String.format("%.2f",totalWithTax));
         randomEditText2.setEnabled(false);
 
-        getBarcode();
+        //getBarcode();
         getQRCode();
 
 
-        /*completePurchaseButton.setOnClickListener(new View.OnClickListener() {
+        completePurchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // save shopping event to past events
+                // save shopping event to past events and remove all items from current bag
             }
-        });*/
+        });
 
     }
 
-    private void getBarcode(){
+    /*private void getBarcode(){
         try{
             setBarcode();
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void getQRCode(){
         try{
@@ -89,7 +89,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-    public void setBarcode() throws WriterException {
+    /*public void setBarcode() throws WriterException {
 
         BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString().substring(7), BarcodeFormat.CODE_128,400,170,null);
         // first variable in .encode is what we want to receive, means the total price from
@@ -101,7 +101,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         barcode.setImageBitmap(bitmap);
         // set generated barcode (bitmap) to image view (barcode)
-    }
+    }*/
 
     public void setQRCode() throws WriterException {
 
