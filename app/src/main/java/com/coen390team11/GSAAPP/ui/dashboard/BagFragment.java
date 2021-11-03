@@ -120,7 +120,7 @@ public class BagFragment extends Fragment {
         barcode.add("5900001654"); // robin hood all purpose flour
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6810008424"); // kraft smooth peanut butter
-        barcode.add("554330292"); // pens
+        barcode.add("6563313434"); // lucky charms cereal
 
         // copy barcode arraylist into noDuplicates arraylist but without duplicates
         linkedHashSet = new LinkedHashSet<>(barcode);

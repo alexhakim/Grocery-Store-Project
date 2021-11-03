@@ -5,10 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,7 +16,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -40,6 +36,7 @@ public class ItemInformation extends AppCompatActivity {
     ImageButton increaseItemCountImageButton;
     Button updateItemQuantityButton;
     int countForItem = 1;
+    String tempDescription = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +51,7 @@ public class ItemInformation extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("product_name", Context.MODE_PRIVATE);
         String productName = sharedPreferences.getString("product_name","");
-        setTitle(productName.substring(3) + " Product Information");
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Nutella Spread 725g Image");
+        setTitle("Product Information");
 
         productImageView = findViewById(R.id.productImageView);
         itemNameTextView = findViewById(R.id.itemNameTextView);
@@ -115,10 +110,18 @@ public class ItemInformation extends AppCompatActivity {
                         String description = trimQuotation[0];
                         Log.i("DESCRIPTION SEGMENT: ", description);
 
-                        itemDescriptionInformationTextView.setText("\u2022 " + description);
+                        String[] BulletPoints = description.split("\\.");
+
+                        for (int i=0;i<BulletPoints.length;i++) {
+                            tempDescription+=("\u2022 " + BulletPoints[i] + "\n");
+                        }
+
+                        itemDescriptionInformationTextView.setText(tempDescription);
+
+
+
                     } catch (Exception e){
                         e.printStackTrace();
-                        itemDescriptionInformationTextView.setText("\u2022 Item description not available.");
                     }
 
                 }

@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="365dp"
         android:text="Product Description"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -40,8 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="390dp"
         android:textColor="#808080"
+        android:text="• Item description not available."
         android:textSize="13sp" />
 
     <TextView
