@@ -24,7 +24,7 @@ public class ProblemWithProductDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.checkbox,null);
-        builder.setView(view).setTitle("Are you sure you want to log out?").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("What seems to be the issue?").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 // do nothing

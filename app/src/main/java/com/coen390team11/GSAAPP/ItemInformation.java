@@ -37,7 +37,7 @@ public class ItemInformation extends AppCompatActivity {
     TextView modifyQuantityTextView;
     ImageButton increaseItemCountImageButton;
     Button updateItemQuantityButton;
-    int countForItem = 1;
+    int productCount;
     String tempDescription = "";
 
     @Override
@@ -53,6 +53,8 @@ public class ItemInformation extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("product_name", Context.MODE_PRIVATE);
         String productName = sharedPreferences.getString("product_name","");
+        String productCountString = productName.substring(0,1);
+        productCount = Integer.parseInt(productCountString);
         setTitle("Product Information");
 
         productImageView = findViewById(R.id.productImageView);
@@ -64,16 +66,16 @@ public class ItemInformation extends AppCompatActivity {
         updateItemQuantityButton = findViewById(R.id.updateItemQuantityButton);
 
         itemNameTextView.setText(productName.substring(3) + "");
-        modifyQuantityTextView.setText(countForItem + "");
+        modifyQuantityTextView.setText(productCount + "");
 
         decreaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //countForItem = Integer.parseInt(modifyQuantityTextView.getText().toString());
-                if (countForItem-1 >= 1) {
-                    modifyQuantityTextView.setText(--countForItem + "");
+                if (productCount-1 >= 1) {
+                    modifyQuantityTextView.setText(--productCount + "");
                 } else {
-                    // cannot decrement
+                    // do nothing, minimum quantity of 1
                 }
             }
         });
@@ -82,7 +84,7 @@ public class ItemInformation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //countForItem = Integer.parseInt(modifyQuantityTextView.getText().toString());
-                modifyQuantityTextView.setText(++countForItem + "");
+                modifyQuantityTextView.setText(++productCount + "");
             }
         });
 
