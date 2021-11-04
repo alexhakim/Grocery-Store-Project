@@ -218,6 +218,11 @@ public class CheckoutActivity extends AppCompatActivity {
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .update("purchaseCompleted0", 1);
 
+                        String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp0", timeStamp);
+
 
                         counterForTimesAllowedToReadFireBaseMethod += 1;
                     }
@@ -230,6 +235,8 @@ public class CheckoutActivity extends AppCompatActivity {
                             // getting past shoppingEvent0
                             String shoppingEvent0String = (value.get("shoppingEvent0")).toString();
                             Log.i("shoppingEvent0String", shoppingEvent0String);
+
+                            String timeStamp0String = (value.get("timeStamp0")).toString();
 
                             FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -252,6 +259,17 @@ public class CheckoutActivity extends AppCompatActivity {
                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .update("shoppingEvent0", currentBagString);
 
+                            // setting timeStamp1 to timeStamp 0
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp1", timeStamp0String);
+
+                            String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                            // setting timeStamp0 to new timeStamp of new shopping event
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp0", timeStamp);
+
                             counterForTimesAllowedToReadFireBaseMethod += 1;
                         }
                     } else if (purchaseCompletedIntArray[1] == 1){
@@ -260,6 +278,10 @@ public class CheckoutActivity extends AppCompatActivity {
                                 String shoppingEvent0String = (value.get("shoppingEvent0")).toString();
                                 String shoppingEvent1String = (value.get("shoppingEvent1")).toString();
                                 Log.i("shoppingEvent1String", shoppingEvent1String);
+
+                                String timeStamp0String = (value.get("timeStamp0")).toString();
+                                String timeStamp1String = (value.get("timeStamp1")).toString();
+
 
                                 FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -287,6 +309,22 @@ public class CheckoutActivity extends AppCompatActivity {
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .update("shoppingEvent0", currentBagString);
 
+                                // setting timeStamp2 to timeStamp 1
+                                FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .update("timeStamp2", timeStamp1String);
+
+                                // setting timeStamp1 to timeStamp 0
+                                FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .update("timeStamp1", timeStamp0String);
+
+                                String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                                // setting timeStamp0 to new timeStamp of new shopping event
+                                FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .update("timeStamp0", timeStamp);
+
                                 counterForTimesAllowedToReadFireBaseMethod += 1;
                             }
                         } else if (purchaseCompletedIntArray[2] == 1) {
@@ -295,6 +333,10 @@ public class CheckoutActivity extends AppCompatActivity {
                                         String shoppingEvent0String = (value.get("shoppingEvent0")).toString();
                                         String shoppingEvent1String = (value.get("shoppingEvent1")).toString();
                                         String shoppingEvent2String = (value.get("shoppingEvent2")).toString();
+
+                                        String timeStamp0String = (value.get("timeStamp0")).toString();
+                                        String timeStamp1String = (value.get("timeStamp1")).toString();
+                                        String timeStamp2String = (value.get("timeStamp2")).toString();
 
                                         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -327,6 +369,27 @@ public class CheckoutActivity extends AppCompatActivity {
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .update("shoppingEvent0", currentBagString);
 
+                                        // setting timeStamp3 to timeStamp 2
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp3", timeStamp2String);
+
+                                        // setting timeStamp2 to timeStamp 1
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp2", timeStamp1String);
+
+                                        // setting timeStamp1 to timeStamp 0
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp1", timeStamp0String);
+
+                                        String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                                        // setting timeStamp0 to new timeStamp of new shopping event
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp0", timeStamp);
+
                                         counterForTimesAllowedToReadFireBaseMethod += 1;
                                     }
                             } else if (purchaseCompletedIntArray[3] == 1){
@@ -336,6 +399,11 @@ public class CheckoutActivity extends AppCompatActivity {
                                         String shoppingEvent1String = (value.get("shoppingEvent1")).toString();
                                         String shoppingEvent2String = (value.get("shoppingEvent2")).toString();
                                         String shoppingEvent3String = (value.get("shoppingEvent3")).toString();
+
+                                        String timeStamp0String = (value.get("timeStamp0")).toString();
+                                        String timeStamp1String = (value.get("timeStamp1")).toString();
+                                        String timeStamp2String = (value.get("timeStamp2")).toString();
+                                        String timeStamp3String = (value.get("timeStamp3")).toString();
 
                                         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -373,6 +441,32 @@ public class CheckoutActivity extends AppCompatActivity {
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .update("shoppingEvent0", currentBagString);
 
+                                        // setting timeStamp4 to timeStamp 3
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp4", timeStamp3String);
+
+                                        // setting timeStamp3 to timeStamp 2
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp3", timeStamp2String);
+
+                                        // setting timeStamp2 to timeStamp 1
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp2", timeStamp1String);
+
+                                        // setting timeStamp1 to timeStamp 0
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp1", timeStamp0String);
+
+                                        String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                                        // setting timeStamp0 to new timeStamp of new shopping event
+                                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .update("timeStamp0", timeStamp);
+
                                         counterForTimesAllowedToReadFireBaseMethod+=1;
                                     }
                                 }
@@ -388,6 +482,11 @@ public class CheckoutActivity extends AppCompatActivity {
                         String shoppingEvent1String = (value.get("shoppingEvent1")).toString();
                         String shoppingEvent2String = (value.get("shoppingEvent2")).toString();
                         String shoppingEvent3String = (value.get("shoppingEvent3")).toString();
+
+                        String timeStamp0String = (value.get("timeStamp0")).toString();
+                        String timeStamp1String = (value.get("timeStamp1")).toString();
+                        String timeStamp2String = (value.get("timeStamp2")).toString();
+                        String timeStamp3String = (value.get("timeStamp3")).toString();
 
                         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -424,6 +523,32 @@ public class CheckoutActivity extends AppCompatActivity {
                         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .update("shoppingEvent0", currentBagString);
+
+                        // setting timeStamp4 to timeStamp 3
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp4", timeStamp3String);
+
+                        // setting timeStamp3 to timeStamp 2
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp3", timeStamp2String);
+
+                        // setting timeStamp2 to timeStamp 1
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp2", timeStamp1String);
+
+                        // setting timeStamp1 to timeStamp 0
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp1", timeStamp0String);
+
+                        String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                        // setting timeStamp0 to new timeStamp of new shopping event
+                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .update("timeStamp0", timeStamp);
 
                         counterForTimesAllowedToReadFireBaseMethod+=1;
                     }
