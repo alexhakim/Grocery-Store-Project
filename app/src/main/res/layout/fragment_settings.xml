@@ -129,6 +129,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
         android:text="When Data Saving Mode is turned on, all product images will be disabled."
+        android:textSize="12.5sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dataSavingModeSwitch" />

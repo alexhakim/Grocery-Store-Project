@@ -101,11 +101,13 @@ public class ItemInformation extends AppCompatActivity {
             }
         });
 
+        // TODO: USER SHOULDNT BE ABLE TO INCREMENT WITHOUT THE SCANNER
         increaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //countForItem = Integer.parseInt(modifyQuantityTextView.getText().toString());
-                modifyQuantityTextView.setText(++productCount + "");
+                
+                //modifyQuantityTextView.setText(++productCount + "");
             }
         });
 

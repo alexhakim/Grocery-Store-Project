@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="106dp"
+        android:layout_marginEnd="06dp"
         android:text="Past Shopping Events"
         android:textSize="20sp"
         android:textColor="#808080"
@@ -23,4 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/historyListView"
+        android:layout_width="398dp"
+        android:layout_height="653dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="5dp"
+        android:textColor="#808080"
+        android:textColorHint="#808080"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pastShoppingEventsTextView" />
+
+
+</RelativeLayout>
