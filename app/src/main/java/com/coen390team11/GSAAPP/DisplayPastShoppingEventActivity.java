@@ -1,9 +1,14 @@
 package com.coen390team11.GSAAPP;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,6 +24,12 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_past_shopping_event);
+
+        ActionBar actionBar = getSupportActionBar();
+        // changing color of action bar
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ArrayList<String> pastShoppingEvents = new ArrayList<String>();
 
@@ -36,5 +47,16 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
