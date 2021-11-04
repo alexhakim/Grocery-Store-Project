@@ -20,11 +20,11 @@ public class pastShoppingEventsPerUser implements Parcelable {
     public String shoppingEvent2 = "";
     public String shoppingEvent3 = "";
     public String shoppingEvent4 = "";
-    public String shoppingEvent5 = "";
-    public String shoppingEvent6 = "";
-    public String shoppingEvent7 = "";
-    public String shoppingEvent8 = "";
-    public String shoppingEvent9 = "";
+    public String timeStamp0 = "";
+    public String timeStamp1 = "";
+    public String timeStamp2 = "";
+    public String timeStamp3 = "";
+    public String timeStamp4 = "";
 
     protected pastShoppingEventsPerUser(Parcel in) {
         purchaseCompleted0 = in.readInt();
@@ -42,11 +42,11 @@ public class pastShoppingEventsPerUser implements Parcelable {
         shoppingEvent2 = in.readString();
         shoppingEvent3 = in.readString();
         shoppingEvent4 = in.readString();
-        shoppingEvent5 = in.readString();
-        shoppingEvent6 = in.readString();
-        shoppingEvent7 = in.readString();
-        shoppingEvent8 = in.readString();
-        shoppingEvent9 = in.readString();
+        timeStamp0 = in.readString();
+        timeStamp1 = in.readString();
+        timeStamp2 = in.readString();
+        timeStamp3 = in.readString();
+        timeStamp4 = in.readString();
     }
 
     public static final Creator<pastShoppingEventsPerUser> CREATOR = new Creator<pastShoppingEventsPerUser>() {
@@ -62,6 +62,7 @@ public class pastShoppingEventsPerUser implements Parcelable {
     };
 
     public pastShoppingEventsPerUser() {
+
     }
 
     @Override
@@ -86,10 +87,10 @@ public class pastShoppingEventsPerUser implements Parcelable {
         parcel.writeString(shoppingEvent2);
         parcel.writeString(shoppingEvent3);
         parcel.writeString(shoppingEvent4);
-        parcel.writeString(shoppingEvent5);
-        parcel.writeString(shoppingEvent6);
-        parcel.writeString(shoppingEvent7);
-        parcel.writeString(shoppingEvent8);
-        parcel.writeString(shoppingEvent9);
+        parcel.writeString(timeStamp0);
+        parcel.writeString(timeStamp1);
+        parcel.writeString(timeStamp2);
+        parcel.writeString(timeStamp3);
+        parcel.writeString(timeStamp4);
     }
 }

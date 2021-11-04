@@ -218,6 +218,7 @@ public class CheckoutActivity extends AppCompatActivity {
                                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .update("purchaseCompleted0", 1);
 
+
                         counterForTimesAllowedToReadFireBaseMethod += 1;
                     }
                 } else if (purchaseCompletedIntArray[0] == 1){
