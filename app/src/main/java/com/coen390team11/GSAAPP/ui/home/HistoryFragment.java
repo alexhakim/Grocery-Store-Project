@@ -1,6 +1,8 @@
 package com.coen390team11.GSAAPP.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,11 @@ public class HistoryFragment extends Fragment {
     private HistoryViewModel homeViewModel;
     private FragmentHistoryBinding binding;
     ListView historyListView;
+    String timeStampShoppingEvent0 = "";
+    String timeStampShoppingEvent1 = "";
+    String timeStampShoppingEvent2 = "";
+    String timeStampShoppingEvent3 = "";
+    String timeStampShoppingEvent4 = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,24 +58,67 @@ public class HistoryFragment extends Fragment {
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                String timeStampShoppingEvent0 = (value.get("timeStamp0")).toString();
-                String timeStampShoppingEvent1 = (value.get("timeStamp1")).toString();
-                String timeStampShoppingEvent2 = (value.get("timeStamp2")).toString();
-                String timeStampShoppingEvent3 = (value.get("timeStamp3")).toString();
-                String timeStampShoppingEvent4 = (value.get("timeStamp4")).toString();
+                timeStampShoppingEvent0 = (value.get("timeStamp0")).toString();
+                timeStampShoppingEvent1 = (value.get("timeStamp1")).toString();
+                timeStampShoppingEvent2 = (value.get("timeStamp2")).toString();
+                timeStampShoppingEvent3 = (value.get("timeStamp3")).toString();
+                timeStampShoppingEvent4 = (value.get("timeStamp4")).toString();
 
-                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent0);
-                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent1);
-                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent2);
-                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent3);
-                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent4);
+                try {
+                    //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("event_timestamps", Context.MODE_PRIVATE);
+                    //SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, pastShoppingEvents);
-                historyListView.setAdapter(arrayAdapter);
-                arrayAdapter.notifyDataSetChanged();
+                    if (!(timeStampShoppingEvent0.isEmpty())) {
+                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent0);
+                        /*editor.putString("timeStamp0", "Shopping Event on " + timeStampShoppingEvent0);
+                        editor.apply();*/
+                    }
+                    if (!(timeStampShoppingEvent1.isEmpty())) {
+                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent1);
+                        /*editor.putString("timeStamp1", "Shopping Event on " + timeStampShoppingEvent1);
+                        editor.apply();*/
+                    }
+                    if (!(timeStampShoppingEvent2.isEmpty())) {
+                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent2);
+                        /*editor.putString("timeStamp2", "Shopping Event on " + timeStampShoppingEvent2);
+                        editor.apply();*/
+                    }
+                    if (!(timeStampShoppingEvent3.isEmpty())) {
+                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent3);
+                        /*editor.putString("timeStamp3", "Shopping Event on " + timeStampShoppingEvent3);
+                        editor.apply();*/
+                    }
+                    if (!(timeStampShoppingEvent4.isEmpty())) {
+                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent4);
+                        /*editor.putString("timeStamp4", "Shopping Event on " + timeStampShoppingEvent4);
+                        editor.apply();*/
+
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, pastShoppingEvents);
+                        historyListView.setAdapter(arrayAdapter);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
+
+
 
             }
         });
+
+        /*SharedPreferences sharedPreferences = getActivity().getSharedPreferences("event_timestamps", Context.MODE_PRIVATE);
+        String timeStamp0 = sharedPreferences.getString("timeStamp0","");
+        String timeStamp1 = sharedPreferences.getString("timeStamp1","");
+        String timeStamp2 = sharedPreferences.getString("timeStamp2","");
+        String timeStamp3 = sharedPreferences.getString("timeStamp3","");
+        String timeStamp4 = sharedPreferences.getString("timeStamp4","");
+        pastShoppingEvents.add(timeStamp0);
+        pastShoppingEvents.add(timeStamp1);
+        pastShoppingEvents.add(timeStamp2);
+        pastShoppingEvents.add(timeStamp3);
+        pastShoppingEvents.add(timeStamp4);*/
+
 
         historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
