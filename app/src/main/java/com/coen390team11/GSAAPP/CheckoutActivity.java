@@ -48,7 +48,7 @@ public class CheckoutActivity extends AppCompatActivity {
         qrcode = findViewById(R.id.qrcode);
         randomEditText = findViewById(R.id.randomEditText);
         randomEditText2 = findViewById(R.id.randomEditText2);
-        //completePurchaseButton = findViewById(R.id.completePurchaseButton);
+        completePurchaseButton = findViewById(R.id.completePurchaseButton);
 
         Intent intent = getIntent();
         String stringTotalPrice = intent.getStringExtra("total_price");

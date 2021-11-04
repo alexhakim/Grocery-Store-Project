@@ -82,7 +82,6 @@ public class BagFragment extends Fragment {
     LinkedHashSet<String> linkedHashSet;
     ArrayList<String> noDuplicates;
     Double checkoutTotalPrice = 0.0;
-    Gson gson;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -175,10 +174,10 @@ public class BagFragment extends Fragment {
                                         Log.i("PRODUCT: ",productName);
                                         hashMapName.put(barcode.get(i),productName);
 
-                                        /*String priceSegment = trim[2];
+                                        String priceSegment = trim[2];
                                         String productPrice = priceSegment.substring(7);
                                         checkoutTotalPrice+=Double.parseDouble(productPrice);
-                                        Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));*/
+                                        Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));
 
                                     }
                                 }
@@ -253,6 +252,7 @@ public class BagFragment extends Fragment {
             public void onClick(View view) {
                 // go to checkout
                 String totalPrice = String.format("%.2f",checkoutTotalPrice); // round to 2 decimal places
+                Log.d("TOTALPRICE",checkoutTotalPrice.toString());
                 Intent goToCheckoutIntent = new Intent(getContext(), CheckoutActivity.class);
                 goToCheckoutIntent.putExtra("total_price",totalPrice);
                 startActivity(goToCheckoutIntent);
