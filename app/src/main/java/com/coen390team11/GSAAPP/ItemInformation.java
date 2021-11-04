@@ -63,9 +63,6 @@ public class ItemInformation extends AppCompatActivity {
         String productCountString = productName.substring(0,1);
         productCount = Integer.parseInt(productCountString);
 
-        SharedPreferences sharedPreferences2 = getSharedPreferences("product_price",Context.MODE_PRIVATE);
-        String productPriceString  = sharedPreferences2.getString("product_price","");
-        Double productPrice = Double.parseDouble(productPriceString);
 
         setTitle("Product Information");
 
@@ -80,7 +77,17 @@ public class ItemInformation extends AppCompatActivity {
 
         itemNameTextView.setText(productName.substring(3) + "");
         modifyQuantityTextView.setText(productCount + "");
-        priceOfProductTextView.setText("Price Per Unit: $" + productPrice);
+
+        FirebaseFirestore.getInstance().collection("items")
+                .document(productName.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String priceOfProductString = (value.get("price")).toString();
+                Double priceOfProduct = Double.parseDouble(priceOfProductString);
+                priceOfProductTextView.setText("Price Per Unit: $" + priceOfProduct);
+
+            }
+        });
 
         decreaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +237,6 @@ public class ItemInformation extends AppCompatActivity {
                 }
             }
         });
-
 
 
 
