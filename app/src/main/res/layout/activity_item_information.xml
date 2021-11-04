@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="600dp"
         android:padding="15dp"
         android:paddingHorizontal="10dp"
         android:paddingTop="3dp"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="115dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="600dp"
         android:background="@android:color/transparent"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:padding="15dp"
@@ -75,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="232dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="600dp"
         android:background="@android:color/transparent"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:padding="15dp"
@@ -86,8 +86,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="670dp"
         android:backgroundTint="#344398"
         android:text="SAVE CHANGES" />
+
+    <TextView
+        android:id="@+id/priceOfProductTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="570dp"
+        android:textColor="@color/black"
+        android:text="Price Per Unit: $" />
 
 </RelativeLayout>

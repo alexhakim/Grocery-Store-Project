@@ -139,6 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.firstName = firstNameEditText.getEditText().getText().toString();
                                 user.lastName = lastNameEditText.getEditText().getText().toString();
                                 user.rewardsCardNumber = generateRewardsNumber();
+                                user.dataSavingMode = 0;
 
                                 // store user in cloud
                                 FirebaseFirestore.getInstance().collection("users").document(user.id)

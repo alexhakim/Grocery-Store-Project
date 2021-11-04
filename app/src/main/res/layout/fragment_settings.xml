@@ -34,9 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:hint="Name: "
             android:textColor="#808080"
-            android:textColorHint="#808080"
-            android:hint="Name: " />
+            android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -53,10 +53,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#808080"
-            android:textColorHint="#808080"
             android:background="@color/white"
-            android:hint="Email: " />
+            android:hint="Email: "
+            android:textColor="#808080"
+            android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,18 +67,17 @@
         android:textColor="@color/black"
         android:textColorHint="#808080"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:digits="1234567890"
+            android:hint="Phone Number:"
             android:inputType="phone"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:digits="1234567890"
-            android:hint="Phone Number:" />
+            android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -96,9 +95,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:hint="Cartly® Rewards Card Number: "
             android:textColor="#808080"
-            android:textColorHint="#808080"
-            android:hint="Cartly® Rewards Card Number: " />
+            android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -112,5 +111,26 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getCartlyCardNumberEditText" />
+
+    <Switch
+        android:id="@+id/dataSavingModeSwitch"
+        android:layout_width="179dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="44dp"
+        android:text="Data Saving Mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dataSavingModeExplanationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="4dp"
+        android:text="When Data Saving Mode is turned on, all product images will be disabled."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataSavingModeSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

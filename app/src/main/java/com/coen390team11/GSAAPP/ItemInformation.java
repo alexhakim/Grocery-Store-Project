@@ -1,6 +1,7 @@
 package com.coen390team11.GSAAPP;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,13 +18,17 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coen390team11.GSAAPP.ui.LogoutDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -39,6 +44,8 @@ public class ItemInformation extends AppCompatActivity {
     Button updateItemQuantityButton;
     int productCount;
     String tempDescription = "";
+    TextView priceOfProductTextView;
+    int dataSavingMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,11 @@ public class ItemInformation extends AppCompatActivity {
         String productName = sharedPreferences.getString("product_name","");
         String productCountString = productName.substring(0,1);
         productCount = Integer.parseInt(productCountString);
+
+        SharedPreferences sharedPreferences2 = getSharedPreferences("product_price",Context.MODE_PRIVATE);
+        String productPriceString  = sharedPreferences2.getString("product_price","");
+        Double productPrice = Double.parseDouble(productPriceString);
+
         setTitle("Product Information");
 
         productImageView = findViewById(R.id.productImageView);
@@ -64,9 +76,11 @@ public class ItemInformation extends AppCompatActivity {
         modifyQuantityTextView = findViewById(R.id.modifyQuantityTextView);
         increaseItemCountImageButton = findViewById(R.id.increaseItemCountImageButton);
         updateItemQuantityButton = findViewById(R.id.updateItemQuantityButton);
+        priceOfProductTextView = findViewById(R.id.priceOfProductTextView);
 
         itemNameTextView.setText(productName.substring(3) + "");
         modifyQuantityTextView.setText(productCount + "");
+        priceOfProductTextView.setText("Price Per Unit: $" + productPrice);
 
         decreaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,67 +151,87 @@ public class ItemInformation extends AppCompatActivity {
             }
         });
 
-        FirebaseFirestore.getInstance().collection("items").document(productName.substring(3)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        // CORRECTLY GETTING SPECIFIC FIELD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        // getting dataSavingMode value
+        FirebaseFirestore.getInstance().collection("users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String dataSavingModeString = (value.get("dataSavingMode")).toString();
+                dataSavingMode = Integer.parseInt(dataSavingModeString);
 
-                    try {
-                        DocumentSnapshot documentSnapshot = task.getResult();
-                        String dataToString = documentSnapshot.toString();
-                        Log.i("PHOTO: ", String.valueOf(documentSnapshot));
-                        String[] trimFirstPart = dataToString.split("https");
-                        String[] trimSecondPart = dataToString.split("\\?alt");
-                        String finalFirstPart = trimFirstPart[1].substring(0, 73);
-                        String splitSecondPart = trimSecondPart[1];
-                        Log.i("splitFirstPart: ", finalFirstPart);
-                        Log.i("splitSecondPart: ", splitSecondPart);
-                        String[] finalSecond = splitSecondPart.split("\"");
-                        String finalSecondPart = finalSecond[0];
-                        Log.i("finalSecondPart: ", finalSecondPart);
+                if (dataSavingMode == 0) {
+                    // get images for products
+                    FirebaseFirestore.getInstance().collection("items").document(productName.substring(3)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
 
-                        // trim product name, add %20 between each space
-                        String[] trimmedProductName = productName.substring(3).split(" ");
-                        // split by space
+                                try {
+                                    DocumentSnapshot documentSnapshot = task.getResult();
+                                    String dataToString = documentSnapshot.toString();
+                                    Log.i("PHOTO: ", String.valueOf(documentSnapshot));
+                                    String[] trimFirstPart = dataToString.split("https");
+                                    String[] trimSecondPart = dataToString.split("\\?alt");
+                                    String finalFirstPart = trimFirstPart[1].substring(0, 73);
+                                    String splitSecondPart = trimSecondPart[1];
+                                    Log.i("splitFirstPart: ", finalFirstPart);
+                                    Log.i("splitSecondPart: ", splitSecondPart);
+                                    String[] finalSecond = splitSecondPart.split("\"");
+                                    String finalSecondPart = finalSecond[0];
+                                    Log.i("finalSecondPart: ", finalSecondPart);
 
-                        // now get all product name parts
-                        String productNameParts = "";
-                        for (int i = 0; i < trimmedProductName.length; i++) {
-                            productNameParts += trimmedProductName[i];
-                            productNameParts += "%20";
+                                    // trim product name, add %20 between each space
+                                    String[] trimmedProductName = productName.substring(3).split(" ");
+                                    // split by space
 
-                            if (i + 1 == trimmedProductName.length) {
-                                Log.d("productNameParts: ", productNameParts);
+                                    // now get all product name parts
+                                    String productNameParts = "";
+                                    for (int i = 0; i < trimmedProductName.length; i++) {
+                                        productNameParts += trimmedProductName[i];
+                                        productNameParts += "%20";
+
+                                        if (i + 1 == trimmedProductName.length) {
+                                            Log.d("productNameParts: ", productNameParts);
+                                        }
+                                    }
+                                    productNameParts = productNameParts.substring(0, productNameParts.length() - 3);
+                                    productNameParts += ".jpeg?alt";
+                                    Log.d("productNamePartsPERPART: ", productNameParts);
+                                    // image name part done
+
+                                    String totalURL = "https" + finalFirstPart + productNameParts + finalSecondPart;
+                                    if (totalURL.contains("'")) { // remove extra ' from product names such as Lay's or French's
+                                        totalURL = totalURL.replace("'", "");
+                                    }
+                                    Log.i("TOTALURL", totalURL);
+
+
+                                    // split entire url into two parts, 1 before product name and 1 after product name
+                                    // after part is .split("Image?alt") and substring(53???)
+                                    // before part is is .split("https") and .substring(73???)
+
+                                    Picasso.get().load(totalURL).into(productImageView);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                        productNameParts = productNameParts.substring(0, productNameParts.length() - 3);
-                        productNameParts += ".jpeg?alt";
-                        Log.d("productNamePartsPERPART: ", productNameParts);
-                        // image name part done
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
-                        String totalURL = "https" + finalFirstPart + productNameParts + finalSecondPart;
-                        if (totalURL.contains("'")){ // remove extra ' from product names such as Lay's or French's
-                            totalURL = totalURL.replace("'","");
                         }
-                        Log.i("TOTALURL", totalURL);
+                    });
 
-
-                        // split entire url into two parts, 1 before product name and 1 after product name
-                        // after part is .split("Image?alt") and substring(53???)
-                        // before part is is .split("https") and .substring(73???)
-
-                        Picasso.get().load(totalURL).into(productImageView);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
                 }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
         });
+
+
 
 
     }

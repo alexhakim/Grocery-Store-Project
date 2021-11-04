@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +30,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     private SettingsViewModel notificationsViewModel;
     private FragmentSettingsBinding binding;
@@ -42,6 +49,7 @@ public class SettingsFragment extends Fragment {
     TextInputLayout getCartlyCardNumberEditText;
     Spinner changeLanguageSpinner;
     Button saveSettingsButton;
+    Switch dataSavingModeSwitch;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -134,6 +142,24 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        dataSavingModeSwitch = binding.dataSavingModeSwitch;
+        dataSavingModeSwitch.setOnCheckedChangeListener(this);
+
+        // get state of switch from firebase
+        // getting dataSavingMode value
+        FirebaseFirestore.getInstance().collection("users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String dataSavingModeString = (value.get("dataSavingMode")).toString();
+                if (dataSavingModeString.equals("1")){
+                    dataSavingModeSwitch.setChecked(true);
+                } else if (dataSavingModeString.equals("0")){
+                    dataSavingModeSwitch.setChecked(false);
+                }
+            }
+        });
+
         return root;
     }
 
@@ -143,4 +169,20 @@ public class SettingsFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        switch(compoundButton.getId()){
+            case R.id.dataSavingModeSwitch:
+                if (isChecked){ // when user requests to disable images
+                    FirebaseFirestore.getInstance().collection("users")
+                            .document( FirebaseAuth.getInstance().getCurrentUser().getUid()).update("dataSavingMode",1);
+
+                } else { // normal mode
+                    FirebaseFirestore.getInstance().collection("users")
+                            .document( FirebaseAuth.getInstance().getCurrentUser().getUid()).update("dataSavingMode",0);
+
+                }
+                break;
+        }
+    }
 }

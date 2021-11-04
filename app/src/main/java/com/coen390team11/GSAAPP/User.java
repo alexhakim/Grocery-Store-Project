@@ -15,6 +15,7 @@ public class User implements Parcelable {
     public String gender = "";
     public int profileCompleted = 0;
     public long rewardsCardNumber = Long.valueOf(0);
+    public int dataSavingMode = 0;
 
     // constructor do not remove
     public User(){
@@ -30,6 +31,7 @@ public class User implements Parcelable {
         gender = in.readString();
         profileCompleted = in.readInt();
         rewardsCardNumber = in.readLong();
+        dataSavingMode = in.readInt();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -59,5 +61,6 @@ public class User implements Parcelable {
         parcel.writeString(gender);
         parcel.writeInt(profileCompleted);
         parcel.writeLong(rewardsCardNumber);
+        parcel.writeInt(dataSavingMode);
     }
 }
