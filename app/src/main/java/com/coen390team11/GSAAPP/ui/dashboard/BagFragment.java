@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -82,7 +83,6 @@ public class BagFragment extends Fragment {
     LinkedHashSet<String> linkedHashSet;
     ArrayList<String> noDuplicates;
     Double checkoutTotalPrice = 0.0;
-    Double pricePerProduct = 0.0;
     String productPrice;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -191,19 +191,12 @@ public class BagFragment extends Fragment {
                                 productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
                                 Log.i("ARRL --->",hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
                                 Log.i("BARCODE ---->",noDuplicates.get(i));
-
-
-
-                                pricePerProduct = Double.parseDouble(productPrice);
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_price", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("product_price",String.format("%.2f",pricePerProduct));
-                                editor.apply();
                             }
                             Log.d("PNM --->", hashMapName.toString());
                             ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
                             currentBagListView.setAdapter(arrayAdapter);
                             arrayAdapter.notifyDataSetChanged();
+
 
                             // add document of name set to email of user to collection itemsPerUser
                             FirebaseFirestore.getInstance().collection("itemsPerUser").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
@@ -265,6 +258,7 @@ public class BagFragment extends Fragment {
                 Log.d("TOTALPRICE",checkoutTotalPrice.toString());
                 Intent goToCheckoutIntent = new Intent(getContext(), CheckoutActivity.class);
                 goToCheckoutIntent.putExtra("total_price",totalPrice);
+                goToCheckoutIntent.putExtra("current_bag",productsInBagArrayList);
                 startActivity(goToCheckoutIntent);
             }
         });
