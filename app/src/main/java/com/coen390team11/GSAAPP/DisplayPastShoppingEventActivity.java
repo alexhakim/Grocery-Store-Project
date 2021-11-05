@@ -108,7 +108,7 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         });
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
+        /*SharedPreferences sharedPreferences = getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
         String subtotal = sharedPreferences.getString("product_subtotal","");
         String gst = String.format("%.2f",Double.parseDouble(subtotal)*0.05);
         String qst = String.format("%.2f",Double.parseDouble(subtotal)*0.09975);
@@ -117,7 +117,37 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         QSTTextView.setText("Estimated QST: $" + qst);
         Double totalDouble = Double.parseDouble(subtotal) + Double.parseDouble(gst) + Double.parseDouble(qst);
         String total = String.format("%.2f",totalDouble);
-        totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+        totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);*/
+
+        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                try {
+
+                    Intent intent = getIntent();
+                    int positionInTimeStampListView = intent.getIntExtra("position",0);
+
+                        if ((value.get("zSubTotal" + positionInTimeStampListView)).toString() != null){
+                            String zSubTotalXString = (value.get("zSubTotal" + positionInTimeStampListView)).toString();
+                            if (!(zSubTotalXString.isEmpty())){
+                                String gst = String.format("%.2f",Double.parseDouble(zSubTotalXString)*0.05);
+                                String qst = String.format("%.2f",Double.parseDouble(zSubTotalXString)*0.09975);
+                                subtotalPriceOfShoppingEventTextView.setText("Subtotal: $" + zSubTotalXString);
+                                GSTTextView.setText("Estimated GST: $" + gst);
+                                QSTTextView.setText("Estimated QST: $" + qst);
+                                Double totalDouble = Double.parseDouble(zSubTotalXString) + Double.parseDouble(gst) + Double.parseDouble(qst);
+                                String total = String.format("%.2f",totalDouble);
+                                totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+                            }
+                        }
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override

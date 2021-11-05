@@ -25,6 +25,12 @@ public class pastShoppingEventsPerUser implements Parcelable {
     public String timeStamp2 = "";
     public String timeStamp3 = "";
     public String timeStamp4 = "";
+    public String zSubTotal0 = "";
+    public String zSubTotal1 = "";
+    public String zSubTotal2 = "";
+    public String zSubTotal3 = "";
+    public String zSubTotal4 = "";
+
 
     protected pastShoppingEventsPerUser(Parcel in) {
         purchaseCompleted0 = in.readInt();
@@ -47,6 +53,12 @@ public class pastShoppingEventsPerUser implements Parcelable {
         timeStamp2 = in.readString();
         timeStamp3 = in.readString();
         timeStamp4 = in.readString();
+        zSubTotal0 = in.readString();
+        zSubTotal1 = in.readString();
+        zSubTotal2 = in.readString();
+        zSubTotal3 = in.readString();
+        zSubTotal4 = in.readString();
+
     }
 
     public static final Creator<pastShoppingEventsPerUser> CREATOR = new Creator<pastShoppingEventsPerUser>() {
@@ -62,7 +74,6 @@ public class pastShoppingEventsPerUser implements Parcelable {
     };
 
     public pastShoppingEventsPerUser() {
-
     }
 
     @Override
@@ -92,5 +103,11 @@ public class pastShoppingEventsPerUser implements Parcelable {
         parcel.writeString(timeStamp2);
         parcel.writeString(timeStamp3);
         parcel.writeString(timeStamp4);
+        parcel.writeString(zSubTotal0);
+        parcel.writeString(zSubTotal1);
+        parcel.writeString(zSubTotal2);
+        parcel.writeString(zSubTotal3);
+        parcel.writeString(zSubTotal4);
+
     }
 }
