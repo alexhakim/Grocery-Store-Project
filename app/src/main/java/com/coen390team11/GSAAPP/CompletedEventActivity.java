@@ -1,10 +1,8 @@
 package com.coen390team11.GSAAPP;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +11,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.coen390team11.GSAAPP.ui.LogoutDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -29,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class DisplayPastShoppingEventActivity extends AppCompatActivity {
+public class CompletedEventActivity extends AppCompatActivity {
 
     ListView pastShoppingEventXItemsListView;
     TextView subtotalPriceOfShoppingEventTextView;
@@ -46,14 +44,13 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_past_shopping_event);
+        setContentView(R.layout.activity_completed_event);
 
         ActionBar actionBar = getSupportActionBar();
         // changing color of action bar
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
         actionBar.setBackgroundDrawable(colorDrawable);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        setTitle("Past Shopping Event");
+        setTitle("Receipt");
 
         pastShoppingEventXItemsListView = findViewById(R.id.pastShoppingEventXItemsListView);
         subtotalPriceOfShoppingEventTextView = findViewById(R.id.subtotalPriceOfShoppingEventTextView);
@@ -69,44 +66,26 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
         ArrayList<String> pastShoppingEventsArrayList = new ArrayList<String>();
 
-        // pass list view position from history fragment using sharedpreferences, then get shoppingEvent(X)
-        Intent intent = getIntent();
-        int positionInTimeStampListView = intent.getIntExtra("position",0);
-
-        /* here we add the past shopping events received from firebase,
-         ** which are received from the complete purchase button
-         ** in the checkout activity to the arraylist*/
-
         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                String shoppingEventX = (value.get("shoppingEvent" + positionInTimeStampListView)).toString();
+                String shoppingEvent0 = (value.get("shoppingEvent0")).toString();
 
-                // now split it by \t
-                String[] trimShoppingEventX = shoppingEventX.split("\t");
-                for (int i=0;i< trimShoppingEventX.length;i++){
-                    pastShoppingEventsArrayList.add(trimShoppingEventX[i]);
-                    Log.d("trimShoppingEventX", trimShoppingEventX[i]);
+                // now split it by \t to add items seperately in arraylist
+                String[] trimShoppingEvent0 = shoppingEvent0.split("\t");
+                for (int i=0;i< trimShoppingEvent0.length;i++){
+                    pastShoppingEventsArrayList.add(trimShoppingEvent0[i]);
+                    Log.d("trimShoppingEventX", trimShoppingEvent0[i]);
                     Log.d("pastShoppingEvents", String.valueOf(pastShoppingEventsArrayList));
                 }
 
                 Collections.sort(pastShoppingEventsArrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(DisplayPastShoppingEventActivity.this, android.R.layout.simple_list_item_1, pastShoppingEventsArrayList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(CompletedEventActivity.this, android.R.layout.simple_list_item_1, pastShoppingEventsArrayList);
                 pastShoppingEventXItemsListView.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
             }
         });
-
-        pastShoppingEventXItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent goToNutritionInfoIntent = new Intent(DisplayPastShoppingEventActivity.this, NutritionInfoActivity.class);
-                goToNutritionInfoIntent.putExtra("product_name",pastShoppingEventsArrayList.get(position));
-                startActivity(goToNutritionInfoIntent);
-            }
-        });
-
 
         SharedPreferences sharedPreferences = getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
         String subtotal = sharedPreferences.getString("product_subtotal","");
@@ -118,15 +97,21 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         Double totalDouble = Double.parseDouble(subtotal) + Double.parseDouble(gst) + Double.parseDouble(qst);
         String total = String.format("%.2f",totalDouble);
         totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_after_checkout,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.LogoutB:
+                LogoutDialog logoutDialog = new LogoutDialog();
+                logoutDialog.show(getSupportFragmentManager(),"Logout");
         }
         return super.onOptionsItemSelected(item);
     }

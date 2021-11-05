@@ -104,7 +104,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
                 firstEvents();
 
-                Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this,AfterCheckoutActivity.class);
+                Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this,CompletedEventActivity.class);
                 startActivity(goToAfterCheckoutIntent);
                 finish();
             }
@@ -569,12 +569,7 @@ public class CheckoutActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-
         }
-
-
         return super.onOptionsItemSelected(item);
     }
-
-
 }

@@ -106,7 +106,7 @@ public class ItemInformation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //countForItem = Integer.parseInt(modifyQuantityTextView.getText().toString());
-                
+
                 //modifyQuantityTextView.setText(++productCount + "");
             }
         });
