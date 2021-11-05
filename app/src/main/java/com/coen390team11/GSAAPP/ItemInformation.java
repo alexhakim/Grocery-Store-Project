@@ -82,9 +82,15 @@ public class ItemInformation extends AppCompatActivity {
                 .document(productName.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                String priceOfProductString = (value.get("price")).toString();
-                Double priceOfProduct = Double.parseDouble(priceOfProductString);
-                priceOfProductTextView.setText("Price Per Unit: $" + priceOfProduct);
+
+                // TODO: crashing if 1 item quantity is double digits
+                if ((value.get("price")) != null) {
+                    String priceOfProductString = (value.get("price")).toString();
+                    if (!(priceOfProductString.isEmpty())) {
+                        Double priceOfProduct = Double.parseDouble(priceOfProductString);
+                        priceOfProductTextView.setText("Price Per Unit: $" + priceOfProduct);
+                    }
+                }
 
             }
         });
