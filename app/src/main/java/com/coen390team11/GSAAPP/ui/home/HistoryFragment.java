@@ -122,8 +122,9 @@ public class HistoryFragment extends Fragment {
 
         historyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent goToPastShoppingEventIntent = new Intent(getContext(), DisplayPastShoppingEventActivity.class);
+                goToPastShoppingEventIntent.putExtra("position",position);
                 startActivity(goToPastShoppingEventIntent);
             }
         });

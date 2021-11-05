@@ -66,7 +66,10 @@ public class NutritionInfoActivity extends AppCompatActivity {
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("product_name", Context.MODE_PRIVATE);
-        String productName = sharedPreferences.getString("product_name","");
+        String productNameX = sharedPreferences.getString("product_name","");
+
+        Intent intent = getIntent();
+        String productName = intent.getStringExtra("product_name");
 
         productNameTextView.setText("Product Name: " + productName.substring(2));
         servingSizeTextView.setText("Serving Size: 100g");

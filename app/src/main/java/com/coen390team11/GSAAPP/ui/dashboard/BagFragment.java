@@ -100,7 +100,7 @@ public class BagFragment extends Fragment {
         ArrayList<String> productsInBagArrayList = new ArrayList<String>();
 
         // currently adding temp barcodes
-        /*barcode.add("7680801101"); // example of barilla spaghetti
+        barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
@@ -116,7 +116,7 @@ public class BagFragment extends Fragment {
         barcode.add("6041004701"); // lays chips
         barcode.add("6041004701"); // lays chips
         barcode.add("6202000084"); // nutella spread
-        barcode.add("5620097439"); // french's ketchup*/
+        barcode.add("5620097439"); // french's ketchup
         barcode.add("5620097439"); // french's ketchup
         barcode.add("5900001654"); // robin hood all purpose flour
         barcode.add("6810008424"); // kraft smooth peanut butter

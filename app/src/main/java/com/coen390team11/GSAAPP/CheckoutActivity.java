@@ -101,6 +101,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
                 firstEvents();
 
+                Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this,AfterCheckoutActivity.class);
+                startActivity(goToAfterCheckoutIntent);
+                finish();
             }
         });
 

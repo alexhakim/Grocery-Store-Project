@@ -22,6 +22,9 @@
         android:theme="@style/Theme.GroceryStoreAndroidApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".AfterCheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".DisplayPastShoppingEventActivity"
             android:exported="false" />
         <activity

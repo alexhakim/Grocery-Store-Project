@@ -1,9 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DisplayPastShoppingEventActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/pastShoppingEventXItemsListView"
+        android:layout_width="398dp"
+        android:layout_height="350dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="#808080"
+        android:textColorHint="#808080" />
+
+    <TextView
+        android:id="@+id/orderSummaryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="360dp"
+        android:text="Order Summary"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/priceDisplayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="5dp"
+        android:text="PRICE             "
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subtotalPriceOfShoppingEventTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="440dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Subtotal: $" />
+
+    <TextView
+        android:id="@+id/GSTTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Estimated GST: $" />
+
+    <TextView
+        android:id="@+id/QSTTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Esimated QST: $" />
+
+    <TextView
+        android:id="@+id/totalPriceOfShoppingEventTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="Total Price: $" />
+
+    <TextView
+        android:id="@+id/nutritionInformationDisplayTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="540dp"
+        android:layout_marginLeft="5dp"
+        android:text="Nutrition Information Totals             "
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/totalCaloriesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Calories: " />
+
+    <TextView
+        android:id="@+id/totalFatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Fat: " />
+
+    <TextView
+        android:id="@+id/totalCholesterolTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="620dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Cholesterol: " />
+
+    <TextView
+        android:id="@+id/totalSodiumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="640dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Sodium: " />
+
+    <TextView
+        android:id="@+id/totalCarbohydratesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="660dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Carbohydrates: " />
+
+    <TextView
+        android:id="@+id/totalProteinTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="680dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="Protein: " />
+
+
+
+</RelativeLayout>
