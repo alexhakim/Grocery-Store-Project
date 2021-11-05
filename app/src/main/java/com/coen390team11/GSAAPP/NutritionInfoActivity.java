@@ -63,11 +63,6 @@ public class NutritionInfoActivity extends AppCompatActivity {
         sugarsTextView = findViewById(R.id.sugarsTextView);
         proteinTextView = findViewById(R.id.proteinTextView);
 
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences("product_name", Context.MODE_PRIVATE);
-        String productNameX = sharedPreferences.getString("product_name","");
-
         Intent intent = getIntent();
         String productName = intent.getStringExtra("product_name");
 

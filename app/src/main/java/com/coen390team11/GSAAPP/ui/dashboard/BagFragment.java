@@ -232,9 +232,6 @@ public class BagFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                //Intent goToNutritionInfoIntent = new Intent(getContext(), NutritionInfoActivity.class);
-                //startActivity(goToNutritionInfoIntent);
-
                 Intent goToItemInformationIntent = new Intent(getContext(), ItemInformation.class);
                 startActivity(goToItemInformationIntent);
 
@@ -259,6 +256,13 @@ public class BagFragment extends Fragment {
                 Intent goToCheckoutIntent = new Intent(getContext(), CheckoutActivity.class);
                 goToCheckoutIntent.putExtra("total_price",totalPrice);
                 goToCheckoutIntent.putExtra("current_bag",productsInBagArrayList);
+
+                // pass subtotal to DisplayPastShoppingEventActivity
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("product_subtotal", totalPrice);
+                editor.apply();
+
                 startActivity(goToCheckoutIntent);
             }
         });

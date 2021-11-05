@@ -6,7 +6,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -75,6 +77,7 @@ public class CheckoutActivity extends AppCompatActivity {
         String stringTotalPrice = intent.getStringExtra("total_price");
         randomEditText.setText("Subtotal: " + stringTotalPrice);
         randomEditText.setEnabled(false);
+
         Double totalDouble = Double.parseDouble(stringTotalPrice);
         Double totalWithTax = totalDouble*1.14975;
         randomEditText2.setText("Total: " + String.format("%.2f",totalWithTax));

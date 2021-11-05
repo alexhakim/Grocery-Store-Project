@@ -6,7 +6,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -102,6 +104,18 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
                 startActivity(goToNutritionInfoIntent);
             }
         });
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
+        String subtotal = sharedPreferences.getString("product_subtotal","");
+        String gst = String.format("%.2f",Double.parseDouble(subtotal)*0.05);
+        String qst = String.format("%.2f",Double.parseDouble(subtotal)*0.09975);
+        subtotalPriceOfShoppingEventTextView.setText("Subtotal: $" + subtotal);
+        GSTTextView.setText("Estimated GST: $" + gst);
+        QSTTextView.setText("Estimated QST: $" + qst);
+        Double totalDouble = Double.parseDouble(subtotal) + Double.parseDouble(gst) + Double.parseDouble(qst);
+        String total = String.format("%.2f",totalDouble);
+        totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
     }
 
     @Override
