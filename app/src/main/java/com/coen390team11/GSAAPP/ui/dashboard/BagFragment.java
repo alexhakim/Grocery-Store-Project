@@ -32,6 +32,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.coen390team11.GSAAPP.CheckoutActivity;
+import com.coen390team11.GSAAPP.ConfirmDeleteDialog;
 import com.coen390team11.GSAAPP.ItemInformation;
 import com.coen390team11.GSAAPP.Items;
 import com.coen390team11.GSAAPP.LoginActivity;
@@ -265,6 +266,8 @@ public class BagFragment extends Fragment {
                 switch (index){
                     case 0:
                         // alert dialog to confirm delete then delete from firebase
+                        ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
+                        confirmDeleteDialog.show(getChildFragmentManager(),"OK");
                         break;
                 }
                 return false;
