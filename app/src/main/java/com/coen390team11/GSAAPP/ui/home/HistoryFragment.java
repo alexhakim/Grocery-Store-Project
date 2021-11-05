@@ -54,50 +54,50 @@ public class HistoryFragment extends Fragment {
         ** which are received from the complete purchase button
         ** in the checkout activity to the arraylist*/
 
+
         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                timeStampShoppingEvent0 = (value.get("timeStamp0")).toString();
-                timeStampShoppingEvent1 = (value.get("timeStamp1")).toString();
-                timeStampShoppingEvent2 = (value.get("timeStamp2")).toString();
-                timeStampShoppingEvent3 = (value.get("timeStamp3")).toString();
-                timeStampShoppingEvent4 = (value.get("timeStamp4")).toString();
 
-                try {
-                    //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("event_timestamps", Context.MODE_PRIVATE);
-                    //SharedPreferences.Editor editor = sharedPreferences.edit();
+                    try {
+                        if ((value.get("timeStamp0")).toString() != null) {
+                            timeStampShoppingEvent0 = (value.get("timeStamp0")).toString();
+                            if (!(timeStampShoppingEvent0.isEmpty())) {
+                                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent0);
+                            }
+                        }
+                        if ((value.get("timeStamp1")).toString() != null) {
+                            timeStampShoppingEvent1 = (value.get("timeStamp1")).toString();
+                            if (!(timeStampShoppingEvent1.isEmpty())) {
+                                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent1);
+                            }
+                        }
+                        if ((value.get("timeStamp2")).toString() != null) {
+                            timeStampShoppingEvent2 = (value.get("timeStamp2")).toString();
+                            if (!(timeStampShoppingEvent2.isEmpty())) {
+                                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent2);
+                            }
+                        }
+                        if ((value.get("timeStamp3")).toString() != null) {
+                            timeStampShoppingEvent3 = (value.get("timeStamp3")).toString();
+                            if (!(timeStampShoppingEvent3.isEmpty())) {
+                                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent3);
+                            }
+                        }
+                        if ((value.get("timeStamp4")).toString() != null) {
+                            timeStampShoppingEvent4 = (value.get("timeStamp4")).toString();
+                            if (!(timeStampShoppingEvent4.isEmpty())) {
+                                pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent4);
+                            }
 
-                    if (!(timeStampShoppingEvent0.isEmpty())) {
-                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent0);
-                        /*editor.putString("timeStamp0", "Shopping Event on " + timeStampShoppingEvent0);
-                        editor.apply();*/
-                    }
-                    if (!(timeStampShoppingEvent1.isEmpty())) {
-                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent1);
-                        /*editor.putString("timeStamp1", "Shopping Event on " + timeStampShoppingEvent1);
-                        editor.apply();*/
-                    }
-                    if (!(timeStampShoppingEvent2.isEmpty())) {
-                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent2);
-                        /*editor.putString("timeStamp2", "Shopping Event on " + timeStampShoppingEvent2);
-                        editor.apply();*/
-                    }
-                    if (!(timeStampShoppingEvent3.isEmpty())) {
-                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent3);
-                        /*editor.putString("timeStamp3", "Shopping Event on " + timeStampShoppingEvent3);
-                        editor.apply();*/
-                    }
-                    if (!(timeStampShoppingEvent4.isEmpty())) {
-                        pastShoppingEvents.add("Shopping Event on " + timeStampShoppingEvent4);
-                        /*editor.putString("timeStamp4", "Shopping Event on " + timeStampShoppingEvent4);
-                        editor.apply();*/
+                        }
 
                         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, pastShoppingEvents);
                         historyListView.setAdapter(arrayAdapter);
                         arrayAdapter.notifyDataSetChanged();
-                    }
-                } catch (NullPointerException e){
+
+                }catch (NullPointerException e){
                     e.printStackTrace();
                 }
 

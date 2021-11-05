@@ -128,7 +128,7 @@ public class BagFragment extends Fragment {
         barcode.add("6041004701"); // lays chips
         barcode.add("6041004701"); // lays chips
         barcode.add("6041004701"); // lays chips
-        barcode.add("6041004701"); // lays chips*/
+        barcode.add("6041004701"); // lays chips
         barcode.add("6041004701"); // lays chips
         barcode.add("6041004701"); // lays chips
         barcode.add("6202000084"); // nutella spread
