@@ -37,7 +37,7 @@
 
         />
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/currentBagListView"
         android:layout_width="398dp"
         android:layout_height="618dp"

@@ -75,7 +75,7 @@ public class BagFragment extends Fragment {
     private BagViewModel dashboardViewModel;
     private FragmentBagBinding binding;
     FloatingActionButton fab;
-    ListView currentBagListView;
+    SwipeMenuListView currentBagListView;
     ArrayList<String> barcode = new ArrayList<String>();
     Map hashMapCount = new HashMap();
     Map hashMapName = new HashMap();
@@ -99,8 +99,23 @@ public class BagFragment extends Fragment {
         currentBagListView = binding.currentBagListView;
         ArrayList<String> productsInBagArrayList = new ArrayList<String>();
 
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem deleteMenuItem = new SwipeMenuItem(
+                        getContext());
+                deleteMenuItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                deleteMenuItem.setWidth(150);
+                deleteMenuItem.setIcon(R.drawable.ic_baseline_delete_24_red);
+                menu.addMenuItem(deleteMenuItem);
+            }
+        };
+
+        currentBagListView.setMenuCreator(creator);
+
         // currently adding temp barcodes
-        /*barcode.add("7680801101"); // example of barilla spaghetti
+        barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
         barcode.add("7680801101"); // example of barilla spaghetti
@@ -243,6 +258,20 @@ public class BagFragment extends Fragment {
                 editor.apply();
             }
         });
+
+        currentBagListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index){
+                    case 0:
+                        // alert dialog to confirm delete then delete from firebase
+                        break;
+                }
+                return false;
+            }
+        });
+
+        currentBagListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
 
         // go to checkout floating action button
