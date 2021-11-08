@@ -83,7 +83,7 @@ public class ItemInformation extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                // TODO: crashing if 1 item quantity is double digits
+                // TODO: crashing if 1 item quantity is double digits, most likely from bag fragment switch trim[] and split to getting specific fields
                 if ((value.get("price")) != null) {
                     String priceOfProductString = (value.get("price")).toString();
                     if (!(priceOfProductString.isEmpty())) {

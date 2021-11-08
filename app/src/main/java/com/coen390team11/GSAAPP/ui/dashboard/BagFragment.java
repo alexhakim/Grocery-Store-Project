@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.itemsPerUser;
+import com.coen390team11.GSAAPP.tempBag;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -50,8 +52,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -63,10 +67,13 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -95,6 +102,7 @@ public class BagFragment extends Fragment {
         View root = binding.getRoot();
 
         itemsPerUser itemsPerUser = new itemsPerUser();
+        tempBag tempBag = new tempBag();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -138,10 +146,58 @@ public class BagFragment extends Fragment {
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6563313434"); // lucky charms cereal
+        Log.d("BARCODEARRAYLIST", String.valueOf(barcode));
 
-        // copy barcode arraylist into noDuplicates arraylist but without duplicates
-        linkedHashSet = new LinkedHashSet<>(barcode);
-        noDuplicates = new ArrayList<>(linkedHashSet);
+        // create document of user ID in collection tempBag
+        FirebaseFirestore.getInstance().collection("tempBag")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .set(tempBag,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+            }
+        });
+
+        // converting arraylist barcode to string
+        List<String> list = new ArrayList<String>();
+        for (int i=0;i<barcode.size();i++) {
+            list.add(barcode.get(i));
+        }
+        String barcodeArrayListToString = TextUtils.join(",",list);
+
+        // update document of user in collection tempBag
+        FirebaseFirestore.getInstance().collection("tempBag")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .update("tempCurrentBag",barcodeArrayListToString);
+
+        FirebaseFirestore.getInstance().collection("tempBag")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        String tempCurrentBag = value.get("tempCurrentBag").toString();
+                        if (!(tempCurrentBag.isEmpty())){
+                            String[] trim = tempCurrentBag.split(",");
+                            ArrayList<String> fromFirebaseArrayList = new ArrayList<String>();
+                            for (int i=0;i<trim.length;i++){
+                                Log.d("TRIM",trim[i]);
+                                fromFirebaseArrayList.add(trim[i]);
+                                Log.d("FROMFIREBASEARRAYLIST", String.valueOf(fromFirebaseArrayList));
+                            }
+
+                            // copy barcode arraylist into noDuplicates arraylist but without duplicates
+                            Log.d("FROMFIREBASEARRAYLISTOUTER", String.valueOf(fromFirebaseArrayList));
+                            linkedHashSet = new LinkedHashSet<>(fromFirebaseArrayList);
+                            noDuplicates = new ArrayList<>(linkedHashSet);
+
+                        }
+                    }
+                });
+
 
 
         // key: barcode, value: counter. Counter for each barcode
@@ -164,6 +220,30 @@ public class BagFragment extends Fragment {
 
         // needed to store current cart to database in case of adding/removing items and switching activities
         Log.i("FIREBASE ID: ", String.valueOf(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
+
+        // TODO:
+        /*
+        String dataToString = document.getData().toString();
+                                String documentToString = document.toString();
+                                String[] documentNameSplit = document.toString().split(",");
+                                String documentName = documentNameSplit[0].substring(27);
+                                Log.d("DOCUMENTTOSTRING",documentToString);
+                                Log.d("DOCUMENTNAME",documentName);
+                                int I = i;
+                                FirebaseFirestore.getInstance().collection("items")
+                                        .document(documentName).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        String getProductName = (value.get("name")).toString();
+                                        String getProductPrice = (value.get("price")).toString();
+                                        //Toast.makeText(getContext(), getProductName, Toast.LENGTH_SHORT).show();
+                                        Log.i("GETPRODUCTNAME",getProductName);
+                                        hashMapName.put(barcode.get(I),getProductName);
+                                        checkoutTotalPrice+=Double.parseDouble(getProductPrice);
+
+                                    }
+                                });
+         */
 
         // get item name based on barcode input
         FirebaseFirestore.getInstance().collection("items").get()
