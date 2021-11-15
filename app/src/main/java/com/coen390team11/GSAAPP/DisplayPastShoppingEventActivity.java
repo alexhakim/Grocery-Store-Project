@@ -20,11 +20,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +46,8 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     TextView totalSodiumTextView;
     TextView totalCarbohydratesTextView;
     TextView totalProteinTextView;
+    int totalCalories=0;
+    int p=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +101,7 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
                 ArrayAdapter arrayAdapter = new ArrayAdapter(DisplayPastShoppingEventActivity.this, android.R.layout.simple_list_item_1, pastShoppingEventsArrayList);
                 pastShoppingEventXItemsListView.setAdapter(arrayAdapter);
                 arrayAdapter.notifyDataSetChanged();
+
             }
         });
 
@@ -106,18 +113,6 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
                 startActivity(goToNutritionInfoIntent);
             }
         });
-
-
-        /*SharedPreferences sharedPreferences = getSharedPreferences("product_subtotal", Context.MODE_PRIVATE);
-        String subtotal = sharedPreferences.getString("product_subtotal","");
-        String gst = String.format("%.2f",Double.parseDouble(subtotal)*0.05);
-        String qst = String.format("%.2f",Double.parseDouble(subtotal)*0.09975);
-        subtotalPriceOfShoppingEventTextView.setText("Subtotal: $" + subtotal);
-        GSTTextView.setText("Estimated GST: $" + gst);
-        QSTTextView.setText("Estimated QST: $" + qst);
-        Double totalDouble = Double.parseDouble(subtotal) + Double.parseDouble(gst) + Double.parseDouble(qst);
-        String total = String.format("%.2f",totalDouble);
-        totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);*/
 
         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -148,6 +143,39 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
             }
         });
+
+
+        FirebaseFirestore.getInstance().collection("nutrition")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                for (QueryDocumentSnapshot document : task.getResult()){
+
+                    String dataToString = document.getData().toString();
+                    Log.i("DOCTOSTRING",dataToString);
+
+                    if (p<pastShoppingEventsArrayList.size()) {
+
+
+                        String[] trim = dataToString.split(",");
+                        String caloriesSegment = trim[5];
+                        int caloriesAmount = Integer.parseInt(caloriesSegment.substring(10));
+                        Log.i("CALORIESAMOUNT", String.valueOf(caloriesAmount));
+
+
+                        String getItemCountString = pastShoppingEventsArrayList.get(p).substring(0, 1);
+                        int getItemCount = Integer.parseInt(getItemCountString);
+                        Log.i("GETITEMCOUNT", getItemCountString);
+                        totalCalories += caloriesAmount * getItemCount;
+                        ++p;
+                    }
+                }
+
+                totalCaloriesTextView.setText("Calories: " + totalCalories);
+            }
+        });
+
     }
 
     @Override

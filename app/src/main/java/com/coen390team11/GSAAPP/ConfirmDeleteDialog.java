@@ -17,13 +17,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ConfirmDeleteDialog extends AppCompatDialogFragment {
     @NonNull
@@ -33,6 +36,13 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_delete_request_dialog,null);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("product_name_confirm", Context.MODE_PRIVATE);
+        String productNameBasedOnIndex = sharedPreferences.getString("product_name_confirm", "");
+        Log.i("productNameBasedOnIndex",productNameBasedOnIndex);
+
+
+
 
         builder.setView(view).setTitle("Remove item(s) from bag").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -48,8 +58,43 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
                 // 3. remove item based on item index [DONE]
                 // 4. send updated current bag to firebase [DONE]
 
-                updatedDeletedNoDuplicatesFirebase();
+                //updatedDeletedNoDuplicatesFirebase();
 
+                /*FirebaseFirestore.getInstance().collection("itemsPerUserString")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                String getBag = (value.get("currentBag").toString());
+                                Log.i("GETBAG",getBag);
+
+                                String[] splitBag = getBag.split("----");
+                                Log.d("SPLITBAG", String.valueOf(splitBag));
+                                for (int i=0;i< splitBag.length;i++){
+                                    Log.i("SPLITBAG",splitBag[i]);
+                                }
+                            }
+                        });*/
+
+                SharedPreferences sharedPreferences2 = getContext().getSharedPreferences("totalBag", Context.MODE_PRIVATE);
+                String totalBag = sharedPreferences2.getString("totalBag", "");
+                //Toast.makeText(getContext(), totalBag + " OK", Toast.LENGTH_SHORT).show();
+
+                String[] split = totalBag.split("----");
+                for (int j=0;j< split.length;j++){
+                    if (split[j].equals(productNameBasedOnIndex)){
+                        System.arraycopy(split,j+1, split, j, split.length-j-1);
+                    }
+                }
+                for (int k=0;k<split.length;k++){
+                    Log.i("SPLIT", String.valueOf(split));
+                }
+                //Toast.makeText(getContext(), Arrays.toString(split) + " OK", Toast.LENGTH_SHORT).show()
+                Toast.makeText(getContext(), productNameBasedOnIndex + "OK", Toast.LENGTH_SHORT).show();
+
+                FirebaseFirestore.getInstance().collection("itemsPerUserString")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                        .update(productNameBasedOnIndex,FieldValue.delete());
 
             }
         });

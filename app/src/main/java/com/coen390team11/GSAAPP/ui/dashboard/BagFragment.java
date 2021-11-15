@@ -43,6 +43,7 @@ import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.itemsPerUser;
+import com.coen390team11.GSAAPP.itemsPerUserString;
 import com.coen390team11.GSAAPP.tempBag;
 import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -98,6 +99,7 @@ public class BagFragment extends Fragment {
     Double checkoutTotalPrice = 0.0;
     String productPrice;
     int counterForFirebase = 0;
+    String totalBag="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -109,6 +111,7 @@ public class BagFragment extends Fragment {
 
         itemsPerUser itemsPerUser = new itemsPerUser();
         tempBag tempBag = new tempBag();
+        itemsPerUserString itemsPerUserString = new itemsPerUserString();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -177,6 +180,7 @@ public class BagFragment extends Fragment {
                 public void onFailure(@NonNull Exception e) {
                 }
             });
+
 
 
         linkedHashSet = new LinkedHashSet<>(barcode);
@@ -267,16 +271,39 @@ public class BagFragment extends Fragment {
                                 }
                             });
 
+                            FirebaseFirestore.getInstance().collection("itemsPerUserString").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                    .set(itemsPerUserString, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
 
                             // storing current bag of logged in user in database
                             for (int i=0;i<hashMapCount.size();i++) {
+                                Log.d("HASHMAPCOUNT", String.valueOf(hashMapCount));
 
                                 Log.i("XYZ",hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
 
                                 FirebaseFirestore.getInstance().collection("itemsPerUser")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items",
                                         FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
-                            }
+                                Log.i("DICK",hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
+
+                                totalBag += hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)) + "----";
+                                Log.i("TOTALBBAG",String.valueOf(totalBag));
+                                FirebaseFirestore.getInstance().collection("itemsPerUserString")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)),hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
+
+                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("totalBag", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("totalBag", totalBag);
+                                editor.apply();                            }
                         } else {
                             Log.d(TAG, "Error retrieving document information: ", task.getException());
                         }

@@ -1,6 +1,7 @@
 package com.coen390team11.GSAAPP;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,11 +11,16 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -36,6 +42,7 @@ public class NutritionInfoActivity extends AppCompatActivity {
     TextView dietaryFiberTextView;
     TextView sugarsTextView;
     TextView proteinTextView;
+    String productName;
 
 
     @Override
@@ -64,12 +71,73 @@ public class NutritionInfoActivity extends AppCompatActivity {
         proteinTextView = findViewById(R.id.proteinTextView);
 
         Intent intent = getIntent();
-        String productName = intent.getStringExtra("product_name");
+        productName = intent.getStringExtra("product_name");
 
         productNameTextView.setText("Product Name: " + productName.substring(2));
-        servingSizeTextView.setText("Serving Size: 100g");
+        Log.d("PRODUCTNAME",productName.substring(2));
 
-        OkHttpClient client = new OkHttpClient();
+        FirebaseFirestore.getInstance().collection("nutrition").document(productName.substring(2))
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        try {
+                            Log.d("CALORIES",(value.get("calories")).toString());
+                            String calories = (value.get("calories")).toString();
+                            String carbohydrates = (value.get("carbohydrates")).toString();
+                            String cholesterol = (value.get("cholesterol")).toString();
+                            String fat = (value.get("fat")).toString();
+                            String perQuantity = (value.get("perQuantity")).toString();
+                            String protein = (value.get("protein")).toString();
+                            String sodium = (value.get("sodium")).toString();
+                            String sugar = (value.get("sugar")).toString();
+
+                            servingSizeTextView.setText("Per " + perQuantity);
+                            caloriesTextView.setText("Calories: " + calories);
+                            totalFatTextView.setText("Total Fat: " + fat);
+                            cholesterolTextView.setText("Cholesterol: " + cholesterol);
+                            sodiumTextView.setText("Sodium: " + sodium);
+                            carbsTextView.setText("Total Carbohydrate: " + carbohydrates);
+                            sugarsTextView.setText("Sugars: " + sugar);
+                            proteinTextView.setText("Protein: " + protein);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            productName = productName.substring(2);
+                            if (productName.startsWith(" ")){
+                                productName = productName.substring(1);
+                            }
+                            FirebaseFirestore.getInstance().collection("nutrition").document(productName)
+                                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                            try{
+                                                Log.d("CALORIESCATCH",(value.get("calories")).toString());
+                                                String calories = (value.get("calories")).toString();
+                                                String carbohydrates = (value.get("carbohydrates")).toString();
+                                                String cholesterol = (value.get("cholesterol")).toString();
+                                                String fat = (value.get("fat")).toString();
+                                                String perQuantity = (value.get("perQuantity")).toString();
+                                                String protein = (value.get("protein")).toString();
+                                                String sodium = (value.get("sodium")).toString();
+                                                String sugar = (value.get("sugar")).toString();
+
+                                                servingSizeTextView.setText("Per " + perQuantity);
+                                                caloriesTextView.setText("Calories: " + calories);
+                                                totalFatTextView.setText("Total Fat: " + fat);
+                                                cholesterolTextView.setText("Cholesterol: " + cholesterol);
+                                                sodiumTextView.setText("Sodium: " + sodium);
+                                                carbsTextView.setText("Total Carbohydrate: " + carbohydrates);
+                                                sugarsTextView.setText("Sugars: " + sugar);
+                                                proteinTextView.setText("Protein: " + protein);
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+       /* OkHttpClient client = new OkHttpClient();
         String query = productName.substring(2);
         String url = "https://api.calorieninjas.com/v1/nutrition?query= " + query;
 
@@ -142,11 +210,9 @@ public class NutritionInfoActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        });
-
+        });*/
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
