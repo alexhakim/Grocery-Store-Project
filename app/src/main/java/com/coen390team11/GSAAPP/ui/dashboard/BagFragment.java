@@ -73,6 +73,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BagFragment extends Fragment {
 
+
     private BagViewModel dashboardViewModel;
     private FragmentBagBinding binding;
     FloatingActionButton fab;

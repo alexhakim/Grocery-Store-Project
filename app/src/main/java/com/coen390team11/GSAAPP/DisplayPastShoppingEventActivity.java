@@ -89,6 +89,7 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 String shoppingEventX = (value.get("shoppingEvent" + positionInTimeStampListView)).toString();
 
+
                 // now split it by \t
                 String[] trimShoppingEventX = shoppingEventX.split("\t");
                 for (int i=0;i< trimShoppingEventX.length;i++){
