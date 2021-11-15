@@ -3,7 +3,6 @@ package com.coen390team11.GSAAPP.ui.dashboard;
 import static android.content.ContentValues.TAG;
 
 import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -43,9 +41,6 @@ import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.itemsPerUser;
-import com.coen390team11.GSAAPP.itemsPerUserString;
-import com.coen390team11.GSAAPP.tempBag;
-import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,10 +50,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -70,13 +63,10 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -88,18 +78,13 @@ public class BagFragment extends Fragment {
     FloatingActionButton fab;
     SwipeMenuListView currentBagListView;
     ArrayList<String> barcode = new ArrayList<String>();
-    ArrayList<String> second = new ArrayList<String>();
     Map hashMapCount = new HashMap();
     Map hashMapName = new HashMap();
-    Map hashMapCount2 = new HashMap();
-    Map hashMapName2 = new HashMap();
     int counter=0;
     LinkedHashSet<String> linkedHashSet;
     ArrayList<String> noDuplicates;
     Double checkoutTotalPrice = 0.0;
     String productPrice;
-    int counterForFirebase = 0;
-    String totalBag="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -110,8 +95,6 @@ public class BagFragment extends Fragment {
         View root = binding.getRoot();
 
         itemsPerUser itemsPerUser = new itemsPerUser();
-        tempBag tempBag = new tempBag();
-        itemsPerUserString itemsPerUserString = new itemsPerUserString();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -131,9 +114,6 @@ public class BagFragment extends Fragment {
         };
 
         currentBagListView.setMenuCreator(creator);
-
-        // TODO: 1. If entry in firebase is empty, write into firebase
-        // TODO: 2. If entry in firebase is not empty, get updated firebase entry
 
         // currently adding temp barcodes
         barcode.add("7680801101"); // example of barilla spaghetti
@@ -158,35 +138,11 @@ public class BagFragment extends Fragment {
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6810008424"); // kraft smooth peanut butter
         barcode.add("6563313434"); // lucky charms cereal
-        Log.d("BARCODEARRAYLIST", String.valueOf(barcode));
 
-
-        // 1. write noDuplicates array in firebase [COMPLETE]
-        // 2. in confirm delete dialog fragment, when user confirms delete, update entry in firebase [COMPLETE]
-        // 3. TODO: receive updated list in this fragment, and displayed listview based on it
-
-
-
-
-            // create document of user ID in collection tempBag
-            FirebaseFirestore.getInstance().collection("tempBag")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .set(tempBag, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                }
-            });
-
-
-
+        // copy barcode arraylist into noDuplicates arraylist but without duplicates
         linkedHashSet = new LinkedHashSet<>(barcode);
         noDuplicates = new ArrayList<>(linkedHashSet);
 
-        delete();
 
         // key: barcode, value: counter. Counter for each barcode
         for (int i=0;i<barcode.size();i++){
@@ -271,39 +227,16 @@ public class BagFragment extends Fragment {
                                 }
                             });
 
-                            FirebaseFirestore.getInstance().collection("itemsPerUserString").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                                    .set(itemsPerUserString, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-
-                                }
-                            });
-
 
                             // storing current bag of logged in user in database
                             for (int i=0;i<hashMapCount.size();i++) {
-                                Log.d("HASHMAPCOUNT", String.valueOf(hashMapCount));
 
                                 Log.i("XYZ",hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
 
                                 FirebaseFirestore.getInstance().collection("itemsPerUser")
                                         .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items",
                                         FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
-                                Log.i("DICK",hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-
-                                totalBag += hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)) + "----";
-                                Log.i("TOTALBBAG",String.valueOf(totalBag));
-                                FirebaseFirestore.getInstance().collection("itemsPerUserString")
-                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)),hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-
-                                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("totalBag", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("totalBag", totalBag);
-                                editor.apply();                            }
+                            }
                         } else {
                             Log.d(TAG, "Error retrieving document information: ", task.getException());
                         }
@@ -333,13 +266,7 @@ public class BagFragment extends Fragment {
                     case 0:
                         // alert dialog to confirm delete then delete from firebase
                         ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
-                        // pass data of product name to nutritional info activity
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_name_confirm", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("product_name_confirm", productsInBagArrayList.get(position));
-                        editor.apply();
                         confirmDeleteDialog.show(getChildFragmentManager(),"OK");
-
                         break;
                 }
                 return false;
@@ -373,33 +300,6 @@ public class BagFragment extends Fragment {
         });
 
         return root;
-    }
-
-    public void delete(){
-
-        // converting noDuplicates to string
-        List<String> list = new ArrayList<String>();
-        for (int i=0;i<noDuplicates.size();i++) {
-            list.add(noDuplicates.get(i));
-        }
-        String noDuplicatesArrayListToString = TextUtils.join(",",list);
-
-        // sending noDuplicates arraylist to firebase
-        // update document of user in collection tempBag
-        FirebaseFirestore.getInstance().collection("tempBag")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .update("tempCurrentBag",noDuplicatesArrayListToString);
-
-
-        // converting barcode to string
-        List<String> barcodeList = new ArrayList<String>();
-        for (int i=0;i< barcode.size();i++){
-            barcodeList.add(barcode.get(i));
-        }
-        String barcodeArrayListToString = TextUtils.join(",",barcodeList);
-        FirebaseFirestore.getInstance().collection("tempBag")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .update("withDuplicates",barcodeArrayListToString);
     }
 
     @Override
