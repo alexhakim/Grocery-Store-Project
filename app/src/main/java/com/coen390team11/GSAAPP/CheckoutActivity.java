@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -585,97 +588,102 @@ public class CheckoutActivity extends AppCompatActivity {
                         String timeStamp2String = (value.get("timeStamp2")).toString();
                         String timeStamp3String = (value.get("timeStamp3")).toString();
 
-                        String zSubTotal0String = (value.get("zSubTotal0")).toString();
-                        String zSubTotal1String = (value.get("zSubTotal1")).toString();
-                        String zSubTotal2String = (value.get("zSubTotal2")).toString();
-                        String zSubTotal3String = (value.get("zSubTotal3")).toString();
-
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("purchaseCompleted4", 1);
-
-                        // waste time for firebase to correctly update shoppingEvent0String
                         try {
-                            TimeUnit.SECONDS.sleep(1);
-                        } catch (InterruptedException e) {
+                            String zSubTotal0String = (value.get("zSubTotal0")).toString();
+                            String zSubTotal1String = (value.get("zSubTotal1")).toString();
+                            String zSubTotal2String = (value.get("zSubTotal2")).toString();
+                            String zSubTotal3String = (value.get("zSubTotal3")).toString();
+
+
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("purchaseCompleted4", 1);
+
+                            // waste time for firebase to correctly update shoppingEvent0String
+                            try {
+                                TimeUnit.SECONDS.sleep(1);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            // setting shoppingEvent4 to shoppingEvent3
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("shoppingEvent4", shoppingEvent3String);
+
+                            // setting shoppingEvent3 to shoppingEvent2
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("shoppingEvent3", shoppingEvent2String);
+
+                            // setting shoppingEvent2 to shoppingEvent1
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("shoppingEvent2", shoppingEvent1String);
+
+                            // setting shoppingEvent1 to shoppingEvent0
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("shoppingEvent1", shoppingEvent0String);
+
+                            // setting shoppingEvent0 to current bag
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("shoppingEvent0", currentBagString);
+
+                            // setting timeStamp4 to timeStamp 3
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp4", timeStamp3String);
+
+                            // setting timeStamp3 to timeStamp 2
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp3", timeStamp2String);
+
+                            // setting timeStamp2 to timeStamp 1
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp2", timeStamp1String);
+
+                            // setting timeStamp1 to timeStamp 0
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp1", timeStamp0String);
+
+                            String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
+                            // setting timeStamp0 to new timeStamp of new shopping event
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("timeStamp0", timeStamp);
+
+                            // updating price
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("zSubTotal4", zSubTotal3String);
+
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("zSubTotal3", zSubTotal2String);
+
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("zSubTotal2", zSubTotal1String);
+
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("zSubTotal1", zSubTotal0String);
+
+                            Intent intent = getIntent();
+                            String stringTotalPrice = intent.getStringExtra("total_price");
+                            FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .update("zSubTotal0", stringTotalPrice);
+
+                            counterForTimesAllowedToReadFireBaseMethod += 1;
+                        } catch (Exception e){
                             e.printStackTrace();
                         }
-
-                        // setting shoppingEvent4 to shoppingEvent3
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("shoppingEvent4", shoppingEvent3String);
-
-                        // setting shoppingEvent3 to shoppingEvent2
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("shoppingEvent3", shoppingEvent2String);
-
-                        // setting shoppingEvent2 to shoppingEvent1
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("shoppingEvent2", shoppingEvent1String);
-
-                        // setting shoppingEvent1 to shoppingEvent0
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("shoppingEvent1", shoppingEvent0String);
-
-                        // setting shoppingEvent0 to current bag
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("shoppingEvent0", currentBagString);
-
-                        // setting timeStamp4 to timeStamp 3
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("timeStamp4", timeStamp3String);
-
-                        // setting timeStamp3 to timeStamp 2
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("timeStamp3", timeStamp2String);
-
-                        // setting timeStamp2 to timeStamp 1
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("timeStamp2", timeStamp1String);
-
-                        // setting timeStamp1 to timeStamp 0
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("timeStamp1", timeStamp0String);
-
-                        String timeStamp = (String) android.text.format.DateFormat.format("yyyy-MM-dd @ kk:mm:ss", new java.util.Date());
-                        // setting timeStamp0 to new timeStamp of new shopping event
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("timeStamp0", timeStamp);
-
-                        // updating price
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("zSubTotal4", zSubTotal3String);
-
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("zSubTotal3", zSubTotal2String);
-
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("zSubTotal2", zSubTotal1String);
-
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("zSubTotal1", zSubTotal0String);
-
-                        Intent intent = getIntent();
-                        String stringTotalPrice = intent.getStringExtra("total_price");
-                        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
-                                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .update("zSubTotal0", stringTotalPrice);
-
-                        counterForTimesAllowedToReadFireBaseMethod+=1;
                     }
                 }
             }

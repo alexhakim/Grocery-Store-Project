@@ -262,9 +262,6 @@ public class ItemInformation extends AppCompatActivity {
             case R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.reportIssue:
-                ProblemWithProductDialog problemWithProductDialog = new ProblemWithProductDialog();
-                problemWithProductDialog.show(getSupportFragmentManager(),"Issue With Product");
         }
         return super.onOptionsItemSelected(item);
     }

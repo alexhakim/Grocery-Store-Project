@@ -1,6 +1,7 @@
 package com.coen390team11.GSAAPP;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,12 +15,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.coen390team11.GSAAPP.ui.LogoutDialog;
+import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import android.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,6 +44,13 @@ public class PrimaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // to keep user logged in
+        try {
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         binding = ActivityPrimaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

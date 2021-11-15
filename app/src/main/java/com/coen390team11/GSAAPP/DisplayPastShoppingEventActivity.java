@@ -129,7 +129,7 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
                     Intent intent = getIntent();
                     int positionInTimeStampListView = intent.getIntExtra("position",0);
 
-                        if ((value.get("zSubTotal" + positionInTimeStampListView)).toString() != null){
+                        if ((value.get("zSubTotal" + positionInTimeStampListView)) != null){
                             String zSubTotalXString = (value.get("zSubTotal" + positionInTimeStampListView)).toString();
                             if (!(zSubTotalXString.isEmpty())){
                                 String gst = String.format("%.2f",Double.parseDouble(zSubTotalXString)*0.05);

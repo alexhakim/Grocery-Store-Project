@@ -3,6 +3,7 @@ package com.coen390team11.GSAAPP;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.coen390team11.GSAAPP.ui.LogoutDialog;
+import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -112,6 +114,10 @@ public class CompletedEventActivity extends AppCompatActivity {
             case R.id.LogoutB:
                 LogoutDialog logoutDialog = new LogoutDialog();
                 logoutDialog.show(getSupportFragmentManager(),"Logout");
+            case R.id.goToPastEvents:
+                Intent goToPrimaryActivityIntent = new Intent(CompletedEventActivity.this,PrimaryActivity.class);
+                startActivity(goToPrimaryActivityIntent);
+                this.finish();
         }
         return super.onOptionsItemSelected(item);
     }

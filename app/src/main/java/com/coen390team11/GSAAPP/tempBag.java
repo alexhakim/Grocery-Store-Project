@@ -6,12 +6,14 @@ import android.os.Parcelable;
 public class tempBag implements Parcelable {
 
     public String tempCurrentBag = "";
+    public String withDuplicates = "";
 
     public tempBag(){
     }
 
     protected tempBag(Parcel in) {
         tempCurrentBag = in.readString();
+        withDuplicates = in.readString();
     }
 
     public static final Creator<tempBag> CREATOR = new Creator<tempBag>() {
@@ -34,5 +36,10 @@ public class tempBag implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(tempCurrentBag);
+        parcel.writeString(withDuplicates);
     }
 }
+
+
+
+
