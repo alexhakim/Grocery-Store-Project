@@ -60,42 +60,6 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
 
                 //updatedDeletedNoDuplicatesFirebase();
 
-                /*FirebaseFirestore.getInstance().collection("itemsPerUserString")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                String getBag = (value.get("currentBag").toString());
-                                Log.i("GETBAG",getBag);
-
-                                String[] splitBag = getBag.split("----");
-                                Log.d("SPLITBAG", String.valueOf(splitBag));
-                                for (int i=0;i< splitBag.length;i++){
-                                    Log.i("SPLITBAG",splitBag[i]);
-                                }
-                            }
-                        });*/
-
-                SharedPreferences sharedPreferences2 = getContext().getSharedPreferences("totalBag", Context.MODE_PRIVATE);
-                String totalBag = sharedPreferences2.getString("totalBag", "");
-                //Toast.makeText(getContext(), totalBag + " OK", Toast.LENGTH_SHORT).show();
-
-                String[] split = totalBag.split("----");
-                for (int j=0;j< split.length;j++){
-                    if (split[j].equals(productNameBasedOnIndex)){
-                        System.arraycopy(split,j+1, split, j, split.length-j-1);
-                    }
-                }
-                for (int k=0;k<split.length;k++){
-                    Log.i("SPLIT", String.valueOf(split));
-                }
-                //Toast.makeText(getContext(), Arrays.toString(split) + " OK", Toast.LENGTH_SHORT).show()
-                Toast.makeText(getContext(), productNameBasedOnIndex + "OK", Toast.LENGTH_SHORT).show();
-
-                FirebaseFirestore.getInstance().collection("itemsPerUserString")
-                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                        .update(productNameBasedOnIndex,FieldValue.delete());
-
             }
         });
 
