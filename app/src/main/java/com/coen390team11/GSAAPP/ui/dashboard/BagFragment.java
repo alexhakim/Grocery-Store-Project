@@ -40,6 +40,7 @@ import com.coen390team11.GSAAPP.NutritionInfoActivity;
 import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
+import com.coen390team11.GSAAPP.deleteItem;
 import com.coen390team11.GSAAPP.itemsPerUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -50,8 +51,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -86,6 +89,7 @@ public class BagFragment extends Fragment {
     ArrayList<String> noDuplicates;
     Double checkoutTotalPrice = 0.0;
     String productPrice;
+    ArrayAdapter arrayAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +100,7 @@ public class BagFragment extends Fragment {
         View root = binding.getRoot();
 
         itemsPerUser itemsPerUser = new itemsPerUser();
+        deleteItem deleteItem = new deleteItem();
 
         // listview that will display scanned items
         currentBagListView = binding.currentBagListView;
@@ -209,8 +214,9 @@ public class BagFragment extends Fragment {
                                 Log.i("ARRL --->",hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
                                 Log.i("BARCODE ---->",noDuplicates.get(i));
                             }
+
                             Log.d("PNM --->", hashMapName.toString());
-                            ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
+                            arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
                             currentBagListView.setAdapter(arrayAdapter);
                             arrayAdapter.notifyDataSetChanged();
 
@@ -218,6 +224,18 @@ public class BagFragment extends Fragment {
                             // add document of name set to email of user to collection itemsPerUser
                             FirebaseFirestore.getInstance().collection("itemsPerUser").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                                     .set(itemsPerUser, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
+                            FirebaseFirestore.getInstance().collection("deleteItem").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                    .set(deleteItem, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                 }
@@ -267,7 +285,32 @@ public class BagFragment extends Fragment {
                     case 0:
                         // alert dialog to confirm delete then delete from firebase
                         ConfirmDeleteDialog confirmDeleteDialog = new ConfirmDeleteDialog();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("product_name", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("product_name", productsInBagArrayList.get(position));
+                        editor.apply();
                         confirmDeleteDialog.show(getChildFragmentManager(),"OK");
+
+                        SharedPreferences sp = getContext().getSharedPreferences("delete_item", Context.MODE_PRIVATE);
+                        //String deleteItem = sp.getString("delete_item", "");
+                        //Log.i("DELETEITEM",deleteItem);
+
+                        FirebaseFirestore.getInstance().collection("deleteItem")
+                                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        try {
+                                            String deleteItem = (value.get("itemDeleted")).toString();
+                                            if (productsInBagArrayList.contains(deleteItem)) {
+                                                productsInBagArrayList.remove(deleteItem);
+                                                arrayAdapter.notifyDataSetChanged();
+                                            }
+                                        }catch(Exception e){
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                         break;
                 }
                 return false;

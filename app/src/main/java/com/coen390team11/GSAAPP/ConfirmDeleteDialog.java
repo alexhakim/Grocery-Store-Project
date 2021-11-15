@@ -37,8 +37,8 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_delete_request_dialog,null);
 
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("product_name_confirm", Context.MODE_PRIVATE);
-        String productNameBasedOnIndex = sharedPreferences.getString("product_name_confirm", "");
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("product_name", Context.MODE_PRIVATE);
+        String productNameBasedOnIndex = sharedPreferences.getString("product_name", "");
         Log.i("productNameBasedOnIndex",productNameBasedOnIndex);
 
 
@@ -59,6 +59,16 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
                 // 4. send updated current bag to firebase [DONE]
 
                 //updatedDeletedNoDuplicatesFirebase();
+                SharedPreferences sp = getContext().getSharedPreferences("delete_item",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("delete_item", productNameBasedOnIndex);
+                editor.commit();
+                Toast.makeText(getContext(), productNameBasedOnIndex, Toast.LENGTH_SHORT).show();
+
+                FirebaseFirestore.getInstance().collection("deleteItem")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                        .update("itemDeleted",productNameBasedOnIndex);
+
 
             }
         });
