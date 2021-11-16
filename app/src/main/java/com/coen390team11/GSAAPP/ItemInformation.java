@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -107,13 +108,12 @@ public class ItemInformation extends AppCompatActivity {
             }
         });
 
-        // TODO: USER SHOULDNT BE ABLE TO INCREMENT WITHOUT THE SCANNER
         increaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //countForItem = Integer.parseInt(modifyQuantityTextView.getText().toString());
 
-                //modifyQuantityTextView.setText(++productCount + "");
+                modifyQuantityTextView.setText(++productCount + "");
             }
         });
 
@@ -121,6 +121,15 @@ public class ItemInformation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // store quantity update on firebase
+                int itemCount = Integer.parseInt(modifyQuantityTextView.getText().toString());
+                String itemName = itemNameTextView.getText().toString();
+
+
+
+                // when save button pressed go back to currentbag
+                Intent goToPrimaryActivity = new Intent(getApplicationContext(),PrimaryActivity.class);
+                startActivity(goToPrimaryActivity);
+                finish();
             }
         });
 
@@ -165,10 +174,6 @@ public class ItemInformation extends AppCompatActivity {
 
             }
         });
-
-        // CORRECTLY GETTING SPECIFIC FIELD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // getting dataSavingMode value
         FirebaseFirestore.getInstance().collection("users")

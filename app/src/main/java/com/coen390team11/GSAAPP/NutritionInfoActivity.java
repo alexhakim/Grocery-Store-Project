@@ -35,11 +35,9 @@ public class NutritionInfoActivity extends AppCompatActivity {
     TextView amountPerServingTextView;
     TextView caloriesTextView;
     TextView totalFatTextView;
-    TextView saturatedFatTextView;
     TextView cholesterolTextView;
     TextView sodiumTextView;
     TextView carbsTextView;
-    TextView dietaryFiberTextView;
     TextView sugarsTextView;
     TextView proteinTextView;
     String productName;
@@ -62,11 +60,9 @@ public class NutritionInfoActivity extends AppCompatActivity {
         amountPerServingTextView = findViewById(R.id.amountPerServingTextView);
         caloriesTextView = findViewById(R.id.caloriesTextView);
         totalFatTextView = findViewById(R.id.totalFatTextView);
-        saturatedFatTextView = findViewById(R.id.saturatedFatTextView);
         cholesterolTextView = findViewById(R.id.cholesterolTextView);
         sodiumTextView = findViewById(R.id.sodiumTextView);
         carbsTextView = findViewById(R.id.carbsTextView);
-        dietaryFiberTextView = findViewById(R.id.dietaryFiberTextView);
         sugarsTextView = findViewById(R.id.sugarsTextView);
         proteinTextView = findViewById(R.id.proteinTextView);
 

@@ -306,7 +306,7 @@ public class BagFragment extends Fragment {
                                                 productsInBagArrayList.remove(deleteItem);
                                                 arrayAdapter.notifyDataSetChanged();
 
-
+                                                // update total price after removing X item
                                                 Log.i("DELETEITEMSUBSTRING3",deleteItem.substring(3));
                                                 FirebaseFirestore.getInstance().collection("items")
                                                         .document(deleteItem.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {

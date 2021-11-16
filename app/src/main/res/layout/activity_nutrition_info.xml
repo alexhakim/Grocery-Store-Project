@@ -52,14 +52,6 @@
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/saturatedFatTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="160dp"
-        android:text="Saturated Fat: " />
-
-    <TextView
         android:id="@+id/cholesterolTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,14 +77,6 @@
         android:layout_marginTop="220dp"
         android:text="Total Carbohydrate: "
         android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/dietaryFiberTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="240dp"
-        android:text="Dietary Fiber: "/>
 
     <TextView
         android:id="@+id/sugarsTextView"

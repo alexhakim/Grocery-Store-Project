@@ -148,7 +148,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     public void setQRCode() throws WriterException {
 
-        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText.getText().toString().substring(7), BarcodeFormat.QR_CODE,350,300,null);
+        BitMatrix bitMatrix = multiFormatWriter.encode(randomEditText2.getText().toString().substring(7), BarcodeFormat.QR_CODE,350,300,null);
         // first variable in .encode is what we want to receive, means the total price from
         // bag fragment, for now it is set to random edit text
         // second variable (BarcodeFormat.X), X is type of barcode (UPC, EAN8, EAN 13, CODE_128 etc)
