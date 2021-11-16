@@ -63,7 +63,7 @@ public class ConfirmDeleteDialog extends AppCompatDialogFragment {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("delete_item", productNameBasedOnIndex);
                 editor.commit();
-                Toast.makeText(getContext(), productNameBasedOnIndex, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), productNameBasedOnIndex, Toast.LENGTH_SHORT).show();
 
                 FirebaseFirestore.getInstance().collection("deleteItem")
                         .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())

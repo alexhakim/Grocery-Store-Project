@@ -305,6 +305,23 @@ public class BagFragment extends Fragment {
                                             if (productsInBagArrayList.contains(deleteItem)) {
                                                 productsInBagArrayList.remove(deleteItem);
                                                 arrayAdapter.notifyDataSetChanged();
+
+
+                                                Log.i("DELETEITEMSUBSTRING3",deleteItem.substring(3));
+                                                FirebaseFirestore.getInstance().collection("items")
+                                                        .document(deleteItem.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                        String getDeletedItemPrice = (value.get("price")).toString();
+                                                        Log.i("GETDELETEDITEMPRICE",getDeletedItemPrice);
+                                                        getDeletedItemPrice = String.format("%.2f",Double.parseDouble(getDeletedItemPrice));
+                                                        // single digit
+                                                        Log.i("DELETEITEMCOUNT",deleteItem.substring(0,1));
+                                                        checkoutTotalPrice-=(Double.parseDouble(getDeletedItemPrice)*Integer.parseInt(deleteItem.substring(0,1)));
+                                                        //Toast.makeText(getContext(), checkoutTotalPrice+"OK", Toast.LENGTH_SHORT).show();
+                                                        Log.i("CHECKOUTTOTALPRICE", String.valueOf(checkoutTotalPrice));
+                                                    }
+                                                });
                                             }
                                         }catch(Exception e){
                                             e.printStackTrace();
