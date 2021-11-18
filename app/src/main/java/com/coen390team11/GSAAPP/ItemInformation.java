@@ -47,6 +47,7 @@ public class ItemInformation extends AppCompatActivity {
     String tempDescription = "";
     TextView priceOfProductTextView;
     int dataSavingMode;
+    int initialItemCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class ItemInformation extends AppCompatActivity {
 
         itemNameTextView.setText(productName.substring(3) + "");
         modifyQuantityTextView.setText(productCount + "");
+        initialItemCount=productCount;
 
         FirebaseFirestore.getInstance().collection("items")
                 .document(productName.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -120,11 +122,12 @@ public class ItemInformation extends AppCompatActivity {
         updateItemQuantityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // store quantity update on firebase
-                int itemCount = Integer.parseInt(modifyQuantityTextView.getText().toString());
-                String itemName = itemNameTextView.getText().toString();
 
-
+                if (Integer.parseInt(modifyQuantityTextView.getText().toString()) > initialItemCount) {
+                    max();
+                } else if (Integer.parseInt(modifyQuantityTextView.getText().toString()) < initialItemCount){
+                    min();
+                }
 
                 // when save button pressed go back to currentbag
                 Intent goToPrimaryActivity = new Intent(getApplicationContext(),PrimaryActivity.class);
@@ -253,6 +256,49 @@ public class ItemInformation extends AppCompatActivity {
 
 
 
+    }
+
+    public void max(){
+        // store quantity update on firebase
+        int itemCount = Integer.parseInt(modifyQuantityTextView.getText().toString())-initialItemCount;
+        String itemName = itemNameTextView.getText().toString();
+
+        // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
+        FirebaseFirestore.getInstance().collection("items")
+                .document(itemName).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String barcodeForItemName = (value.get("barcode")).toString();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChange",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("barcodeForItemQuantityChange", barcodeForItemName);
+                editor.putInt("countForItemQuantityChange",itemCount);
+                editor.apply();
+
+            }
+        });
+    }
+
+    public void min(){
+        int itemCount = initialItemCount-Integer.parseInt(modifyQuantityTextView.getText().toString());
+        String itemName = itemNameTextView.getText().toString();
+
+        // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
+        FirebaseFirestore.getInstance().collection("items")
+                .document(itemName).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String barcodeForItemName = (value.get("barcode")).toString();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChangeMIN",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("barcodeForItemQuantityChangeMIN", barcodeForItemName);
+                editor.putInt("countForItemQuantityChangeMIN",itemCount);
+                editor.apply();
+
+            }
+        });
     }
 
     @Override
