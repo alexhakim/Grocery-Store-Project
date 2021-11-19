@@ -136,9 +136,7 @@ public class BagFragment extends Fragment {
                         if ((value.get("barcode")).toString() != null || (!(value.get("barcode")).toString().isEmpty())) {
                                 getBarcode = (value.get("barcode")).toString();
 
-
-
-                            /*try{
+                            try{
                                 getBarcodesArray = (value.get("barcodesString")).toString();
                                 String[] trim = getBarcodesArray.split(",");
                                 Log.i("TRIM0", trim[0]);
@@ -148,14 +146,14 @@ public class BagFragment extends Fragment {
                                 }
                             } catch (Exception e){
                                 e.printStackTrace();
-                            }*/
+                            }
 
                                 ArrayList<String> receivedBarcodes = new ArrayList<String>();
                                 receivedBarcodes.add(getBarcode);
                                 Log.i("GETBARCODEFROMFIREBASEINITIAL", getBarcode);
 
                                 if (getBarcode.length() == 10 || getBarcode.length() == 9) {
-                                    barcode.add(receivedBarcodes.get(0));
+                                   // barcode.add(receivedBarcodes.get(0));
                                     Log.d("BARCODEARRAYLIST", String.valueOf(barcode));
                                 }
 
@@ -215,10 +213,10 @@ public class BagFragment extends Fragment {
 
                                 // key: barcode, value: counter. Counter for each barcode
                                 for (int i = 0; i < barcode.size(); i++) {
-                                    counter = 1;
+                                    counter = 2;
                                     for (int j = 0; j < barcode.size(); j++) {
                                         if (barcode.get(i).equals(barcode.get(j))) {
-                                            hashMapCount.put(barcode.get(i), counter);
+                                            hashMapCount.put(barcode.get(i), counter - 1);
                                             counter++;
                                         }
                                     }
@@ -273,13 +271,10 @@ public class BagFragment extends Fragment {
                                                     // hashMapCount size == hashMapName size since both have barcodes as keys
                                                     // get count for barcode from hashMapCount and get name for barcode from hashMapName
                                                     for (int i = 0; i < hashMapCount.size(); i++) {
-                                                        productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " +hashMapName.get(noDuplicates.get(i)));
+                                                        productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
                                                         Log.i("ARRL --->", hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
                                                         Log.i("BARCODE ---->", noDuplicates.get(i));
                                                     }
-
-
-
 
                                                     Log.d("PNM --->", hashMapName.toString());
                                                     arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);

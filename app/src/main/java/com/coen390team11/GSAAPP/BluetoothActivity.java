@@ -129,9 +129,9 @@ public class BluetoothActivity extends AppCompatActivity {
                             .document("itemBarcode")
                             .update("barcode",readMessage.substring(0,10));
 
-                    FirebaseFirestore.getInstance().collection("itemScanned")
+                    /*FirebaseFirestore.getInstance().collection("itemScanned")
                             .document("itemBarcode")
-                            .delete();
+                            .update("barcode","");*/
 
                     sendToFirebase += "," + readMessage.substring(0,10);
                     Log.i("SENDTOFIREBASE",sendToFirebase);
