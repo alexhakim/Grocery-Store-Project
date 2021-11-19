@@ -73,9 +73,9 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         changeLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                SharedPreferences.Editor editor = getContext().getSharedPreferences("LanguageFromSpinner", Context.MODE_PRIVATE).edit();
+                /*SharedPreferences.Editor editor = getContext().getSharedPreferences("LanguageFromSpinner", Context.MODE_PRIVATE).edit();
                 editor.putString("LanguageFromSpinner", String.valueOf(i));
-                editor.apply();
+                editor.apply();*/
             }
 
             @Override
