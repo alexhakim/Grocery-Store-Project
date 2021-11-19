@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_completed_event.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_display_past_shopping_event.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_employee_login.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.1911231884057971" />
         <entry key="app/src/main/res/layout/activity_item_information.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
@@ -28,6 +29,7 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.34095733396718036" />
         <entry key="app/src/main/res/layout/activity_rewards.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1286231884057971" />
+        <entry key="app/src/main/res/layout/activity_update_prices.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/checkbox.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/device_adapter_view.xml" value="0.22708333333333333" />
@@ -43,7 +45,9 @@
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.24375" />
         <entry key="app/src/main/res/menu/iteminfo_menu.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/menu_after_checkout.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/menu/menu_employee_login.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/menu_item_information.xml" value="0.2015625" />
+        <entry key="app/src/main/res/menu/menu_logout.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/menu_primary.xml" value="0.24375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17592592592592593" />

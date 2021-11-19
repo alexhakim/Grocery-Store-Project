@@ -21,4 +21,13 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="Theme.GroceryStoreAndroidApplication.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.GroceryStoreAndroidApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.GroceryStoreAndroidApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

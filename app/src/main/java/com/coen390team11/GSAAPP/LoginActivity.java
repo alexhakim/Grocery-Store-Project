@@ -18,6 +18,8 @@ import android.os.Parcelable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -158,6 +160,22 @@ public class LoginActivity extends AppCompatActivity {
         /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
         startActivity(intent);*/
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_employee_login,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.employeeLogin:
+                Intent goToEmployeeLoginIntent = new Intent(getApplicationContext(),EmployeeLoginActivity.class);
+                startActivity(goToEmployeeLoginIntent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
