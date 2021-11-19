@@ -81,10 +81,15 @@ public class CheckoutActivity extends AppCompatActivity {
         randomEditText.setText("Subtotal: " + stringTotalPrice);
         randomEditText.setEnabled(false);
 
-        Double totalDouble = Double.parseDouble(stringTotalPrice);
-        Double totalWithTax = totalDouble*1.14975;
-        randomEditText2.setText("Total: " + String.format("%.2f",totalWithTax));
-        randomEditText2.setEnabled(false);
+
+        try {
+            Double totalDouble = Double.parseDouble(stringTotalPrice);
+            Double totalWithTax = totalDouble * 1.14975;
+            randomEditText2.setText("Total: " + String.format("%.2f", totalWithTax));
+            randomEditText2.setEnabled(false);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         // receive current bag from bag fragment and store in arraylist
         ArrayList<String> currentBagArrayList = (ArrayList<String>)getIntent().getSerializableExtra("current_bag");

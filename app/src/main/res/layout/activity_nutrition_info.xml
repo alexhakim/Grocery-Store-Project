@@ -11,7 +11,7 @@
         android:id="@+id/productNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Name: "
+        android:text="@string/product_name"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
         android:textSize="20sp"/>
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="70dp"
-        android:text="Serving Size: " />
+        android:text="@string/serving_size" />
 
     <TextView
         android:id="@+id/amountPerServingTextView"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="100dp"
-        android:text="Amount Per Serving"
+        android:text="@string/amount_per_serving"
         android:textSize="20sp"/>
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="120dp"
-        android:text="Calories: "
+        android:text="@string/calories"
         android:textSize="20sp"/>
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="140dp"
-        android:text="Total Fat: "
+        android:text="@string/total_fat"
         android:textSize="20sp"/>
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="180dp"
-        android:text="Cholesterol: "
+        android:text="@string/cholesterol"
         android:textSize="20sp"/>
 
     <TextView
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="200dp"
-        android:text="Sodium: "
+        android:text="@string/sodium"
         android:textSize="20sp"/>
 
     <TextView
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="220dp"
-        android:text="Total Carbohydrate: "
+        android:text="@string/total_carbohydrate"
         android:textSize="20sp"/>
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="260dp"
-        android:text="Sugars: "/>
+        android:text="@string/sugars"/>
 
     <TextView
         android:id="@+id/proteinTextView"
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="280dp"
-        android:text="Protein: "
+        android:text="@string/protein"
         android:textSize="20sp"/>
 
 

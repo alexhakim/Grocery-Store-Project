@@ -6,9 +6,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
@@ -48,10 +51,12 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     TextView totalProteinTextView;
     int totalCalories=0;
     int p=0;
+    String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //loadLocale();
         setContentView(R.layout.activity_display_past_shopping_event);
 
         ActionBar actionBar = getSupportActionBar();
@@ -72,6 +77,16 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         totalSodiumTextView = findViewById(R.id.totalSodiumTextView);
         totalCarbohydratesTextView = findViewById(R.id.totalCarbohydratesTextView);
         totalProteinTextView = findViewById(R.id.totalProteinTextView);
+
+        //SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        //String language = sharedPreferences.getString("My_Lang","");
+
+        /*Log.i("LANGUAGEDISPLAYPASTSHOPPINGEVENTACTIVITY",language);
+        if (language == "fr") {
+            GSTTextView.setText("Estimation du GST");
+            QSTTextView.setText("Estimation du QST");
+            setTitle("Événement Complété Auparavant");
+        }*/
 
         ArrayList<String> pastShoppingEventsArrayList = new ArrayList<String>();
 
@@ -133,9 +148,13 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
                                 subtotalPriceOfShoppingEventTextView.setText("Subtotal: $" + zSubTotalXString);
                                 GSTTextView.setText("Estimated GST: $" + gst);
                                 QSTTextView.setText("Estimated QST: $" + qst);
-                                Double totalDouble = Double.parseDouble(zSubTotalXString) + Double.parseDouble(gst) + Double.parseDouble(qst);
-                                String total = String.format("%.2f",totalDouble);
-                                totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+                                try {
+                                    Double totalDouble = Double.parseDouble(zSubTotalXString) + Double.parseDouble(gst) + Double.parseDouble(qst);
+                                    String total = String.format("%.2f", totalDouble);
+                                    totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                             }
                         }
                 } catch (NullPointerException e){
@@ -189,4 +208,26 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*public void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+
+        // save data to shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    // load language from shared preferences
+    public void loadLocale(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        language = sharedPreferences.getString("My_Lang","");
+        Log.i("LANGUAGELOADLOCALE2",language);
+        setLocale(language);
+    }*/
 }

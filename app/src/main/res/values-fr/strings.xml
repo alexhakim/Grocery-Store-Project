@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cartly</string>
+
+    <string-array name="genders">
+        <item>Homme</item>
+        <item>Femme</item>
+        <item>Non-Binaire</item>
+        <item>Préfère Pas Dire</item>
+    </string-array>
+    <string name="title_activity_primary">PrimaryActivity</string>
+    <string name="title_bag">Sac</string>
+    <string name="title_history">Historique</string>
+    <string name="title_settings">Paramètres</string>
+    <string name="email">Courriel</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="forgot_password">Mot de passe oublié?</string>
+    <string name="first_name">Prénom</string>
+    <string name="confirm_password">Confirmer Mot de Passe</string>
+    <string name="register">S\'inscrire</string>
+    <string name="already_have_an_account_login">Vous avez déjâ un compte? Se Connecter</string>
+    <string name="reset_password">Réinitialiser Mot de passe</string>
+    <string name="last_name">Nom</string>
+    <string name="phone_number">Numéro de téléphone</string>
+    <string name="gender">Sexe</string>
+    <string name="save">Sauvegarder</string>
+    <string name="product_name">Nom du Produit:</string>
+    <string name="serving_size">Portion:</string>
+    <string name="amount_per_serving">Quantité Par Portion</string>
+    <string name="calories">Calories:</string>
+    <string name="total_fat">Graisse totale:</string>
+    <string name="cholesterol">Cholesterol:</string>
+    <string name="sodium">Sodium:</string>
+    <string name="total_carbohydrate">Glucides totaux:</string>
+    <string name="sugars">Sucres:</string>
+    <string name="protein">Protein:</string>
+    <string name="current_bag">Sac Actuel</string>
+    <string name="name">Nom Complet:</string>
+    <string name="cartly_rewards_card_number">Numéro de carte de fidélité Cartly®:</string>
+    <string name="english">Anglais</string>
+    <string name="data_saving_mode">Mode limité </string>
+    <string name="when_data_saving_mode_is_turned_on_all_product_images_will_be_disabled">Lorsque le mode d\'économie de données est activé, toutes les images de produits seront désactivées.</string>
+    <string name="past_shopping_events">Événements Complétés Auparavant</string>
+    <string name="product_description">Description du Produit</string>
+    <string name="item_description_not_available">• Description du produit non-disponible.</string>
+    <string name="price_per_unit">Prix Par Unité: $</string>
+    <string name="order_summary">Récapitulatif de la commande</string>
+    <string name="subtotal">Total Partiel: $</string>
+    <string name="estimated_gst">Estimation du GST: $</string>
+    <string name="esimated_qst">Estimation du QST: $</string>
+    <string name="total_price">Prix Total: $</string>
+    <string name="fat">Graisse:</string>
+    <string name="carbohydrates">Glucides:</string>
+    <string name="please_present_this_code_at_the_checkout_counter">Veuillez presenter ce code QR à la caisse</string>
+    <string name="complete_purchase">Finaliser l\'achat</string>
+    <string name="status">Statut:</string>
+    <string name="lt_bluetooth_status"><![CDATA[<État Bluetooth>]]></string>
+    <string name="bluetooth_on">ACTIVER Bluetooth</string>
+    <string name="bluetooth_off">DÉSACTIVER Bluetooth</string>
+    <string name="discover">Découvrir</string>
+    <string name="connect_scanner">Connécter Scanner</string>
+    <string name="cartly_rewards">Récompenses Cartly® </string>
+    <string name="logout">Déconnexion</string>
+    <string-array name="languages">
+        <item>Anglais</item>
+        <item>Français</item>
+    </string-array>
+</resources>

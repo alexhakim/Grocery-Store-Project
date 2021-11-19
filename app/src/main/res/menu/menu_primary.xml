@@ -6,16 +6,16 @@
 
     <item
         android:id="@+id/Bluetooth"
-        android:title="Connect Scanner"
+        android:title="@string/connect_scanner"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Rewards"
-        android:title="Cartly® Rewards"
+        android:title="@string/cartly_rewards"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/Logout"
-        android:title="Logout"
+        android:title="@string/logout"
         app:showAsAction="never"/>
 </menu>

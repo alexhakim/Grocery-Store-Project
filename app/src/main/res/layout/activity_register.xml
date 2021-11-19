@@ -31,7 +31,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:hint="First name"
+            android:hint="@string/first_name"
             android:ems="10"
             android:textColor="@color/black"
             android:textColorHint="@color/black"></com.google.android.material.textfield.TextInputEditText>
@@ -59,7 +59,7 @@
             android:background="@color/white"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:hint="Password"
+            android:hint="@string/password"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -83,7 +83,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:hint="Confirm Password"
+            android:hint="@string/confirm_password"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:ems="10"
@@ -106,7 +106,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:background="@color/white"
@@ -129,7 +129,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:hint="Last name"
+            android:hint="@string/last_name"
             android:background="@color/white"
             android:ems="10"
             android:textColor="@color/black"
@@ -145,7 +145,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="540dp"
         android:backgroundTint="#344398"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@color/white" />
 
     <TextView
@@ -154,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="590dp"
-        android:text="Already have an account? Login"
+        android:text="@string/already_have_an_account_login"
         android:textColor="#344398"
         android:textSize="17sp" />
 

@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="365dp"
-        android:text="Product Description"
+        android:text="@string/product_description"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -42,7 +42,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="390dp"
         android:textColor="#808080"
-        android:text="• Item description not available."
+        android:text="@string/item_description_not_available"
         android:textSize="13sp" />
 
     <TextView
@@ -88,7 +88,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="670dp"
         android:backgroundTint="#344398"
-        android:text="SAVE CHANGES" />
+        android:text="@string/save" />
 
     <TextView
         android:id="@+id/priceOfProductTextView"
@@ -97,6 +97,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="570dp"
         android:textColor="@color/black"
-        android:text="Price Per Unit: $" />
+        android:text="@string/price_per_unit" />
 
 </RelativeLayout>

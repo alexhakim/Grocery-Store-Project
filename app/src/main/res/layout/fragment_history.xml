@@ -15,7 +15,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="06dp"
-        android:text="Past Shopping Events"
+        android:text="@string/past_shopping_events"
         android:textSize="20sp"
         android:textColor="#808080"
         android:textColorHint="#808080"

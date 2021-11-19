@@ -27,7 +27,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:background="#FFFFFF"
-            android:hint="First name" />
+            android:hint="@string/first_name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +50,7 @@
             android:background="#FFFFFF"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:hint="Last name" />
+            android:hint="@string/last_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:background="#FFFFFF"
-            android:hint="Email" />
+            android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -94,7 +94,7 @@
             android:background="#FFFFFF"
             android:inputType="phone"
             android:digits="1234567890"
-            android:hint="Phone Number" />
+            android:hint="@string/phone_number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -105,7 +105,7 @@
         android:layout_marginTop="370dp"
         android:textColor="@color/black"
         android:textColorHint="#808080"
-        android:text="Gender" />
+        android:text="@string/gender" />
 
     <Button
         android:id="@+id/saveButton"
@@ -115,5 +115,5 @@
         android:textColor="@color/white"
         android:layout_marginTop="430dp"
         android:backgroundTint="#344398"
-        android:text="Save" />
+        android:text="@string/save" />
 </RelativeLayout>

@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="360dp"
-        android:text="Order Summary"
+        android:text="@string/order_summary"
         style="?android:attr/listSeparatorTextViewStyle"
         android:textColor="@color/black"
         android:textSize="20sp" />
@@ -46,7 +46,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Subtotal: $" />
+        android:text="@string/subtotal" />
 
     <TextView
         android:id="@+id/GSTTextView"
@@ -56,7 +56,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Estimated GST: $" />
+        android:text="@string/estimated_gst" />
 
     <TextView
         android:id="@+id/QSTTextView"
@@ -66,7 +66,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Esimated QST: $" />
+        android:text="@string/esimated_qst" />
 
     <TextView
         android:id="@+id/totalPriceOfShoppingEventTextView"
@@ -77,7 +77,7 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:text="Total Price: $" />
+        android:text="@string/total_price" />
 
     <TextView
         android:id="@+id/nutritionInformationDisplayTextView"
@@ -98,7 +98,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Calories: " />
+        android:text="@string/calories" />
 
     <TextView
         android:id="@+id/totalFatTextView"
@@ -108,7 +108,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Fat: " />
+        android:text="@string/fat" />
 
     <TextView
         android:id="@+id/totalCholesterolTextView"
@@ -118,7 +118,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Cholesterol: " />
+        android:text="@string/cholesterol" />
 
     <TextView
         android:id="@+id/totalSodiumTextView"
@@ -128,7 +128,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Sodium: " />
+        android:text="@string/sodium" />
 
     <TextView
         android:id="@+id/totalCarbohydratesTextView"
@@ -138,7 +138,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Carbohydrates: " />
+        android:text="@string/carbohydrates" />
 
     <TextView
         android:id="@+id/totalProteinTextView"
@@ -148,6 +148,6 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="Protein: " />
+        android:text="@string/protein" />
 
 </RelativeLayout>

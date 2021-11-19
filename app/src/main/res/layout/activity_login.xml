@@ -35,7 +35,7 @@
             android:alpha="1"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="@color/black"
             android:textColorHint="@color/black"></com.google.android.material.textfield.TextInputEditText>
 
@@ -61,7 +61,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:hint="Password"
+            android:hint="@string/password"
             android:alpha="1"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -78,7 +78,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="360dp"
         android:backgroundTint="#344398"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/white" />
 
     <TextView
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="410dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textColor="#344398"
         android:textSize="17sp" />
 
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="440dp"
-        android:text="Forgot Password?"
+        android:text="@string/forgot_password"
         android:textColor="#344398"
         android:textSize="15sp" />
 

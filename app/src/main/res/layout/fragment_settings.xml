@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="41dp"
         android:backgroundTint="#344398"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="Name: "
+            android:hint="@string/name"
             android:textColor="#808080"
             android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="Email: "
+            android:hint="@string/email"
             android:textColor="#808080"
             android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:digits="1234567890"
-            android:hint="Phone Number:"
+            android:hint="@string/phone_number"
             android:inputType="phone"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:hint="Cartly® Rewards Card Number: "
+            android:hint="@string/cartly_rewards_card_number"
             android:textColor="#808080"
             android:textColorHint="#808080" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +106,7 @@
         android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
-        android:text="English"
+        android:text="@string/english"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
         android:layout_width="179dp"
         android:layout_height="36dp"
         android:layout_marginTop="44dp"
-        android:text="Data Saving Mode"
+        android:text="@string/data_saving_mode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
-        android:text="When Data Saving Mode is turned on, all product images will be disabled."
+        android:text="@string/when_data_saving_mode_is_turned_on_all_product_images_will_be_disabled"
         android:textSize="12.5sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

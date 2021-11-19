@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Grocery Store Android Application</string>
+    <string name="app_name">Cartly</string>
 
     <string-array name="genders">
         <item>Male</item>
@@ -11,6 +11,57 @@
     <string name="title_bag">Bag</string>
     <string name="title_history">History</string>
     <string name="title_settings">Settings</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="first_name">First name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="last_name">Last name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="gender">Gender</string>
+    <string name="save">Save</string>
+    <string name="product_name">Product Name:</string>
+    <string name="serving_size">Serving Size:</string>
+    <string name="amount_per_serving">Amount Per Serving</string>
+    <string name="calories">Calories:</string>
+    <string name="total_fat">Total Fat:</string>
+    <string name="cholesterol">Cholesterol:</string>
+    <string name="sodium">Sodium:</string>
+    <string name="total_carbohydrate">Total Carbohydrate:</string>
+    <string name="sugars">Sugars:</string>
+    <string name="protein">Protein:</string>
+    <string name="current_bag">Current Bag</string>
+    <string name="name">Name:</string>
+    <string name="cartly_rewards_card_number">Cartly® Rewards Card Number:</string>
+    <string name="english">English</string>
+    <string name="data_saving_mode">Data Saving Mode</string>
+    <string name="when_data_saving_mode_is_turned_on_all_product_images_will_be_disabled">When Data Saving Mode is turned on, all product images will be disabled.</string>
+    <string name="past_shopping_events">Past Shopping Events</string>
+    <string name="product_description">Product Description</string>
+    <string name="item_description_not_available">• Item description not available.</string>
+    <string name="price_per_unit">Price Per Unit: $</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="subtotal">Subtotal: $</string>
+    <string name="estimated_gst">Estimated GST: $</string>
+    <string name="esimated_qst">Estimated QST: $</string>
+    <string name="total_price">Total Price: $</string>
+    <string name="fat">Fat:</string>
+    <string name="carbohydrates">Carbohydrates:</string>
+    <string name="please_present_this_code_at_the_checkout_counter">Please present this code at the checkout counter</string>
+    <string name="complete_purchase">Complete purchase</string>
+    <string name="status">Status:</string>
+    <string name="lt_bluetooth_status"><![CDATA[<Bluetooth Status>]]></string>
+    <string name="bluetooth_on">Bluetooth ON</string>
+    <string name="bluetooth_off">Bluetooth OFF</string>
+    <string name="discover">Discover</string>
+    <string name="connect_scanner">Connect Scanner</string>
+    <string name="cartly_rewards">Cartly® Rewards</string>
+    <string name="logout">Logout</string>
     <string-array name="languages">
         <item>English</item>
         <item>French</item>

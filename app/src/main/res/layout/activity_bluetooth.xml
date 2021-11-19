@@ -21,7 +21,7 @@
             android:layout_weight="0.1"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Status:"
+            android:text="@string/status"
             android:textStyle="bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_weight="0.9"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="&lt;Bluetooth Status>" />
+            android:text="@string/lt_bluetooth_status" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,21 +64,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="Bluetooth ON" />
+        android:text="@string/bluetooth_on" />
 
     <Button
         android:id="@+id/off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="Bluetooth OFF" />
+        android:text="@string/bluetooth_off" />
 
     <Button
         android:id="@+id/discover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="Discover" />
+        android:text="@string/discover" />
 
     <ListView
         android:id="@+id/devices_list_view"

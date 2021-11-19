@@ -1,7 +1,9 @@
 package com.coen390team11.GSAAPP.ui.notifications;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.coen390team11.GSAAPP.PrimaryActivity;
 import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.databinding.FragmentSettingsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +40,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class SettingsFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
@@ -59,11 +63,26 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //loadLocale();
+
         changeLanguageSpinner = binding.changeLanguageSpinner;
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.languages, android.R.layout.simple_list_item_1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         changeLanguageSpinner.setAdapter(adapter);
         //changeLanguageSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) getContext());
+        changeLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("LanguageFromSpinner", Context.MODE_PRIVATE).edit();
+                editor.putString("LanguageFromSpinner", String.valueOf(i));
+                editor.apply();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // do nothing
+            }
+        });
 
         getNameEditText = binding.getNameEditText;
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -114,6 +133,33 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
             @Override
             public void onClick(View view) {
 
+                // language
+                /*SharedPreferences sharedPreferences = getContext().getSharedPreferences("LanguageFromSpinner", Activity.MODE_PRIVATE);
+                String lang = sharedPreferences.getString("LanguageFromSpinner","");
+                Log.i("LANGUAGEFROMSPINNER",lang);
+
+                if (Integer.parseInt(lang) == 0) {
+                    setLocale("en");
+                    getActivity().invalidateOptionsMenu();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .detach(SettingsFragment.this)
+                            .attach(SettingsFragment.this)
+                            .commit();
+
+                } else if (Integer.parseInt(lang) == 1){
+                    setLocale("fr");
+                    getActivity().invalidateOptionsMenu();
+                    getFragmentManager()
+                            .beginTransaction()
+                            .attach(SettingsFragment.this)
+                            .detach(SettingsFragment.this)
+                            .commit();
+                }*/
+
+
+
+
                 HashMap updateUserHashMap = new HashMap();
 
 
@@ -130,7 +176,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                             @Override
                             public void onSuccess(Object o) {
                                // Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
-                                Snackbar.make(view, "Succesfully updated information.", Snackbar.LENGTH_LONG).show();
+                                //Snackbar.make(view, "Succesfully updated information.", Snackbar.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -185,4 +231,27 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 break;
         }
     }
+
+    /*public void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        getContext().getResources().updateConfiguration(configuration, getContext().getResources().getDisplayMetrics());
+
+        // save data to shared preferences
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("Settings", Context.MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+
+    }
+
+    // load language from shared preferences
+    public void loadLocale(){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = sharedPreferences.getString("My_Lang","");
+        Log.i("LANGUAGELOADLOCALE",language);
+        setLocale(language);
+    }*/
+
 }
