@@ -76,6 +76,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 /*SharedPreferences.Editor editor = getContext().getSharedPreferences("LanguageFromSpinner", Context.MODE_PRIVATE).edit();
                 editor.putString("LanguageFromSpinner", String.valueOf(i));
                 editor.apply();*/
+
             }
 
             @Override
