@@ -170,6 +170,8 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 } else {
                     updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
 
+                    getPhoneNumberEditText.getEditText().setText(getNewPhoneNumber);
+
 
                 FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance()
                         .getCurrentUser().getUid()).update(updateUserHashMap)

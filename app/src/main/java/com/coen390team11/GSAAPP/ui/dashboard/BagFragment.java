@@ -1,31 +1,23 @@
 package com.coen390team11.GSAAPP.ui.dashboard;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -35,46 +27,27 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.coen390team11.GSAAPP.CheckoutActivity;
 import com.coen390team11.GSAAPP.ConfirmDeleteDialog;
 import com.coen390team11.GSAAPP.ItemInformation;
-import com.coen390team11.GSAAPP.Items;
-import com.coen390team11.GSAAPP.LoginActivity;
-import com.coen390team11.GSAAPP.NutritionInfoActivity;
 import com.coen390team11.GSAAPP.R;
-import com.coen390team11.GSAAPP.User;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.deleteItem;
 import com.coen390team11.GSAAPP.itemsPerUser;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class BagFragment extends Fragment {
 
@@ -84,17 +57,16 @@ public class BagFragment extends Fragment {
     FloatingActionButton fab;
     SwipeMenuListView currentBagListView;
     ArrayList<String> barcode = new ArrayList<String>();
-    ArrayList<String> barcodeClear = new ArrayList<String>();
     Map hashMapCount = new HashMap();
     Map hashMapName = new HashMap();
     int counter=0;
     LinkedHashSet<String> linkedHashSet;
     ArrayList<String> noDuplicates;
-    Double checkoutTotalPrice = 0.0;
+    Double checkoutTotalPrice = 0.00;
     String productPrice;
     ArrayAdapter arrayAdapter;
     String getBarcodes;
-    int itemCount = 1;
+    Map hashMapPrice = new HashMap();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -212,11 +184,11 @@ public class BagFragment extends Fragment {
                                                             //Toast.makeText(getContext(), hashMapName.toString(), Toast.LENGTH_SHORT).show();
 
 
-                                                            /*String priceSegment = trim[2];
+                                                            String priceSegment = trim[2];
                                                             productPrice = priceSegment.substring(7);
-                                                            checkoutTotalPrice += Double.parseDouble(productPrice);
-                                                            Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));*/
-
+                                                            //checkoutTotalPrice += Double.parseDouble(productPrice);
+                                                            Log.wtf("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));
+                                                            //Toast.makeText(getContext(), String.valueOf(prices), Toast.LENGTH_SHORT).show();
 
                                                         }
                                                     }
@@ -225,12 +197,25 @@ public class BagFragment extends Fragment {
                                                 // hashMapCount size == hashMapName size since both have barcodes as keys
                                                 // get count for barcode from hashMapCount and get name for barcode from hashMapName
                                                 try {
+                                                    checkoutTotalPrice = 0.0;
                                                     for (int i = 0; i < hashMapCount.size(); i++) {
                                                         productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
                                                         Log.i("ARRL --->", hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
                                                         Log.i("BARCODE ---->", noDuplicates.get(i));
+                                                        int finalI = i;
+                                                        FirebaseFirestore.getInstance().collection("items")
+                                                                .document((hashMapName.get(noDuplicates.get(i))).toString())
+                                                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                                        String getProductPrice = (value.get("price")).toString();
+                                                                        checkoutTotalPrice += Double.parseDouble(getProductPrice)*Integer.parseInt(hashMapCount.get(noDuplicates.get(finalI)).toString());
+                                                                    }
+                                                                });
+                                                        //checkoutTotalPrice += Double.parseDouble((String) hashMapName.get(noDuplicates.get(i)));
                                                     }
                                                     productsInBagArrayList.remove(0);
+
                                                 }catch (Exception e){
                                                     e.printStackTrace();
                                                 }
@@ -244,223 +229,11 @@ public class BagFragment extends Fragment {
                                         }
                                     });
 
-
-
-                            Log.d("ARRAYADAPTERCOUNT", String.valueOf(arrayAdapter.getCount()));
-
-
-                            /*arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, barcode);
-                            currentBagListView.setAdapter(arrayAdapter);
-                            arrayAdapter.notifyDataSetChanged();*/
-
-
                         }catch (Exception e){
                             e.printStackTrace();
                         }
                     }
                 });
-
-
-        // retrieve barcode of scanned item
-        /*FirebaseFirestore.getInstance().collection("itemScanned")
-                .document("itemBarcode")
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        try {
-                            if ((value.get("barcodeArray")).toString() != null || (!(value.get("barcodeArray")).toString().isEmpty())) {
-                                getBarcodes = (value.get("barcodeArray")).toString();
-                                Log.i("GETBARCODEFIREBASE", getBarcodes);
-
-                                String[] trim = getBarcodes.split(",");
-                                ArrayList<String> trimToArrayList = new ArrayList<String>();
-                                // converting array to arraylist
-                                Collections.addAll(trimToArrayList, trim);
-                                for (int i = 0; i < trimToArrayList.size(); i++) {
-                                    if (trimToArrayList.get(i).contains("[")) {
-                                        String temp = trimToArrayList.get(i);
-                                        trimToArrayList.set(i, temp.substring(1));
-                                    }
-                                    if (trimToArrayList.get(i).contains("]")) {
-                                        String temp = trimToArrayList.get(i);
-                                        trimToArrayList.set(i, temp.substring(0, temp.length() - 1));
-                                    }
-                                    if (trimToArrayList.get(i).contains(" ")) {
-                                        String temp = trimToArrayList.get(i);
-                                        trimToArrayList.set(i, temp.substring(1));
-                                    }
-                                    barcode.add(trimToArrayList.get(i));
-                                    Log.i("BARCODENULLAB", trimToArrayList.get(i));
-                                }
-
-                                // https://stackoverflow.com/questions/14035805/android-refresh-listview-after-delete
-
-                                // temp barcodes
-                                //tempBarcodes();
-
-
-                                // max
-                            /*SharedPreferences sharedPreferences = getContext().getSharedPreferences("barcodeForItemQuantityChange", Context.MODE_PRIVATE);
-                            String barcodeForItemQuantityChange = sharedPreferences.getString("barcodeForItemQuantityChange", "");
-                            int countForItemQuantityChange = sharedPreferences.getInt("countForItemQuantityChange",0);
-
-                            for (int i=0;i<countForItemQuantityChange;i++){
-                                barcode.add(barcodeForItemQuantityChange);
-                            }
-
-
-                            // min
-                            SharedPreferences sharedPreferences2 = getContext().getSharedPreferences("barcodeForItemQuantityChangeMIN", Context.MODE_PRIVATE);
-                            String barcodeForItemQuantityChangeMIN = sharedPreferences2.getString("barcodeForItemQuantityChangeMIN", "");
-                            int countForItemQuantityChangeMIN = sharedPreferences2.getInt("countForItemQuantityChangeMIN",0);
-
-                            for (int i=0;i<countForItemQuantityChangeMIN;i++){
-                                barcode.remove(barcodeForItemQuantityChangeMIN);
-                            }*/
-
-                                // copy barcode arraylist into noDuplicates arraylist but without duplicates
-                                /*linkedHashSet = new LinkedHashSet<>(barcode);
-                                noDuplicates = new ArrayList<>(linkedHashSet);
-                                Log.i("NODUPLICATESARRAYLIST", String.valueOf(noDuplicates));
-
-
-                                // key: barcode, value: counter. Counter for each barcode
-                                for (int i = 0; i < barcode.size(); i++) {
-                                    counter = 2;
-                                    for (int j = 0; j < barcode.size(); j++) {
-                                        if (barcode.get(i).equals(barcode.get(j))) {
-                                            hashMapCount.put(barcode.get(i), counter - 1);
-                                            counter++;
-                                        }
-                                    }
-                                }
-                                Log.d("MAP:     ", hashMapCount.toString());
-                                // getting count for each barcode
-
-                                // store barcode -> name in other hashmap with key = barcode
-                                // get name from hashmapName according to barcode
-                                // get count from hashmapCount according to barcode
-                                // display in arraylist
-
-                                // needed to store current cart to database in case of adding/removing items and switching activities
-                                Log.i("FIREBASE ID: ", String.valueOf(FirebaseAuth.getInstance().getCurrentUser().getEmail()));
-
-                                // get item name based on barcode input
-                                FirebaseFirestore.getInstance().collection("items").get()
-                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if (task.isSuccessful()) {
-
-                                                    // for each existing document in "items" collection
-                                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        //Log.d("QUERY ---> ", document.getId() + " => " + document.getData());
-
-                                                        // converting all received document data to string
-                                                        String dataToString = document.getData().toString();
-
-                                                        for (int i = 0; i < barcode.size(); i++) {
-                                                            if (dataToString.contains(barcode.get(i))) {
-
-                                                                // if document contains barcode, return name
-                                                                // implement return field
-                                                                Log.d("DATA ---->", dataToString);
-
-                                                                String[] trim = dataToString.split(",");
-                                                                String nameSegment = trim[3];
-                                                                String productName = nameSegment.substring(6);
-                                                                Log.i("PRODUCT: ", productName);
-                                                                hashMapName.put(barcode.get(i), productName);
-
-                                                                String priceSegment = trim[2];
-                                                                productPrice = priceSegment.substring(7);
-                                                                checkoutTotalPrice += Double.parseDouble(productPrice);
-                                                                Log.i("CHECKOUT PRICE: ", String.valueOf(checkoutTotalPrice));
-
-                                                            }
-                                                        }
-                                                    }
-
-                                                    // hashMapCount size == hashMapName size since both have barcodes as keys
-                                                    // get count for barcode from hashMapCount and get name for barcode from hashMapName
-                                                    try {
-                                                        for (int i = 0; i < hashMapCount.size(); i++) {
-                                                            productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-                                                            Log.i("ARRL --->", hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
-                                                            Log.i("BARCODE ---->", noDuplicates.get(i));
-                                                        }
-                                                    }catch (Exception e){
-                                                        e.printStackTrace();
-                                                    }
-
-                                                    Log.d("PNM --->", hashMapName.toString());
-                                                    arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
-                                                    currentBagListView.setAdapter(arrayAdapter);
-                                                    arrayAdapter.notifyDataSetChanged();
-                                                    //productsInBagArrayList.clear();
-                                                    for (int i = 0; i < barcode.size(); i++) {
-                                                        barcode.remove(i);
-                                                    }
-
-
-                                                    // add document of name set to email of user to collection itemsPerUser
-                                                    FirebaseFirestore.getInstance().collection("itemsPerUser").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                                                            .set(itemsPerUser, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-
-                                                        }
-                                                    });
-
-                                                    FirebaseFirestore.getInstance().collection("deleteItem").document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                                                            .set(deleteItem, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-
-                                                        }
-                                                    });
-
-
-                                                    // storing current bag of logged in user in database
-                                                    for (int i = 0; i < hashMapCount.size(); i++) {
-
-                                                        Log.i("XYZ", hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-
-                                                        FirebaseFirestore.getInstance().collection("itemsPerUser")
-                                                                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).update("items",
-                                                                FieldValue.arrayUnion(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i))));
-                                                    }
-                                                } else {
-                                                    Log.d(TAG, "Error retrieving document information: ", task.getException());
-                                                }
-                                            }
-                                        });
-
-
-                            }
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                        }
-
-
-                });*/
-
-
-
-
-
-
-
 
 
         // go to nutritioninfo activity
@@ -544,6 +317,7 @@ public class BagFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // go to checkout
                 String totalPrice = String.format("%.2f",checkoutTotalPrice); // round to 2 decimal places
                 Log.d("TOTALPRICE",checkoutTotalPrice.toString());
