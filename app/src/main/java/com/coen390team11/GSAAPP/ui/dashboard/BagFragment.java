@@ -199,22 +199,24 @@ public class BagFragment extends Fragment {
                                                 try {
                                                     checkoutTotalPrice = 0.0;
                                                     for (int i = 0; i < hashMapCount.size(); i++) {
-                                                        productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
-                                                        Log.i("ARRL --->", hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
-                                                        Log.i("BARCODE ---->", noDuplicates.get(i));
-                                                        int finalI = i;
-                                                        FirebaseFirestore.getInstance().collection("items")
-                                                                .document((hashMapName.get(noDuplicates.get(i))).toString())
-                                                                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                                                                    @Override
-                                                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                                                        String getProductPrice = (value.get("price")).toString();
-                                                                        checkoutTotalPrice += Double.parseDouble(getProductPrice)*Integer.parseInt(hashMapCount.get(noDuplicates.get(finalI)).toString());
-                                                                    }
-                                                                });
+                                                        if (!hashMapName.get(noDuplicates.get(i)).toString().equals("Robin Hood All Purpose Flour")) {
+                                                            productsInBagArrayList.add(hashMapCount.get(noDuplicates.get(i)) + "x " + hashMapName.get(noDuplicates.get(i)));
+                                                            Log.i("ARRL --->", hashMapName.get(noDuplicates.get(i)) + " " + hashMapCount.get(noDuplicates.get(i)));
+                                                            Log.i("BARCODE ---->", noDuplicates.get(i));
+                                                            int finalI = i;
+                                                            FirebaseFirestore.getInstance().collection("items")
+                                                                    .document((hashMapName.get(noDuplicates.get(i))).toString())
+                                                                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                                        @Override
+                                                                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                                            String getProductPrice = (value.get("price")).toString();
+                                                                            checkoutTotalPrice += Double.parseDouble(getProductPrice) * Integer.parseInt(hashMapCount.get(noDuplicates.get(finalI)).toString());
+                                                                        }
+                                                                    });
+                                                        }
                                                         //checkoutTotalPrice += Double.parseDouble((String) hashMapName.get(noDuplicates.get(i)));
                                                     }
-                                                    productsInBagArrayList.remove(0);
+                                                    //productsInBagArrayList.remove(0);
 
                                                 }catch (Exception e){
                                                     e.printStackTrace();
