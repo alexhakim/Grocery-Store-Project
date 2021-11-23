@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.335" />
         <entry key="app/src/main/res/layout/layout_delete_request_dialog.xml" value="0.17753623188405798" />
         <entry key="app/src/main/res/layout/layout_logout_dialog.xml" value="0.24270833333333333" />
+        <entry key="app/src/main/res/layout/layout_scanner_disconnection_dialog.xml" value="0.15715579710144928" />
         <entry key="app/src/main/res/layout/login_activity.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.24375" />
         <entry key="app/src/main/res/menu/iteminfo_menu.xml" value="0.24270833333333333" />

@@ -7,11 +7,10 @@
         android:title="@string/logout"
         app:showAsAction="never"/>
 
-    <item
+    <!--<item
         android:id="@+id/searchInterface"
         android:title="Search Products"
         android:icon="@android:drawable/ic_menu_search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always"/>
-
+        app:showAsAction="always"/>-->
 </menu>

@@ -34,6 +34,7 @@
         android:alpha="1"
         android:background="@color/white"
         android:ems="10"
+        android:inputType="number"
         android:hint="Employee ID"
         android:textColor="@color/black"
         android:textColorHint="@color/black"></com.google.android.material.textfield.TextInputEditText>

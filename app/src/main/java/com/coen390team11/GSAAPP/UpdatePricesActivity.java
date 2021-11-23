@@ -85,11 +85,12 @@ public class UpdatePricesActivity extends AppCompatActivity {
                                 editor.putString("product_name_employee", arrayList.get(i));
                                 editor.putString("product_price_employee", priceArrayList.get(i));
                                 editor.apply();
-
                                 ChangeProductPriceDialog changeProductPriceDialog = new ChangeProductPriceDialog();
                                 changeProductPriceDialog.show(getSupportFragmentManager(),"OK");
                             }
                         });
+
+
                     }
                 }
             }
@@ -98,11 +99,12 @@ public class UpdatePricesActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_logout,menu);
-        MenuItem item = menu.findItem(R.id.searchInterface);
-        try {
+        //MenuItem item = menu.findItem(R.id.searchInterface);
+        /*try {
             SearchView searchView = (SearchView) item.getActionView();
 
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -119,7 +121,8 @@ public class UpdatePricesActivity extends AppCompatActivity {
             });
         } catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
+
         return super.onCreateOptionsMenu(menu);
     }
 

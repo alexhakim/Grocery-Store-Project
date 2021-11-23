@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,10 +43,15 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 public class BluetoothActivity extends AppCompatActivity {
+
+    ArrayList<String> barcodes = new ArrayList<String>();
 
     private final String TAG = BluetoothActivity.class.getSimpleName();
 
@@ -71,8 +77,6 @@ public class BluetoothActivity extends AppCompatActivity {
     private Handler mHandler; // Our main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
-
-    String sendToFirebase = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,20 +129,34 @@ public class BluetoothActivity extends AppCompatActivity {
                     editor.putString("barcode_by_bluetooth", readMessage.substring(0,10));
                     editor.apply();
 
+                    /*FirebaseFirestore.getInstance().collection("itemScanned")
+                            .document("itemBarcode")
+                            .update("barcode",readMessage.substring(0,10));*/
+
+
+
+                    /*FirebaseFirestore.getInstance().collection("itemScanned")
+                            .document("itemBarcode")
+                            .update("barcodeArray",FieldValue.arrayUnion(readMessage.substring(0,10)));*/
+
+
+                    barcodes.add(readMessage.substring(0,10));
+                    Map<String, Object> docData = new HashMap<>();
+                    docData.put("barcodeArray", barcodes);
                     FirebaseFirestore.getInstance().collection("itemScanned")
                             .document("itemBarcode")
-                            .update("barcode",readMessage.substring(0,10));
+                            .set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.d("DocumentSnapshot successfully written!", "DocumentSnapshot successfully written!");
+                        }
+                    });
 
-                    /*FirebaseFirestore.getInstance().collection("itemScanned")
-                            .document("itemBarcode")
-                            .update("barcode","");*/
 
-                    sendToFirebase += "," + readMessage.substring(0,10);
-                    Log.i("SENDTOFIREBASE",sendToFirebase);
 
-                    /*FirebaseFirestore.getInstance().collection("itemScanned")
-                            .document("itemBarcode").update("barcodesString",
-                            sendToFirebase);*/
+                    //sendToFirebase += "," + readMessage.substring(0,10);
+                    //Log.i("SENDTOFIREBASE",sendToFirebase);
+
 
                 }
 
