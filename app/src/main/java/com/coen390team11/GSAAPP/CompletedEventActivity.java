@@ -111,14 +111,25 @@ public class CompletedEventActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.LogoutB:
+            /*case R.id.LogoutB:
+                //LogoutDialog logoutDialog = new LogoutDialog();
+                //logoutDialog.show(getSupportFragmentManager(),"Logout");
+                /*Intent goToLoginActivityIntent = new Intent(CompletedEventActivity.this,SplashActivity.class);
+                goToLoginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(goToLoginActivityIntent);
+                this.finish();*/
+            case R.id.goToPastEvents:
                 LogoutDialog logoutDialog = new LogoutDialog();
                 logoutDialog.show(getSupportFragmentManager(),"Logout");
-            case R.id.goToPastEvents:
-                Intent goToPrimaryActivityIntent = new Intent(CompletedEventActivity.this,PrimaryActivity.class);
+                /*Intent goToPrimaryActivityIntent = new Intent(CompletedEventActivity.this,LoginActivity.class);
                 startActivity(goToPrimaryActivityIntent);
-                this.finish();
+                this.finish();*/
+            /*case R.id.LGX:
+                Intent goToPrimaryActivityIntent = new Intent(CompletedEventActivity.this,LoginActivity.class);
+                startActivity(goToPrimaryActivityIntent);
+                this.finish();*/
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

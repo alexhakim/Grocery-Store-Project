@@ -43,6 +43,8 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -111,6 +113,18 @@ public class CheckoutActivity extends AppCompatActivity {
                 // update purchaseCompleted field in firebase collection "pastShoppingEventsPerUser" to 1 for current user
 
                 firstEvents();
+
+                ArrayList<String> empty = new ArrayList<String>();
+                Map<String, Object> emptyMap = new HashMap<>();
+                emptyMap.put("barcodeArray",empty);
+                FirebaseFirestore.getInstance().collection("itemScanned")
+                        .document("itemBarcode")
+                        .set(emptyMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("DocumentSnapshot successfully cleared bag!", "DocumentSnapshot successfully cleared bag!");
+                    }
+                });
 
                 Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this,CompletedEventActivity.class);
                 startActivity(goToAfterCheckoutIntent);

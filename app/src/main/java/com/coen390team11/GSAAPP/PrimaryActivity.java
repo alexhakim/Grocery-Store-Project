@@ -37,6 +37,12 @@ import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class PrimaryActivity extends AppCompatActivity {
 
     private ActivityPrimaryBinding binding;
@@ -47,6 +53,32 @@ public class PrimaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        ArrayList<String> empty = new ArrayList<String>();
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("barcodeArray", empty);
+        FirebaseFirestore.getInstance().collection("itemScanned")
+                .document("itemBarcode")
+                .set(docData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("DocumentSnapshot successfully written!", "DocumentSnapshot successfully written!");
+            }
+        });
+
+        /*try {
+            SharedPreferences sp = getSharedPreferences("passtoprimary", Context.MODE_PRIVATE);
+            //String deleteItem = sp.getString("delete_item", "");
+
+            Set<String> set = sp.getStringSet("passtoprimary", null);
+            ArrayList<String> productsInBagArrayList = new ArrayList<String>(set);
+
+            if (productsInBagArrayList.size() > 1) {
+                productsInBagArrayList.clear();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
 
 
         // to keep user logged in

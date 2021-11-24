@@ -22,8 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coen390team11.GSAAPP.ui.LogoutDialog;
+import com.coen390team11.GSAAPP.ui.dashboard.BagFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -33,6 +35,11 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemInformation extends AppCompatActivity {
 
@@ -48,6 +55,12 @@ public class ItemInformation extends AppCompatActivity {
     TextView priceOfProductTextView;
     int dataSavingMode;
     int initialItemCount;
+    int initialProductCount;
+    ArrayList<String> trimToArrayList = new ArrayList<String>();
+    ArrayList<String> trimToArrayListMAX = new ArrayList<String>();
+    ArrayList<String> trimToArrayListMIN = new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +79,7 @@ public class ItemInformation extends AppCompatActivity {
         productCount = Integer.parseInt(productCountString);
 
 
+
         setTitle("Product Information");
 
         productImageView = findViewById(R.id.productImageView);
@@ -80,6 +94,7 @@ public class ItemInformation extends AppCompatActivity {
         itemNameTextView.setText(productName.substring(3) + "");
         modifyQuantityTextView.setText(productCount + "");
         initialItemCount=productCount;
+        initialProductCount=initialItemCount;
 
         FirebaseFirestore.getInstance().collection("items")
                 .document(productName.substring(3)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -97,6 +112,38 @@ public class ItemInformation extends AppCompatActivity {
 
             }
         });
+
+        FirebaseFirestore.getInstance().collection("itemScanned")
+                .document("itemBarcode").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                String getCurrentBagString = (value.get("barcodeArray")).toString();
+                //Toast.makeText(getApplicationContext(), getCurrentBagString, Toast.LENGTH_SHORT).show();
+
+                String[] trim = getCurrentBagString.split(",");
+                //ArrayList<String> trimToArrayList = new ArrayList<String>();
+                // converting array to arraylist
+                Collections.addAll(trimToArrayList, trim);
+                for (int i = 0; i < trimToArrayList.size(); i++) {
+                    if (trimToArrayList.get(i).contains("[")) {
+                        String temp = trimToArrayList.get(i);
+                        trimToArrayList.set(i, temp.substring(1));
+                    }
+                    if (trimToArrayList.get(i).contains("]")) {
+                        String temp = trimToArrayList.get(i);
+                        trimToArrayList.set(i, temp.substring(0, temp.length() - 1));
+                    }
+                    if (trimToArrayList.get(i).contains(" ")) {
+                        String temp = trimToArrayList.get(i);
+                        trimToArrayList.set(i, temp.substring(1));
+                    }
+                }
+                //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayList), Toast.LENGTH_SHORT).show();
+                TinyDB tinyDB = new TinyDB(getApplicationContext());
+                tinyDB.putListString("currentBag",trimToArrayList);
+            }
+        });
+
 
         decreaseItemCountImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,9 +177,7 @@ public class ItemInformation extends AppCompatActivity {
                 }
 
                 // when save button pressed go back to currentbag
-                Intent goToPrimaryActivity = new Intent(getApplicationContext(),PrimaryActivity.class);
-                startActivity(goToPrimaryActivity);
-                finish();
+                onBackPressed();
             }
         });
 
@@ -263,6 +308,10 @@ public class ItemInformation extends AppCompatActivity {
         int itemCount = Integer.parseInt(modifyQuantityTextView.getText().toString())-initialItemCount;
         String itemName = itemNameTextView.getText().toString();
 
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        trimToArrayListMAX = tinyDB.getListString("currentBag");
+        Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMAX), Toast.LENGTH_SHORT).show();
+
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
         FirebaseFirestore.getInstance().collection("items")
                 .document(itemName).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -270,11 +319,25 @@ public class ItemInformation extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 String barcodeForItemName = (value.get("barcode")).toString();
 
-                SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChange",Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("barcodeForItemQuantityChange", barcodeForItemName);
-                editor.putInt("countForItemQuantityChange",itemCount);
-                editor.apply();
+                for (int i=0;i<itemCount;i++){
+                    trimToArrayListMAX.add(barcodeForItemName);
+                }
+
+                Map<String, Object> plus = new HashMap<>();
+                plus.put("barcodeArray", trimToArrayListMAX);
+
+                FirebaseFirestore.getInstance()
+                        .collection("itemScanned")
+                        .document("itemBarcode")
+                        .set(plus).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i("Successfully increased this item's"," quantity.");
+                    }
+                });
+
+                Log.i("barcodeForItemQuantityChange",barcodeForItemName);
+                Log.i("countForItemQuantityChange",  initialItemCount + "---" + String.valueOf(itemCount));
 
             }
         });
@@ -284,6 +347,10 @@ public class ItemInformation extends AppCompatActivity {
         int itemCount = initialItemCount-Integer.parseInt(modifyQuantityTextView.getText().toString());
         String itemName = itemNameTextView.getText().toString();
 
+        TinyDB tinyDB = new TinyDB(getApplicationContext());
+        trimToArrayListMIN = tinyDB.getListString("currentBag");
+        Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMIN), Toast.LENGTH_SHORT).show();
+
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
         FirebaseFirestore.getInstance().collection("items")
                 .document(itemName).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -291,11 +358,31 @@ public class ItemInformation extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 String barcodeForItemName = (value.get("barcode")).toString();
 
-                SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChangeMIN",Context.MODE_PRIVATE);
+                Log.i("itemCountMIN", String.valueOf(itemCount));
+
+                for (int i=0;i<itemCount;i++){
+                    trimToArrayListMIN.remove(barcodeForItemName);
+                }
+
+                Map<String, Object> minus = new HashMap<>();
+                minus.put("barcodeArray", trimToArrayListMIN);
+
+                FirebaseFirestore.getInstance()
+                        .collection("itemScanned")
+                        .document("itemBarcode")
+                        .set(minus).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i("Successfully decreased this item's"," quantity.");
+                    }
+                });
+
+
+                /*SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChangeMIN",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("barcodeForItemQuantityChangeMIN", barcodeForItemName);
                 editor.putInt("countForItemQuantityChangeMIN",itemCount);
-                editor.apply();
+                editor.apply();*/
 
             }
         });

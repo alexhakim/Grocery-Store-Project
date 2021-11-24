@@ -32,6 +32,7 @@ import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.deleteItem;
 import com.coen390team11.GSAAPP.itemsPerUser;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,8 +47,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class BagFragment extends Fragment {
 
@@ -223,9 +226,21 @@ public class BagFragment extends Fragment {
                                                 }
 
                                                 Log.d("PNM --->", hashMapName.toString());
-                                                arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
-                                                currentBagListView.setAdapter(arrayAdapter);
-                                                arrayAdapter.notifyDataSetChanged();
+                                                try {
+                                                    arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, productsInBagArrayList);
+                                                    currentBagListView.setAdapter(arrayAdapter);
+                                                    arrayAdapter.notifyDataSetChanged();
+
+                                                    Set<String> set = new HashSet<String>();
+                                                    set.clear();
+                                                    set.addAll(productsInBagArrayList);
+                                                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("passtoprimary",Context.MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putStringSet("passtoprimary", set);
+                                                    editor.apply();
+                                                } catch (Exception e){
+                                                    e.printStackTrace();
+                                                }
 
                                             }
                                         }
