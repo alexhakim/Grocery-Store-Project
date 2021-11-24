@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -112,23 +113,30 @@ public class CheckoutActivity extends AppCompatActivity {
                 // receive current bag from bag fragment using intent parcelable extra, send data to history fragment
                 // update purchaseCompleted field in firebase collection "pastShoppingEventsPerUser" to 1 for current user
 
-                firstEvents();
+                Log.i("ITOTAL0",String.valueOf(Double.parseDouble(randomEditText.getText().toString().substring(10))));
 
-                ArrayList<String> empty = new ArrayList<String>();
-                Map<String, Object> emptyMap = new HashMap<>();
-                emptyMap.put("barcodeArray",empty);
-                FirebaseFirestore.getInstance().collection("itemScanned")
-                        .document("itemBarcode")
-                        .set(emptyMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.d("DocumentSnapshot successfully cleared bag!", "DocumentSnapshot successfully cleared bag!");
-                    }
-                });
+                if (Double.parseDouble(randomEditText.getText().toString().substring(10)) == 0.00){
+                    Toast.makeText(getApplicationContext(), "Your cart is empty! Please add items before checking out.", Toast.LENGTH_SHORT).show();
+                } else {
 
-                Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this,CompletedEventActivity.class);
-                startActivity(goToAfterCheckoutIntent);
-                finish();
+                    firstEvents();
+
+                    ArrayList<String> empty = new ArrayList<String>();
+                    Map<String, Object> emptyMap = new HashMap<>();
+                    emptyMap.put("barcodeArray", empty);
+                    FirebaseFirestore.getInstance().collection("itemScanned")
+                            .document("itemBarcode")
+                            .set(emptyMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.d("DocumentSnapshot successfully cleared bag!", "DocumentSnapshot successfully cleared bag!");
+                        }
+                    });
+
+                    Intent goToAfterCheckoutIntent = new Intent(CheckoutActivity.this, CompletedEventActivity.class);
+                    startActivity(goToAfterCheckoutIntent);
+                    finish();
+                }
             }
         });
 

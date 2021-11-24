@@ -296,6 +296,7 @@ public class BagFragment extends Fragment {
                                             if (productsInBagArrayList.contains(deleteItem)) {
                                                 productsInBagArrayList.remove(deleteItem);
                                                 arrayAdapter.notifyDataSetChanged();
+                                                Log.i("NEWPRODUCTSINBAG",String.valueOf(productsInBagArrayList));
 
                                                 // update total price after removing X item
                                                 Log.i("DELETEITEMSUBSTRING3",deleteItem.substring(3));
@@ -311,14 +312,28 @@ public class BagFragment extends Fragment {
                                                         checkoutTotalPrice-=(Double.parseDouble(getDeletedItemPrice)*Integer.parseInt(deleteItem.substring(0,1)));
                                                         //Toast.makeText(getContext(), checkoutTotalPrice+"OK", Toast.LENGTH_SHORT).show();
                                                         Log.i("CHECKOUTTOTALPRICE", String.valueOf(checkoutTotalPrice));
+
+
+                                                        //String getDeletedItemBarcode = (value.get("barcode")).toString();
                                                     }
                                                 });
+
+
+
+                                                /*// update firebase with removed items
+                                                FirebaseFirestore.getInstance().collection("itemScanned")
+                                                        .document("itemBarcode")
+                                                        .set()*/
                                             }
                                         }catch(Exception e){
                                             e.printStackTrace();
                                         }
                                     }
                                 });
+
+
+
+
                         break;
                 }
                 return false;
