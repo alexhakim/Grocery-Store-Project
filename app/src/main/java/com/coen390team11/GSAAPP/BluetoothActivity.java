@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -36,14 +37,18 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -139,6 +144,13 @@ public class BluetoothActivity extends AppCompatActivity {
                             .document("itemBarcode")
                             .update("barcodeArray",FieldValue.arrayUnion(readMessage.substring(0,10)));*/
 
+
+                    // TODO: here we are simply adding barcode by barcode, to solve error maybe try
+                    // TODO: retrieve the current bag from firebase then convert to arraylist then
+                    // TODO: execute the code below
+                    // TODO: EXPLANATION: This is because the array in firebase is always getting
+                    // TODO: replaced everytime a new barcode is scanned. So it will only display the scanned barcodes
+                    // TODO: The barcodes arraylist found here only stores the barcodes scanned with the scanner
 
                     barcodes.add(readMessage.substring(0,10));
                     Map<String, Object> docData = new HashMap<>();

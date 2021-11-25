@@ -27,6 +27,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.coen390team11.GSAAPP.CheckoutActivity;
 import com.coen390team11.GSAAPP.ConfirmDeleteDialog;
 import com.coen390team11.GSAAPP.ItemInformation;
+import com.coen390team11.GSAAPP.PrimaryActivity;
 import com.coen390team11.GSAAPP.R;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.deleteItem;
@@ -314,16 +315,33 @@ public class BagFragment extends Fragment {
                                                         Log.i("CHECKOUTTOTALPRICE", String.valueOf(checkoutTotalPrice));
 
 
-                                                        //String getDeletedItemBarcode = (value.get("barcode")).toString();
+                                                        String getDeletedItemBarcode = (value.get("barcode")).toString();
+                                                        Log.i("BARCODEARRAYINDELETE",String.valueOf(barcode));
+                                                        Log.i("DELETEDITEMBARCODE",getDeletedItemBarcode);
+
+                                                        for (int i=0;i< barcode.size();i++){
+                                                            if (barcode.get(i).equals(getDeletedItemBarcode)){
+                                                                barcode.remove(getDeletedItemBarcode);
+                                                            }
+                                                        }
+
+                                                        Map<String, Object> updateDelete = new HashMap<>();
+                                                        updateDelete.put("barcodeArray", barcode);
+                                                        FirebaseFirestore.getInstance().collection("itemScanned")
+                                                                .document("itemBarcode")
+                                                                .set(updateDelete).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Log.d("DocumentSnapshot successfully written!", "DocumentSnapshot successfully written!");
+                                                                //barcode.clear();
+                                                                //productsInBagArrayList.clear();
+
+                                                            }
+                                                        });
+
                                                     }
                                                 });
 
-
-
-                                                /*// update firebase with removed items
-                                                FirebaseFirestore.getInstance().collection("itemScanned")
-                                                        .document("itemBarcode")
-                                                        .set()*/
                                             }
                                         }catch(Exception e){
                                             e.printStackTrace();
