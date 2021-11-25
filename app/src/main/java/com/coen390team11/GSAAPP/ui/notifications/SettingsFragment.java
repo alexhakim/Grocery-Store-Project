@@ -115,6 +115,17 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 Long passPhone = sharedPreferences.getLong("get_phone",0);
                 getPhoneNumberEditText.getEditText().setText(passPhone + "");
 
+                FirebaseFirestore.getInstance().collection("users")
+                        .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                String userPhoneNumberUpdated = (value.get("mobile")).toString();
+
+                                getPhoneNumberEditText.getEditText().setText(userPhoneNumberUpdated);
+                            }
+                        });
+
             }
         });
 
@@ -170,15 +181,16 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 } else {
                     updateUserHashMap.put("mobile",Long.parseLong(getNewPhoneNumber));
 
-                    getPhoneNumberEditText.getEditText().setText(getNewPhoneNumber);
-
-
                 FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance()
                         .getCurrentUser().getUid()).update(updateUserHashMap)
                         .addOnSuccessListener(new OnSuccessListener() {
                             @Override
                             public void onSuccess(Object o) {
-                               // Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
+                                try {
+                                    Toast.makeText(getContext(), "Succesfully updated information.", Toast.LENGTH_SHORT).show();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 //Snackbar.make(view, "Succesfully updated information.", Snackbar.LENGTH_LONG).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
