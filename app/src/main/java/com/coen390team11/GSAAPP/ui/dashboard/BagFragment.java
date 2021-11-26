@@ -70,8 +70,6 @@ public class BagFragment extends Fragment {
     String productPrice;
     ArrayAdapter arrayAdapter;
     String getBarcodes;
-    Map hashMapPrice = new HashMap();
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

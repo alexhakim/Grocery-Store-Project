@@ -141,6 +141,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.rewardsCardNumber = generateRewardsNumber();
                                 user.dataSavingMode = 0;
 
+                                PointsPerUser pointsPerUser = new PointsPerUser();
+
                                 // store user in cloud
                                 FirebaseFirestore.getInstance().collection("users").document(user.id)
                                         .set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -152,6 +154,22 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onFailure(@NonNull Exception e) {
                                                                             }
                                 });
+
+                                FirebaseFirestore.getInstance().collection("pointsPerUser")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                        .set(pointsPerUser, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        FirebaseFirestore.getInstance().collection("pointsPerUser")
+                                                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                                .update("points",0);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
+
 
                                 Snackbar.make(findViewById(android.R.id.content),"Registration Successful.",Snackbar.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

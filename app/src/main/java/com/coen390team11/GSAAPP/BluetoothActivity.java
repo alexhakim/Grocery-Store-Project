@@ -115,6 +115,46 @@ public class BluetoothActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
+        FirebaseFirestore.getInstance().collection("itemScanned")
+                .document("itemBarcode")
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        try {
+                            String getBarcodes = (value.get("barcodeArray")).toString();
+
+                            String[] trim = getBarcodes.split(",");
+                            ArrayList<String> trimToArrayList = new ArrayList<String>();
+                            // converting array to arraylist
+                            Collections.addAll(trimToArrayList, trim);
+                            for (int i = 0; i < trimToArrayList.size(); i++) {
+                                if (trimToArrayList.get(i).contains("[")) {
+                                    String temp = trimToArrayList.get(i);
+                                    trimToArrayList.set(i, temp.substring(1));
+                                }
+                                if (trimToArrayList.get(i).contains("]")) {
+                                    String temp = trimToArrayList.get(i);
+                                    trimToArrayList.set(i, temp.substring(0, temp.length() - 1));
+                                }
+                                if (trimToArrayList.get(i).contains(" ")) {
+                                    String temp = trimToArrayList.get(i);
+                                    trimToArrayList.set(i, temp.substring(1));
+                                }
+                            }
+                            Log.i("BARCODEBLUETOOTH", String.valueOf(trimToArrayList));
+                            ArrayList<String> testingDoubleEntry = new ArrayList<String>();
+                            if (!(testingDoubleEntry.contains(trimToArrayList))){
+                                testingDoubleEntry.addAll(trimToArrayList);
+                                Log.i("TESTINGDOUBLENETRY",String.valueOf(testingDoubleEntry));
+                                TinyDB tinyDB = new TinyDB(getApplicationContext());
+                                tinyDB.putListString("checkingDoubleEntry",testingDoubleEntry);
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
 
         mHandler = new Handler(Looper.getMainLooper()){
             @Override
@@ -145,12 +185,22 @@ public class BluetoothActivity extends AppCompatActivity {
                             .update("barcodeArray",FieldValue.arrayUnion(readMessage.substring(0,10)));*/
 
 
-                    // TODO: here we are simply adding barcode by barcode, to solve error maybe try
-                    // TODO: retrieve the current bag from firebase then convert to arraylist then
+                    // TODO: here we are simply adding barcode by barcode, to solve error maybe try to
+                    // TODO: retrieve the current bag from firebase (try with tinydb???) then convert to arraylist then
                     // TODO: execute the code below
                     // TODO: EXPLANATION: This is because the array in firebase is always getting
                     // TODO: replaced everytime a new barcode is scanned. So it will only display the scanned barcodes
                     // TODO: The barcodes arraylist found here only stores the barcodes scanned with the scanner
+
+
+                    TinyDB tinyDB = new TinyDB(getApplicationContext());
+                    ArrayList<String> testingDoubleEntry = new ArrayList<String>();
+                    testingDoubleEntry = tinyDB.getListString("checkingDoubleEntry");
+                    barcodes.clear();
+                    for (int i=0;i<testingDoubleEntry.size();i++){
+                        barcodes.add(testingDoubleEntry.get(i));
+                        Log.i("PERENTRY",String.valueOf(barcodes));
+                    }
 
                     barcodes.add(readMessage.substring(0,10));
                     Map<String, Object> docData = new HashMap<>();

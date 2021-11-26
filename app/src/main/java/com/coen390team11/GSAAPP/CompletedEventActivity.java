@@ -23,6 +23,7 @@ import com.coen390team11.GSAAPP.ui.home.HistoryFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
@@ -99,6 +100,11 @@ public class CompletedEventActivity extends AppCompatActivity {
         Double totalDouble = Double.parseDouble(subtotal) + Double.parseDouble(gst) + Double.parseDouble(qst);
         String total = String.format("%.2f",totalDouble);
         totalPriceOfShoppingEventTextView.setText("Total Price: $" + total);
+
+        // for rewards
+        FirebaseFirestore.getInstance().collection("pointsPerUser")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                .update("points", FieldValue.increment(Double.parseDouble(subtotal)));
 
     }
 
