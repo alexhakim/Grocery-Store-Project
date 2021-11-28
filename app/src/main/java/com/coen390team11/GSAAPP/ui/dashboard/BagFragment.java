@@ -322,6 +322,17 @@ public class BagFragment extends Fragment {
                                                                 barcode.remove(getDeletedItemBarcode);
                                                             }
                                                         }
+                                                        for (int i=0;i< barcode.size();i++){
+                                                            if (barcode.get(i).equals(getDeletedItemBarcode)){
+                                                                barcode.remove(getDeletedItemBarcode);
+                                                            }
+                                                        }
+                                                        for (int i=0;i< barcode.size();i++){
+                                                            if (barcode.get(i).equals(getDeletedItemBarcode)){
+                                                                barcode.remove(getDeletedItemBarcode);
+                                                            }
+                                                        }
+                                                        Log.i("ARRAYWITHOUTDELETEDITEM",String.valueOf(barcode));
 
                                                         Map<String, Object> updateDelete = new HashMap<>();
                                                         updateDelete.put("barcodeArray", barcode);
