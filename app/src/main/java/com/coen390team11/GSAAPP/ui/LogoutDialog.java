@@ -1,5 +1,8 @@
 package com.coen390team11.GSAAPP.ui;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,7 +25,10 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.coen390team11.GSAAPP.LoginActivity;
 import com.coen390team11.GSAAPP.PrimaryActivity;
 import com.coen390team11.GSAAPP.R;
+import com.coen390team11.GSAAPP.TinyDB;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.File;
 
 public class LogoutDialog extends AppCompatDialogFragment {
     @NonNull
@@ -48,8 +54,9 @@ public class LogoutDialog extends AppCompatDialogFragment {
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(logoutIntent);
                 getActivity().finish();
-
+                clearApplicationData();
                 triggerRebirth(getContext());
+
 
             }
         });
@@ -66,6 +73,38 @@ public class LogoutDialog extends AppCompatDialogFragment {
         Intent mainIntent = Intent.makeRestartActivityTask(componentName);
         context.startActivity(mainIntent);
         Runtime.getRuntime().exit(0);
+
     }
+
+    public void clearApplicationData() {
+        File cache = getContext().getCacheDir();
+        File appDir = new File(cache.getParent());
+        if (appDir.exists()) {
+            String[] children = appDir.list();
+            for (String s : children) {
+                if (!s.equals("lib")) {
+                    deleteDir(new File(appDir, s));
+                    Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+                }
+            }
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
+    }
+
+
+
 
 }
