@@ -225,8 +225,6 @@ public class PrimaryActivity extends AppCompatActivity {
 
             /*case R.id.Analytics:
 
-
-
                 Intent goToAnalyticsIntent = new Intent(getApplicationContext(),BudgetActivity.class);
                 startActivity(goToAnalyticsIntent);
                 return true;*/

@@ -54,7 +54,9 @@ public class LogoutDialog extends AppCompatDialogFragment {
                 logoutIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(logoutIntent);
                 getActivity().finish();
+                // clear application data for graph reset
                 clearApplicationData();
+
                 triggerRebirth(getContext());
 
 
