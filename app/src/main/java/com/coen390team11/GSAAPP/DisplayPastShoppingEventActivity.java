@@ -166,6 +166,7 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
     }
 
+    // ok
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
