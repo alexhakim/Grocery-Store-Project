@@ -164,38 +164,6 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
             }
         });
 
-
-        FirebaseFirestore.getInstance().collection("nutrition")
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                for (QueryDocumentSnapshot document : task.getResult()){
-
-                    String dataToString = document.getData().toString();
-                    Log.i("DOCTOSTRING",dataToString);
-
-                    if (p<pastShoppingEventsArrayList.size()) {
-
-
-                        String[] trim = dataToString.split(",");
-                        String caloriesSegment = trim[5];
-                        int caloriesAmount = Integer.parseInt(caloriesSegment.substring(10));
-                        Log.i("CALORIESAMOUNT", String.valueOf(caloriesAmount));
-
-
-                        String getItemCountString = pastShoppingEventsArrayList.get(p).substring(0, 1);
-                        int getItemCount = Integer.parseInt(getItemCountString);
-                        Log.i("GETITEMCOUNT", getItemCountString);
-                        totalCalories += caloriesAmount * getItemCount;
-                        ++p;
-                    }
-                }
-
-                totalCaloriesTextView.setText("Calories: " + totalCalories);
-            }
-        });
-
     }
 
     @Override
