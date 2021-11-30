@@ -21,9 +21,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Fragment;
+import android.widget.Toast;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -35,7 +38,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -53,6 +58,31 @@ public class PrimaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        try {
+                            String subtotal0 = (value.get("zSubTotal0")).toString();
+                            String subtotal1 = (value.get("zSubTotal1")).toString();
+                            String subtotal2 = (value.get("zSubTotal2")).toString();
+                            String subtotal3 = (value.get("zSubTotal3")).toString();
+                            String subtotal4 = (value.get("zSubTotal4")).toString();
+
+                            TinyDB tinyDB = new TinyDB(getApplicationContext());
+                            tinyDB.putString("subtotal0", subtotal0);
+                            tinyDB.putString("subtotal1", subtotal1);
+                            tinyDB.putString("subtotal2", subtotal2);
+                            tinyDB.putString("subtotal3", subtotal3);
+                            tinyDB.putString("subtotal4", subtotal4);
+
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
         ArrayList<String> empty = new ArrayList<String>();
         Map<String, Object> docData = new HashMap<>();
@@ -187,6 +217,14 @@ public class PrimaryActivity extends AppCompatActivity {
                 startActivity(goToRewardsActivityIntent);
 
                 return true;
+
+            /*case R.id.Analytics:
+
+
+
+                Intent goToAnalyticsIntent = new Intent(getApplicationContext(),BudgetActivity.class);
+                startActivity(goToAnalyticsIntent);
+                return true;*/
         }
         return super.onOptionsItemSelected(item);
     }

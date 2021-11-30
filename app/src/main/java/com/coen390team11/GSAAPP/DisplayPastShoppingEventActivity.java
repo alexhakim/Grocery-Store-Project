@@ -56,7 +56,6 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadLocale();
         setContentView(R.layout.activity_display_past_shopping_event);
 
         ActionBar actionBar = getSupportActionBar();
@@ -166,7 +165,6 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
 
     }
 
-    // ok
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -177,26 +175,4 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /*public void setLocale(String lang){
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration configuration = new Configuration();
-        configuration.locale = locale;
-        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
-
-        // save data to shared preferences
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit();
-        editor.putString("My_Lang", lang);
-        editor.apply();
-
-    }
-
-    // load language from shared preferences
-    public void loadLocale(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        language = sharedPreferences.getString("My_Lang","");
-        Log.i("LANGUAGELOADLOCALE2",language);
-        setLocale(language);
-    }*/
 }

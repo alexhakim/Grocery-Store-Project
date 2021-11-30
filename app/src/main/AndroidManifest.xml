@@ -28,6 +28,9 @@
         android:theme="@style/Theme.GroceryStoreAndroidApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BudgetActivity"
+            android:exported="true" />
+        <activity
             android:name=".UpdatePricesActivity"
             android:exported="true" />
         <activity

@@ -3,6 +3,7 @@ package com.coen390team11.GSAAPP.ui.home;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coen390team11.GSAAPP.DisplayPastShoppingEventActivity;
+import com.coen390team11.GSAAPP.R;
+import com.coen390team11.GSAAPP.TinyDB;
 import com.coen390team11.GSAAPP.databinding.FragmentHistoryBinding;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 
@@ -39,6 +51,13 @@ public class HistoryFragment extends Fragment {
     String timeStampShoppingEvent3 = "";
     String timeStampShoppingEvent4 = "";
 
+    GraphView graph;
+
+    BarChart barChart;
+    BarData barData;
+    BarDataSet barDataSet;
+    ArrayList barEntriesArrayList;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -49,6 +68,65 @@ public class HistoryFragment extends Fragment {
 
         historyListView = binding.historyListView;
         ArrayList<String> pastShoppingEvents = new ArrayList<String>();
+
+        TinyDB tinyDB = new TinyDB(getContext());
+        /*graph = binding.graph;
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, Float.parseFloat(tinyDB.getString("subtotal0"))),
+                new DataPoint(1, Float.parseFloat(tinyDB.getString("subtotal1"))),
+                new DataPoint(2, Float.parseFloat(tinyDB.getString("subtotal2"))),
+                new DataPoint(3, Float.parseFloat(tinyDB.getString("subtotal3"))),
+                new DataPoint(4, Float.parseFloat(tinyDB.getString("subtotal4")))
+        });
+        graph.addSeries(series);*/
+
+        // -------
+
+        barChart = binding.idBarChart;
+        barEntriesArrayList = new ArrayList<>();
+
+        String subtotal0 = (tinyDB.getString("subtotal0"));
+        String subtotal1 = (tinyDB.getString("subtotal1"));
+        String subtotal2 = (tinyDB.getString("subtotal2"));
+        String subtotal3 = (tinyDB.getString("subtotal3"));
+        String subtotal4 = (tinyDB.getString("subtotal4"));
+
+        // if there are no past shopping events
+        if (subtotal0.isEmpty()){
+            barChart.setAlpha(0);
+            barChart.clear();
+            // do nothing
+            // if there is one past shopping event
+        } else if (((!subtotal0.isEmpty()) && subtotal1.isEmpty())){
+            barChart.setAlpha(0);
+            barChart.clear();
+            // do nothing
+            //barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(tinyDB.getString("subtotal0"))));
+            //getBarChart();
+        } else if ((!(subtotal1.isEmpty())) && subtotal2.isEmpty()){
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
+            getBarChart();
+        } else if ((!(subtotal2.isEmpty())) && subtotal3.isEmpty()){
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
+            getBarChart();
+        }else if ((!(subtotal3.isEmpty())) && subtotal4.isEmpty()) {
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
+            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)));
+            getBarChart();
+        } else if (!(subtotal4.isEmpty())){
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
+            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)));
+            barEntriesArrayList.add(new BarEntry(5f, Float.parseFloat(subtotal4)));
+            getBarChart();
+        }
+
 
         /* here we add the past shopping events received from firebase,
         ** which are received from the complete purchase button
@@ -131,6 +209,20 @@ public class HistoryFragment extends Fragment {
 
 
         return root;
+    }
+
+    public void getBarChart(){
+        barDataSet = new BarDataSet(barEntriesArrayList, "Your 5 Most Recent Shopping Totals");
+        barData = new BarData(barDataSet);
+        barChart.setData(barData);
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setValueTextColor(Color.BLACK);
+        barDataSet.setValueTextSize(16f);
+        barChart.isFullyZoomedOut();
+        barChart.setScaleEnabled(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.getAxisRight().setDrawLabels(false);
+        barChart.getXAxis().setDrawLabels(false);
     }
 
     @Override
