@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lightbluebackgroundlogin"
     tools:context=".DisplayPastShoppingEventActivity">
 
     <ListView
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="400dp"
         android:layout_marginLeft="5dp"
-        android:text="PRICE             "
+        android:text="PRICE Summary             "
         style="?android:attr/listSeparatorTextViewStyle"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -81,12 +82,12 @@
 
     <TextView
         android:id="@+id/nutritionInformationDisplayTextView"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="540dp"
         android:layout_marginLeft="5dp"
-        android:text="Nutrition Information Totals             "
-        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_marginTop="540dp"
+        android:text="Total Nutrition            "
         android:textSize="16sp"
         android:textStyle="bold" />
 

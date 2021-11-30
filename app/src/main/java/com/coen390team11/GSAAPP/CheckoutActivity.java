@@ -57,6 +57,7 @@ public class CheckoutActivity extends AppCompatActivity {
     Button completePurchaseButton;
     String currentBagString="";
     int counterForTimesAllowedToReadFireBaseMethod;
+    final double tax = 1.14975;
 
 
     @Override
@@ -81,14 +82,14 @@ public class CheckoutActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String stringTotalPrice = intent.getStringExtra("total_price");
-        randomEditText.setText("Subtotal: " + stringTotalPrice);
+        randomEditText.setText(" Subtotal: " + stringTotalPrice);
         randomEditText.setEnabled(false);
 
 
         try {
             Double totalDouble = Double.parseDouble(stringTotalPrice);
-            Double totalWithTax = totalDouble * 1.14975;
-            randomEditText2.setText("Total: " + String.format("%.2f", totalWithTax));
+            Double totalWithTax = totalDouble * tax; //changed the amount to a final Double variable for easy modification in the future.
+            randomEditText2.setText(" Total: " + String.format("%.2f", totalWithTax));
             randomEditText2.setEnabled(false);
         } catch (Exception e){
             e.printStackTrace();

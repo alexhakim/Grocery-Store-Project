@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintVertical_bias="0.653" />
 
     <EditText
         android:id="@+id/randomEditText"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
         android:background="@color/white"
-        android:backgroundTint="#808080"
+        android:backgroundTint="#40808080"
         android:digits=".1234567890"
         android:minHeight="48dp"
         android:textColor="@color/black"
@@ -60,13 +60,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="196dp"
         android:background="@color/white"
-        android:backgroundTint="#808080"
+        android:backgroundTint="#40808080"
         android:digits=".1234567890"
         android:minHeight="48dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias=".0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +88,7 @@
         android:id="@+id/completePurchaseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="45dp"
         android:text="@string/complete_purchase"
         android:backgroundTint="#344398"
         app:layout_constraintEnd_toEndOf="parent"

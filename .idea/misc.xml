@@ -4,6 +4,36 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_bluetooth.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_checkout.xml" value="0.259375" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_completed_event.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_display_past_shopping_event.xml" value="0.259375" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_employee_login.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_forgot_password.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_item_information.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_login.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_main.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_nutrition_info.xml" value="0.3828571428571429" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_primary.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_register.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_rewards.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_splash.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_update_prices.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/activity_user_profile.xml" value="0.259375" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/checkbox.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/device_adapter_view.xml" value="0.3179347826086957" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/fragment_bag.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/fragment_history.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/fragment_settings.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/layout_change_product_price_dialog.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/layout_delete_request_dialog.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/layout_logout_dialog.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/layout/layout_scanner_disconnection_dialog.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/menu/bottom_nav_menu.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/menu/menu_employee_login.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/menu/menu_primary.xml" value="0.32083333333333336" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.33697916666666666" />
+        <entry key="..\:/Users/Aidin/AndroidStudioProjects/coen390/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.33697916666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.19444444444444445" />
@@ -27,7 +57,7 @@
         <entry key="app/src/main/res/layout/activity_nutrition_info.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_primary.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.34095733396718036" />
-        <entry key="app/src/main/res/layout/activity_rewards.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_rewards.xml" value="0.19157608695652173" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1286231884057971" />
         <entry key="app/src/main/res/layout/activity_update_prices.xml" value="0.16757246376811594" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.5" />
