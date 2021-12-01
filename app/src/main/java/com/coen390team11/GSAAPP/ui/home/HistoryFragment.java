@@ -1,5 +1,7 @@
 package com.coen390team11.GSAAPP.ui.home;
 
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -215,7 +217,7 @@ public class HistoryFragment extends Fragment {
         barDataSet = new BarDataSet(barEntriesArrayList, "Your 5 Most Recent Shopping Totals");
         barData = new BarData(barDataSet);
         barChart.setData(barData);
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setColors(barChartColors);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
         barChart.isFullyZoomedOut();
@@ -224,6 +226,10 @@ public class HistoryFragment extends Fragment {
         barChart.getAxisRight().setDrawLabels(false);
         barChart.getXAxis().setDrawLabels(false);
     }
+
+    public static final int[] barChartColors = {
+            rgb("#2ecc71"), rgb("#f1c40f"), rgb("#e74c3c"), rgb("#3498db"), rgb("#650099")
+    };
 
     @Override
     public void onDestroyView() {

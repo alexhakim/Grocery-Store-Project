@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/lightbluebackgroundlogin"
     tools:context=".RewardsActivity"
-    android:background="@color/white"/>
+    tools:ignore="ExtraText">/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rewards Table"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:background="@android:color/white"
-        android:layout_margin="40dp">
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp">
 
         <TableRow
             android:background="@color/green">
@@ -21,7 +36,7 @@
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -31,7 +46,7 @@
                 android:padding="10sp"
                 android:text="Average"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -41,7 +56,7 @@
                 android:padding="10sp"
                 android:text="Enthusiast"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -51,12 +66,12 @@
                 android:padding="10sp"
                 android:text="Addict"
                 android:textColor="@android:color/white"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
         </TableRow>
 
 
         <TableRow
-            android:background="@color/grey">
+            android:background="#EBECF0">
 
             <TextView
                 android:layout_width="0dp"
@@ -66,7 +81,7 @@
                 android:padding="10sp"
                 android:text="Requirements"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,7 +90,7 @@
                 android:padding="10sp"
                 android:text="Free"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -84,7 +99,7 @@
                 android:padding="10sp"
                 android:text="$500 lifetime spend"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -94,13 +109,13 @@
                 android:padding="10sp"
                 android:text="$1000 lifetime spend"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
 
         </TableRow>
 
         <TableRow
-            android:background="@color/grey">
+            android:background="#EBECF0">
 
             <TextView
                 android:layout_width="0dp"
@@ -110,7 +125,7 @@
                 android:padding="10sp"
                 android:text="Points Benefit"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -120,7 +135,7 @@
                 android:padding="10sp"
                 android:text="$1->1 point"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -129,7 +144,7 @@
                 android:padding="10sp"
                 android:text="$1->2 point"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,11 +153,11 @@
                 android:padding="10sp"
                 android:text="$1->3 point"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
         </TableRow>
 
         <TableRow
-            android:background="@color/grey">
+            android:background="#EBECF0">
 
             <TextView
                 android:layout_width="0dp"
@@ -152,7 +167,7 @@
                 android:padding="10sp"
                 android:text="Shopping Benefit"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -162,7 +177,7 @@
                 android:padding="10sp"
                 android:text="None"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -171,7 +186,7 @@
                 android:padding="10sp"
                 android:text="1% cashback"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -180,11 +195,11 @@
                 android:padding="10sp"
                 android:text="2% cashback"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
         </TableRow>
 
         <TableRow
-            android:background="@color/grey">
+            android:background="#EBECF0">
 
             <TextView
                 android:layout_width="0dp"
@@ -194,7 +209,7 @@
                 android:padding="10sp"
                 android:text="Free bags"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -203,7 +218,7 @@
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -221,11 +236,11 @@
                 android:padding="10sp"
                 android:text="•"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
         </TableRow>
 
         <TableRow
-            android:background="@color/grey">
+            android:background="#EBECF0">
 
             <TextView
                 android:layout_width="0dp"
@@ -235,7 +250,7 @@
                 android:padding="10sp"
                 android:text="Annual gift"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -252,7 +267,7 @@
                 android:gravity="center_horizontal"
                 android:padding="10sp"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -261,49 +276,56 @@
                 android:padding="10sp"
                 android:text="•"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="13sp" />
         </TableRow>
     </TableLayout>
 
     <TextView
         android:id="@+id/currentTierTextView"
-        android:layout_width="109dp"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="550dp"
         android:layout_marginBottom="295dp"
-        android:text="Current Tier"
-        android:textSize="20sp" />
+        android:text="Current Tier: "
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tierTextView"
-        android:layout_width="183dp"
-        android:layout_height="57dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="207dp"
-        android:textSize="25sp" />
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginBottom="295dp"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView3"
+        style="?android:listSeparatorTextViewStyle"
         android:layout_width="178dp"
-        android:layout_height="49dp"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="100dp"
-        android:text="Points Earned = "
-        android:textSize="25sp" />
+        android:text="Points Earned: "
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/pointsEarnedTextView"
-        android:layout_width="101dp"
-        android:layout_height="39dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="82dp"
-        android:layout_marginBottom="103dp"
-        android:textSize="25sp" />
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginBottom="100dp"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 
 </RelativeLayout>
 

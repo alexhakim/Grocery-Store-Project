@@ -64,6 +64,8 @@ public class PrimaryActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+
+        // for bar chart
         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addSnapshotListener(new EventListener<DocumentSnapshot>() {
