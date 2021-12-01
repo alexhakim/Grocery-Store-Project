@@ -113,7 +113,6 @@
         android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="430dp"
-        android:background="@color/white"
         android:text="@string/gender"
         android:textColor="@color/black"
         android:textColorHint="#808080" />

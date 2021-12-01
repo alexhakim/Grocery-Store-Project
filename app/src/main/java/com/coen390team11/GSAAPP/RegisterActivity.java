@@ -142,6 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.dataSavingMode = 0;
 
                                 PointsPerUser pointsPerUser = new PointsPerUser();
+                                deleteItem deleteItem = new deleteItem();
 
                                 // store user in cloud
                                 FirebaseFirestore.getInstance().collection("users").document(user.id)
@@ -163,6 +164,18 @@ public class RegisterActivity extends AppCompatActivity {
                                         FirebaseFirestore.getInstance().collection("pointsPerUser")
                                                 .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
                                                 .update("points",0);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
+
+                                FirebaseFirestore.getInstance().collection("deleteItem")
+                                        .document(FirebaseAuth.getInstance().getCurrentUser().getEmail())
+                                        .set(deleteItem, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
