@@ -29,6 +29,7 @@ import com.coen390team11.GSAAPP.ConfirmDeleteDialog;
 import com.coen390team11.GSAAPP.ItemInformation;
 import com.coen390team11.GSAAPP.PrimaryActivity;
 import com.coen390team11.GSAAPP.R;
+import com.coen390team11.GSAAPP.RecipeActivity;
 import com.coen390team11.GSAAPP.databinding.FragmentBagBinding;
 import com.coen390team11.GSAAPP.deleteItem;
 import com.coen390team11.GSAAPP.itemsPerUser;
@@ -59,6 +60,7 @@ public class BagFragment extends Fragment {
     private BagViewModel dashboardViewModel;
     private FragmentBagBinding binding;
     FloatingActionButton fab;
+    FloatingActionButton fabRecipes;
     SwipeMenuListView currentBagListView;
     ArrayList<String> barcode = new ArrayList<String>();
     Map hashMapCount = new HashMap();
@@ -391,6 +393,15 @@ public class BagFragment extends Fragment {
                 editor.apply();
 
                 startActivity(goToCheckoutIntent);
+            }
+        });
+
+        fabRecipes = binding.fabRecipes;
+        fabRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToRecipeActivityIntent = new Intent(getContext(), RecipeActivity.class);
+                startActivity(goToRecipeActivityIntent);
             }
         });
 

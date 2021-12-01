@@ -38,6 +38,18 @@
 
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRecipes"
+        android:layout_width="wrap_content"
+        android:layout_height="69dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="60dp"
+
+        />
+
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/currentBagListView"
         android:layout_width="398dp"
