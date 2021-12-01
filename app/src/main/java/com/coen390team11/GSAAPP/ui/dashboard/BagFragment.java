@@ -397,6 +397,7 @@ public class BagFragment extends Fragment {
         });
 
         fabRecipes = binding.fabRecipes;
+        fabRecipes.setImageResource(R.drawable.ic_baseline_food_bank_24);
         fabRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

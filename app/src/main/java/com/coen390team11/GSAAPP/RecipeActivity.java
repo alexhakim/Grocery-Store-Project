@@ -1,16 +1,21 @@
 package com.coen390team11.GSAAPP;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -50,6 +55,15 @@ public class RecipeActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+
+        ActionBar actionBar = getSupportActionBar();
+        // changing color of action bar
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("Recipe Search");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         txt1 = findViewById(R.id.txt1);
         ls = findViewById(R.id.ls);
@@ -139,5 +153,21 @@ public class RecipeActivity extends AppCompatActivity {
         userList = new ArrayList<>();
         listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userList);
         ls.setAdapter(listAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
