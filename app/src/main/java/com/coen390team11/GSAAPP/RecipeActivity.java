@@ -1,7 +1,9 @@
 package com.coen390team11.GSAAPP;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -93,9 +95,15 @@ public class RecipeActivity extends AppCompatActivity {
 
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent goToRecipeIntent = new Intent(getApplicationContext(), RecipeActivity.class);
                 startActivity(goToRecipeIntent);
+
+                // pass data of recipe name to nutritional info activity
+                SharedPreferences sharedPreferences = getSharedPreferences("recipe_name", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("recipe_name", arrayList.get(position));
+                editor.apply();
             }
         });
 
