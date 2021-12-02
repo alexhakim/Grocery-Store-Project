@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lightbluebackgroundlogin"
     tools:context=".DisplayPastShoppingEventActivity">
 
     <ListView
@@ -18,12 +19,12 @@
 
     <TextView
         android:id="@+id/orderSummaryTextView"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="400dp"
         android:text="@string/order_summary"
-        style="?android:attr/listSeparatorTextViewStyle"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -31,21 +32,21 @@
         android:id="@+id/priceDisplayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="460dp"
         android:layout_marginLeft="5dp"
         android:text="PRICE             "
         style="?android:attr/listSeparatorTextViewStyle"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/subtotalPriceOfShoppingEventTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="510dp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:text="@string/subtotal" />
 
     <TextView
@@ -53,33 +54,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="530dp"
         android:text="Estimated GST: "
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/QSTTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="550dp"
         android:text="Estimated QST"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/totalPriceOfShoppingEventTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="570dp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/total_price" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/nutritionInformationDisplayTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,7 +149,7 @@
         android:layout_marginLeft="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="@string/protein" />
+        android:text="@string/protein" />-->
 
 
 

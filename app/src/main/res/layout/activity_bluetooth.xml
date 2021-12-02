@@ -23,6 +23,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/status"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,10 +33,11 @@
             android:layout_weight="0.9"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/lt_bluetooth_status" />
+            android:text="@string/lt_bluetooth_status"
+            android:textSize="16sp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -58,28 +60,28 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="&lt;Read Barcode>" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <Button
         android:id="@+id/scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="@string/bluetooth_on" />
+        android:text="Turn Bluetooth On" />
 
     <Button
         android:id="@+id/off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="@string/bluetooth_off" />
+        android:text="Turn Bluetooth Off" />
 
     <Button
         android:id="@+id/discover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
-        android:text="@string/discover" />
+        android:text="Discover Scanner" />
 
     <ListView
         android:id="@+id/devices_list_view"

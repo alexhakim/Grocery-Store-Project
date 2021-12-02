@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.coen390team11.GSAAPP.ui.LogoutDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -50,6 +51,8 @@ public class EmployeeLoginActivity extends AppCompatActivity {
                         Intent goToUpdatePricesActivityIntent = new Intent(getApplicationContext(),UpdatePricesActivity.class);
                         startActivity(goToUpdatePricesActivityIntent);
                         finish();
+                    } else { // if password is incorrect
+                        Snackbar.make(findViewById(android.R.id.content),"Incorrect login credentials.",Snackbar.LENGTH_SHORT).show();
                     }
                 }
 

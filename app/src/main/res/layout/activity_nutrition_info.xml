@@ -5,24 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NutritionInfoActivity"
-    android:background="@color/white">
+    android:background="@drawable/lightbluebackgroundlogin">
 
     <TextView
         android:id="@+id/productNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/product_name"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
-        android:textSize="20sp"/>
+        android:layout_marginTop="30dp"
+        android:text="@string/product_name"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/servingSizeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="70dp"
-        android:text="@string/serving_size" />
+        android:layout_marginTop="75dp"
+        android:text="@string/serving_size"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/amountPerServingTextView"
@@ -31,34 +33,34 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="100dp"
         android:text="@string/amount_per_serving"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/caloriesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="125dp"
         android:text="@string/calories"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/totalFatTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="150dp"
         android:text="@string/total_fat"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/cholesterolTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="175dp"
         android:text="@string/cholesterol"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/sodiumTextView"
@@ -67,33 +69,43 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="200dp"
         android:text="@string/sodium"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/carbsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="225dp"
         android:text="@string/total_carbohydrate"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/sugarsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="260dp"
-        android:text="@string/sugars"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="250dp"
+        android:text="@string/sugars"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/proteinTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="275dp"
         android:text="@string/protein"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="350dp"
+        android:text="Price Per Unit: "
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

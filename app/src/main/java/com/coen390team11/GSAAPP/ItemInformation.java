@@ -310,7 +310,7 @@ public class ItemInformation extends AppCompatActivity {
 
         TinyDB tinyDB = new TinyDB(getApplicationContext());
         trimToArrayListMAX = tinyDB.getListString("currentBag");
-        Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMAX), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMAX), Toast.LENGTH_SHORT).show();
 
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
         FirebaseFirestore.getInstance().collection("items")
@@ -349,7 +349,7 @@ public class ItemInformation extends AppCompatActivity {
 
         TinyDB tinyDB = new TinyDB(getApplicationContext());
         trimToArrayListMIN = tinyDB.getListString("currentBag");
-        Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMIN), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMIN), Toast.LENGTH_SHORT).show();
 
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
         FirebaseFirestore.getInstance().collection("items")

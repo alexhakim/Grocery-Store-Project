@@ -106,26 +106,26 @@ public class HistoryFragment extends Fragment {
             //barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(tinyDB.getString("subtotal0"))));
             //getBarChart();
         } else if ((!(subtotal1.isEmpty())) && subtotal2.isEmpty()){
-            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
-            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)*1.14975f));
             getBarChart();
         } else if ((!(subtotal2.isEmpty())) && subtotal3.isEmpty()){
-            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
-            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
-            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)*1.14975f));
             getBarChart();
         }else if ((!(subtotal3.isEmpty())) && subtotal4.isEmpty()) {
-            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
-            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
-            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
-            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)));
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)*1.14975f));
             getBarChart();
         } else if (!(subtotal4.isEmpty())){
-            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)));
-            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)));
-            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)));
-            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)));
-            barEntriesArrayList.add(new BarEntry(5f, Float.parseFloat(subtotal4)));
+            barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(2f, Float.parseFloat(subtotal1)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(3f, Float.parseFloat(subtotal2)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(4f, Float.parseFloat(subtotal3)*1.14975f));
+            barEntriesArrayList.add(new BarEntry(5f, Float.parseFloat(subtotal4)*1.14975f));
             getBarChart();
         }
 

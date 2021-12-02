@@ -37,12 +37,12 @@ public class CompletedEventActivity extends AppCompatActivity {
     TextView GSTTextView;
     TextView QSTTextView;
     TextView totalPriceOfShoppingEventTextView;
-    TextView totalCaloriesTextView;
+    /*TextView totalCaloriesTextView;
     TextView totalFatTextView;
     TextView totalCholesterolTextView;
     TextView totalSodiumTextView;
     TextView totalCarbohydratesTextView;
-    TextView totalProteinTextView;
+    TextView totalProteinTextView;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +60,12 @@ public class CompletedEventActivity extends AppCompatActivity {
         GSTTextView = findViewById(R.id.GSTTextView);
         QSTTextView = findViewById(R.id.QSTTextView);
         totalPriceOfShoppingEventTextView = findViewById(R.id.totalPriceOfShoppingEventTextView);
-        totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView);
+        /*totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView);
         totalFatTextView = findViewById(R.id.totalFatTextView);
         totalCholesterolTextView = findViewById(R.id.totalCholesterolTextView);
         totalSodiumTextView = findViewById(R.id.totalSodiumTextView);
         totalCarbohydratesTextView = findViewById(R.id.totalCarbohydratesTextView);
-        totalProteinTextView = findViewById(R.id.totalProteinTextView);
+        totalProteinTextView = findViewById(R.id.totalProteinTextView);*/
 
         ArrayList<String> pastShoppingEventsArrayList = new ArrayList<String>();
 

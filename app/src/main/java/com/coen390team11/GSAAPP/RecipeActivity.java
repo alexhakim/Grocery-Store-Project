@@ -1,22 +1,36 @@
 package com.coen390team11.GSAAPP;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,25 +44,23 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 public class RecipeActivity extends AppCompatActivity {
 
+
+    //JSONParser jsonParser = new JsonParser();
     EditText txt1, txt2, txt3;
     ListView ls;
     Button btn;
-    String in;
-    ArrayList<String> userList;
-    Handler mainHandler = new Handler();
-    ProgressDialog progressDialog;
-    ArrayAdapter<String> listAdapter;
-    private Object HttpURLConnection;
+    private RequestQueue requestQueue;
+    ArrayList<String> arrayList = new ArrayList<String>();
+    ArrayAdapter arrayAdapter;
 
 
     @Override
@@ -63,111 +75,81 @@ public class RecipeActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("Recipe Search");
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
         txt1 = findViewById(R.id.txt1);
         ls = findViewById(R.id.ls);
-        in = txt1.getText().toString();
-        initializeUserList();
         btn = findViewById(R.id.btn);
-        try {
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new fetchData().start();
+        requestQueue = Volley.newRequestQueue(this);
+
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!arrayList.isEmpty()){
+                    arrayList.clear();
                 }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    class fetchData extends Thread {
-
-        String data = "";
-
-
-        @Override
-        public void run() {
-
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-
-                    progressDialog = new ProgressDialog(RecipeActivity.this);
-                    progressDialog.setMessage("Fetching Data");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                }
-            });
-
-            try {
-                URL url = new URL("www.themealdb.com/api/json/v1/1/filter.php?i=" + in);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = null;
-                inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-
-                    data = data + line;
-                }
-
-                if (!data.isEmpty()) {
-                    JSONObject jsonObject = null;
-                    try {
-                        jsonObject = new JSONObject(data);
-                        JSONArray meals = (JSONArray) jsonObject.get("meals");
-                        userList.clear();
-                        for (int i = 0; i < meals.length(); i++) {
-                            JSONObject recipes = meals.getJSONObject(i);
-                            String recipe = recipes.getString("strMeals");
-                            userList.add(recipe);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
+                jsonParse();
             }
+        });
 
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
+        ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent goToRecipeIntent = new Intent(getApplicationContext(), RecipeActivity.class);
+                startActivity(goToRecipeIntent);
+            }
+        });
 
-                    if (progressDialog.isShowing())
-                        progressDialog.dismiss();
-                    listAdapter.notifyDataSetChanged();
-
-                }
-            });
-
-        }
 
     }
 
+    private void jsonParse(){
+        String query = txt1.getText().toString();
+        String url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" + query;
 
-    public void initializeUserList(){
-        userList = new ArrayList<>();
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userList);
-        ls.setAdapter(listAdapter);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("meals");
+
+                    for (int i=0;i<jsonArray.length();i++){
+                        JSONObject meals = jsonArray.getJSONObject(i);
+
+                        String mealName = meals.getString("strMeal");
+
+
+
+                        arrayList.add(mealName);
+                        arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                        ls.setAdapter(arrayAdapter);
+                        arrayAdapter.notifyDataSetChanged();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        requestQueue.add(request);
+
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.home:
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 onBackPressed();
                 return true;
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
 }

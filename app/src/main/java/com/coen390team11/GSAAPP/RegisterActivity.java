@@ -16,12 +16,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;

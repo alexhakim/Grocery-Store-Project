@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class NutritionInfoActivity extends AppCompatActivity {
     TextView sugarsTextView;
     TextView proteinTextView;
     String productName;
+    TextView priceTextView;
 
 
     @Override
@@ -69,6 +71,10 @@ public class NutritionInfoActivity extends AppCompatActivity {
         carbsTextView = findViewById(R.id.carbsTextView);
         sugarsTextView = findViewById(R.id.sugarsTextView);
         proteinTextView = findViewById(R.id.proteinTextView);
+        priceTextView = findViewById((R.id.priceTextView));
+
+        amountPerServingTextView.setPaintFlags(amountPerServingTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
 
         Intent intent = getIntent();
         productName = intent.getStringExtra("product_name");
@@ -91,7 +97,7 @@ public class NutritionInfoActivity extends AppCompatActivity {
                             String sodium = (value.get("sodium")).toString();
                             String sugar = (value.get("sugar")).toString();
 
-                            servingSizeTextView.setText("Per " + perQuantity);
+                            servingSizeTextView.setText("Serving Size: Per " + perQuantity);
                             caloriesTextView.setText("Calories: " + calories);
                             totalFatTextView.setText("Total Fat: " + fat);
                             cholesterolTextView.setText("Cholesterol: " + cholesterol);
@@ -120,7 +126,7 @@ public class NutritionInfoActivity extends AppCompatActivity {
                                                 String sodium = (value.get("sodium")).toString();
                                                 String sugar = (value.get("sugar")).toString();
 
-                                                servingSizeTextView.setText("Per " + perQuantity);
+                                                servingSizeTextView.setText("Serving Size: Per " + perQuantity);
                                                 caloriesTextView.setText("Calories: " + calories);
                                                 totalFatTextView.setText("Total Fat: " + fat);
                                                 cholesterolTextView.setText("Cholesterol: " + cholesterol);
@@ -128,6 +134,39 @@ public class NutritionInfoActivity extends AppCompatActivity {
                                                 carbsTextView.setText("Total Carbohydrate: " + carbohydrates);
                                                 sugarsTextView.setText("Sugars: " + sugar);
                                                 proteinTextView.setText("Protein: " + protein);
+                                            }catch (Exception e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+        FirebaseFirestore.getInstance().collection("items").document(productName.substring(3))
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        try {
+                            //Log.d("CALORIES",(value.get("calories")).toString());
+                            String price = (value.get("price").toString());
+
+                            priceTextView.setText("Price Per Unit: $" + price);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            productName = productName.substring(2);
+                            if (productName.startsWith(" ")){
+                                productName = productName.substring(1);
+                            }
+                            FirebaseFirestore.getInstance().collection("items").document(productName)
+                                    .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                            try{
+                                                Log.d("CALORIESCATCH",(value.get("calories")).toString());
+                                                String price = (value.get("price").toString());
+
+                                                priceTextView.setText("Price: $" + price);
                                             }catch (Exception e){
                                                 e.printStackTrace();
                                             }

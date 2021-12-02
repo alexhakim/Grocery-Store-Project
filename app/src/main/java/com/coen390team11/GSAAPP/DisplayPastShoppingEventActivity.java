@@ -43,13 +43,13 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
     TextView GSTTextView;
     TextView QSTTextView;
     TextView totalPriceOfShoppingEventTextView;
-    TextView totalCaloriesTextView;
+    /*TextView totalCaloriesTextView;
     TextView totalFatTextView;
     TextView totalCholesterolTextView;
     TextView totalSodiumTextView;
     TextView totalCarbohydratesTextView;
     TextView totalProteinTextView;
-    int totalCalories=0;
+    int totalCalories=0;*/
     int p=0;
     String language;
 
@@ -70,12 +70,12 @@ public class DisplayPastShoppingEventActivity extends AppCompatActivity {
         GSTTextView = findViewById(R.id.GSTTextView);
         QSTTextView = findViewById(R.id.QSTTextView);
         totalPriceOfShoppingEventTextView = findViewById(R.id.totalPriceOfShoppingEventTextView);
-        totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView);
+        /*totalCaloriesTextView = findViewById(R.id.totalCaloriesTextView);
         totalFatTextView = findViewById(R.id.totalFatTextView);
         totalCholesterolTextView = findViewById(R.id.totalCholesterolTextView);
         totalSodiumTextView = findViewById(R.id.totalSodiumTextView);
         totalCarbohydratesTextView = findViewById(R.id.totalCarbohydratesTextView);
-        totalProteinTextView = findViewById(R.id.totalProteinTextView);
+        totalProteinTextView = findViewById(R.id.totalProteinTextView);*/
 
         //SharedPreferences sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         //String language = sharedPreferences.getString("My_Lang","");

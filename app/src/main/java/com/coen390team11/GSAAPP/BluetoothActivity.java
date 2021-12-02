@@ -69,7 +69,7 @@ public class BluetoothActivity extends AppCompatActivity {
 
     // GUI Components
     private TextView mBluetoothStatus;
-    private TextView mReadBuffer;
+    //private TextView mReadBuffer;
     private Button mScanBtn;
     private Button mOffBtn;
     private Button mDiscoverBtn;
@@ -99,7 +99,7 @@ public class BluetoothActivity extends AppCompatActivity {
         setTitle("Connect Scanner");
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetooth_status);
-        mReadBuffer = (TextView) findViewById(R.id.read_buffer);
+        //mReadBuffer = (TextView) findViewById(R.id.read_buffer);
         mScanBtn = (Button)findViewById(R.id.scan);
         mOffBtn = (Button)findViewById(R.id.off);
         mDiscoverBtn = (Button)findViewById(R.id.discover);
@@ -167,7 +167,7 @@ public class BluetoothActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mReadBuffer.setText(readMessage.substring(0,10));
+                    //mReadBuffer.setText(readMessage.substring(0,10));
                     Log.i("READMESSAGE",readMessage.substring(0,10));
                     SharedPreferences sharedPreferences = getSharedPreferences("barcode_by_bluetooth",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
