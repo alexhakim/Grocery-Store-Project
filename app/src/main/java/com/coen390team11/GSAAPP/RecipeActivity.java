@@ -13,6 +13,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,9 +56,7 @@ import okhttp3.OkHttpClient;
 
 public class RecipeActivity extends AppCompatActivity {
 
-
-    //JSONParser jsonParser = new JsonParser();
-    EditText txt1, txt2, txt3;
+    EditText txt1;
     ListView ls;
     Button btn;
     private RequestQueue requestQueue;
@@ -76,6 +75,9 @@ public class RecipeActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("Recipe Search");
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 
         txt1 = findViewById(R.id.txt1);
         ls = findViewById(R.id.ls);
@@ -96,7 +98,7 @@ public class RecipeActivity extends AppCompatActivity {
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent goToRecipeIntent = new Intent(getApplicationContext(), RecipeActivity.class);
+                Intent goToRecipeIntent = new Intent(getApplicationContext(), DetailedRecipeActivity.class);
                 startActivity(goToRecipeIntent);
 
                 // pass data of recipe name to nutritional info activity
