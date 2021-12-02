@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="360dp"
-        android:backgroundTint="#344398"
+        android:backgroundTint="#4CAF50"
         android:text="@string/login"
         android:textColor="@color/white" />
 

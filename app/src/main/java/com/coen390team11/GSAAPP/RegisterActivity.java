@@ -16,12 +16,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -54,6 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerButton;
     TextView loginTextView;
     ProgressDialog progressDialog;
+    CheckBox checkBox;
+    TextView terms;
 
     // generate random rewards number, will be checked for uniqueness in generateRewardsNumber()
     Random randRewards = new Random();
@@ -74,12 +79,33 @@ public class RegisterActivity extends AppCompatActivity {
         passwordConfirmEditText = (TextInputLayout) findViewById(R.id.passwordConfirmEditText);
         registerButton = findViewById(R.id.registerButton);
         loginTextView = findViewById(R.id.loginTextView);
+        checkBox = findViewById(R.id.checkBoxTerms);
+        terms = findViewById(R.id.TermsTextView);
+
+        String termsText = "I agree to the Terms of Use";
+        SpannableString edit = new SpannableString(termsText);
+        ForegroundColorSpan black = new ForegroundColorSpan(Color.BLACK);
+        edit.setSpan(black,15,27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        terms.setText(edit);
+
 
         ActionBar actionBar = getSupportActionBar();
         // changing color of action bar
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Create an Account");
+
+
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TermsOfServiceFragment dialog = new TermsOfServiceFragment();
+                dialog.show(getSupportFragmentManager(),"Terms");
+            }
+        });
+
 
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // if the user did not input in X field
                 if (firstNameEditText.getEditText().getText().toString().isEmpty()
+                        || !(checkBox.isChecked())
                         || lastNameEditText.getEditText().getText().toString().isEmpty()
                         || emailEditText.getEditText().getText().toString().isEmpty()
                         || passwordEditText.getEditText().getText().toString().isEmpty()

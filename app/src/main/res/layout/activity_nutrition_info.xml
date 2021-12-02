@@ -11,10 +11,10 @@
         android:id="@+id/productNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/product_name"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="5dp"
-        android:textSize="20sp"/>
+        android:layout_marginTop="50dp"
+        android:text="@string/product_name"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/servingSizeTextView"
@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="70dp"
-        android:text="@string/serving_size" />
+        android:text="@string/serving_size"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/amountPerServingTextView"
@@ -31,7 +32,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="100dp"
         android:text="@string/amount_per_serving"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/caloriesTextView"
@@ -82,9 +83,12 @@
         android:id="@+id/sugarsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="7dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="260dp"
-        android:text="@string/sugars"/>
+        android:text="@string/sugars"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/proteinTextView"
@@ -93,7 +97,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="280dp"
         android:text="@string/protein"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

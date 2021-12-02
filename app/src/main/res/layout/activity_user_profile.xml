@@ -112,8 +112,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
         android:layout_marginTop="430dp"
-        android:backgroundTint="#344398"
-        android:text="@string/save" />
+        android:backgroundTint="#4CAF50"
+        android:text="Create Your Account"
+        android:textColor="@color/white" />
 </RelativeLayout>

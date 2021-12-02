@@ -20,7 +20,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="250dp"
         android:ems="10"
         android:alpha="1"
         android:textColor="@color/black"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="310dp"
         android:ems="10"
         android:alpha="1"
         android:inputType="textPersonName"
@@ -76,8 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="360dp"
-        android:backgroundTint="#344398"
+        android:layout_marginTop="380dp"
+        android:backgroundTint="#4CAF50"
         android:text="@string/login"
         android:textColor="@color/white" />
 
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="430dp"
         android:text="@string/sign_up"
         android:textColor="#344398"
         android:textSize="17sp" />
@@ -96,11 +96,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="460dp"
         android:text="@string/forgot_password"
         android:textColor="#344398"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/WelcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="222dp"
+        android:text="Welcome to Cartly"
+        android:textSize="16sp" />
 
 
 </RelativeLayout>

@@ -37,6 +37,7 @@ public class forgotPasswordActivity extends AppCompatActivity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#344398"));
         actionBar.setBackgroundDrawable(colorDrawable);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Reset Password");
 
         forgotPasswordEmailEditText = (TextInputLayout) findViewById(R.id.forgotPasswordEmailEditText);
         forgotPasswordButton = findViewById(R.id.forgotPasswordButton);

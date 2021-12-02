@@ -63,21 +63,21 @@
         android:id="@+id/scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#344398"
+        android:backgroundTint="#4CAF50"
         android:text="@string/bluetooth_on" />
 
     <Button
         android:id="@+id/off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#344398"
+        android:backgroundTint="#F44336"
         android:text="@string/bluetooth_off" />
 
     <Button
         android:id="@+id/discover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#344398"
+        android:backgroundTint="#CDDC39"
         android:text="@string/discover" />
 
     <ListView
