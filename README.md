@@ -1,5 +1,10 @@
 # Grocery Store Android Application
 
+## Rights
+
+This project is not for commercial use.
+All APIs and github libraries used in this project belong to their respectful owners.
+
 ## Objective
 
 The purpose of this project is to develop a grocery store android application, linked to a barcode scanner and development kit. 
