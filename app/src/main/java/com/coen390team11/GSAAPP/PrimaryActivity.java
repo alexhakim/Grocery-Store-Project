@@ -47,6 +47,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +65,6 @@ public class PrimaryActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-
         // for bar chart
         FirebaseFirestore.getInstance().collection("pastShoppingEventsPerUser")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -78,12 +78,14 @@ public class PrimaryActivity extends AppCompatActivity {
                             String subtotal3 = (value.get("zSubTotal3")).toString();
                             String subtotal4 = (value.get("zSubTotal4")).toString();
 
-                            TinyDB tinyDB = new TinyDB(getApplicationContext());
-                            tinyDB.putString("subtotal0", subtotal0);
-                            tinyDB.putString("subtotal1", subtotal1);
-                            tinyDB.putString("subtotal2", subtotal2);
-                            tinyDB.putString("subtotal3", subtotal3);
-                            tinyDB.putString("subtotal4", subtotal4);
+                            SharedPreferences sharedPreferences = getSharedPreferences("subtotals",Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("subtotal0", subtotal0);
+                            editor.putString("subtotal1", subtotal1);
+                            editor.putString("subtotal2", subtotal2);
+                            editor.putString("subtotal3", subtotal3);
+                            editor.putString("subtotal4", subtotal4);
+                            editor.apply();
 
                         } catch (Exception e){
                             e.printStackTrace();
@@ -102,20 +104,6 @@ public class PrimaryActivity extends AppCompatActivity {
                 Log.d("DocumentSnapshot successfully written!", "DocumentSnapshot successfully written!");
             }
         });
-
-        /*try {
-            SharedPreferences sp = getSharedPreferences("passtoprimary", Context.MODE_PRIVATE);
-            //String deleteItem = sp.getString("delete_item", "");
-
-            Set<String> set = sp.getStringSet("passtoprimary", null);
-            ArrayList<String> productsInBagArrayList = new ArrayList<String>(set);
-
-            if (productsInBagArrayList.size() > 1) {
-                productsInBagArrayList.clear();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
 
 
         // to keep user logged in
@@ -225,12 +213,9 @@ public class PrimaryActivity extends AppCompatActivity {
 
                 return true;
 
-            /*case R.id.Analytics:
-
-                Intent goToAnalyticsIntent = new Intent(getApplicationContext(),BudgetActivity.class);
-                startActivity(goToAnalyticsIntent);
-                return true;*/
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -36,10 +36,6 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BudgetActivity"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".UpdatePricesActivity"
             android:exported="true"
             android:screenOrientation="portrait" />

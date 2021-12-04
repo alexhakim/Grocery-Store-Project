@@ -22,8 +22,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coen390team11.GSAAPP.DisplayPastShoppingEventActivity;
+import com.coen390team11.GSAAPP.PassArrayList;
 import com.coen390team11.GSAAPP.R;
-import com.coen390team11.GSAAPP.TinyDB;
 import com.coen390team11.GSAAPP.databinding.FragmentHistoryBinding;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -71,7 +71,8 @@ public class HistoryFragment extends Fragment {
         historyListView = binding.historyListView;
         ArrayList<String> pastShoppingEvents = new ArrayList<String>();
 
-        TinyDB tinyDB = new TinyDB(getContext());
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("subtotals", Context.MODE_PRIVATE);
+
         /*graph = binding.graph;
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, Float.parseFloat(tinyDB.getString("subtotal0"))),
@@ -87,11 +88,11 @@ public class HistoryFragment extends Fragment {
         barChart = binding.idBarChart;
         barEntriesArrayList = new ArrayList<>();
 
-        String subtotal0 = (tinyDB.getString("subtotal0"));
-        String subtotal1 = (tinyDB.getString("subtotal1"));
-        String subtotal2 = (tinyDB.getString("subtotal2"));
-        String subtotal3 = (tinyDB.getString("subtotal3"));
-        String subtotal4 = (tinyDB.getString("subtotal4"));
+        String subtotal0 = (sharedPreferences.getString("subtotal0",""));
+        String subtotal1 = (sharedPreferences.getString("subtotal1",""));
+        String subtotal2 = (sharedPreferences.getString("subtotal2",""));
+        String subtotal3 = (sharedPreferences.getString("subtotal3",""));
+        String subtotal4 = (sharedPreferences.getString("subtotal4",""));
 
         // if there are no past shopping events
         if (subtotal0.isEmpty()){
@@ -103,7 +104,6 @@ public class HistoryFragment extends Fragment {
             barChart.setAlpha(0);
             barChart.clear();
             // do nothing
-            //barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(tinyDB.getString("subtotal0"))));
             //getBarChart();
         } else if ((!(subtotal1.isEmpty())) && subtotal2.isEmpty()){
             barEntriesArrayList.add(new BarEntry(1f, Float.parseFloat(subtotal0)*1.14975f));

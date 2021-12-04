@@ -139,8 +139,8 @@ public class ItemInformation extends AppCompatActivity {
                     }
                 }
                 //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayList), Toast.LENGTH_SHORT).show();
-                TinyDB tinyDB = new TinyDB(getApplicationContext());
-                tinyDB.putListString("currentBag",trimToArrayList);
+                PassArrayList passArrayList = new PassArrayList(getApplicationContext());
+                passArrayList.putArrayList("currentBag",trimToArrayList);
             }
         });
 
@@ -308,8 +308,8 @@ public class ItemInformation extends AppCompatActivity {
         int itemCount = Integer.parseInt(modifyQuantityTextView.getText().toString())-initialItemCount;
         String itemName = itemNameTextView.getText().toString();
 
-        TinyDB tinyDB = new TinyDB(getApplicationContext());
-        trimToArrayListMAX = tinyDB.getListString("currentBag");
+        PassArrayList passArrayList = new PassArrayList(getApplicationContext());
+        trimToArrayListMAX = passArrayList.getArrayList("currentBag");
         //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMAX), Toast.LENGTH_SHORT).show();
 
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
@@ -347,8 +347,8 @@ public class ItemInformation extends AppCompatActivity {
         int itemCount = initialItemCount-Integer.parseInt(modifyQuantityTextView.getText().toString());
         String itemName = itemNameTextView.getText().toString();
 
-        TinyDB tinyDB = new TinyDB(getApplicationContext());
-        trimToArrayListMIN = tinyDB.getListString("currentBag");
+        PassArrayList passArrayList = new PassArrayList(getApplicationContext());
+        trimToArrayListMIN = passArrayList.getArrayList("currentBag");
         //Toast.makeText(getApplicationContext(), String.valueOf(trimToArrayListMIN), Toast.LENGTH_SHORT).show();
 
         // get barcode for itemName and pass to bagfragment with sharedpreferences along with count
@@ -376,13 +376,6 @@ public class ItemInformation extends AppCompatActivity {
                         Log.i("Successfully decreased this item's"," quantity.");
                     }
                 });
-
-
-                /*SharedPreferences sharedPreferences = getSharedPreferences("barcodeForItemQuantityChangeMIN",Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("barcodeForItemQuantityChangeMIN", barcodeForItemName);
-                editor.putInt("countForItemQuantityChangeMIN",itemCount);
-                editor.apply();*/
 
             }
         });

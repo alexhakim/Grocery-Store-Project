@@ -103,10 +103,6 @@ public class DetailedRecipeActivity extends AppCompatActivity {
                         String ingredient10Measure = meals.getString("strMeasure10");
                         String ingredient11Measure = meals.getString("strMeasure11");
                         String ingredient12Measure = meals.getString("strMeasure12");
-                        String ingredient13Measure = meals.getString("strMeasure13");
-                        String ingredient14Measure = meals.getString("strMeasure14");
-                        String ingredient15Measure = meals.getString("strMeasure15");
-                        String ingredient16Measure = meals.getString("strMeasure16");
 
                         String instructions = meals.getString("strInstructions");
                         String[] trim = instructions.split("\r\n");
@@ -134,22 +130,6 @@ public class DetailedRecipeActivity extends AppCompatActivity {
                             if (!ingredient12Measure.isEmpty() && !ingredient12Measure.equals(null))
                             {
                                 tempDescription += "\u2022 " + ingredient12Measure + " " + ingredient12 + "\n";
-                            }
-                            if (!ingredient13Measure.isEmpty() && !ingredient13Measure.equals(null))
-                            {
-                                tempDescription += "\u2022 " + ingredient13Measure + " " + ingredient13 + "\n";
-                            }
-                            if (!ingredient14Measure.isEmpty() && !ingredient14Measure.equals(null))
-                            {
-                                tempDescription += "\u2022 " + ingredient14Measure + " " + ingredient14 + "\n";
-                            }
-                            if (!ingredient15Measure.isEmpty() && !ingredient15Measure.equals(null))
-                            {
-                                tempDescription += "\u2022 " + ingredient15Measure + " " + ingredient15 + "\n";
-                            }
-                            if (!ingredient16Measure.isEmpty() && !ingredient16Measure.equals(null))
-                            {
-                                tempDescription += "\u2022 " + ingredient16Measure + " " + ingredient16 + "\n";
                             }
 
 

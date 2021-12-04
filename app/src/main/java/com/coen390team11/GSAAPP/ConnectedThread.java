@@ -9,43 +9,40 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class ConnectedThread extends Thread {
-    private final BluetoothSocket mmSocket;
-    private final InputStream mmInStream;
-    private final OutputStream mmOutStream;
-    private final Handler mHandler;
+    private final BluetoothSocket bluetoothSocket;
+    private final InputStream inputStream;
+    private final OutputStream outputStream;
+    private final Handler handler;
 
     public ConnectedThread(BluetoothSocket socket, Handler handler) {
-        mmSocket = socket;
-        mHandler = handler;
-        InputStream tmpIn = null;
-        OutputStream tmpOut = null;
-
-        // Get the input and output streams, using temp objects because
-        // member streams are final
+        bluetoothSocket = socket;
+        this.handler = handler;
+        InputStream in = null;
+        OutputStream out = null;
         try {
-            tmpIn = socket.getInputStream();
-            tmpOut = socket.getOutputStream();
-        } catch (IOException e) { }
-
-        mmInStream = tmpIn;
-        mmOutStream = tmpOut;
+            in = socket.getInputStream();
+            out = socket.getOutputStream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        inputStream = in;
+        outputStream = out;
     }
 
     @Override
     public void run() {
-        byte[] buffer = new byte[1024];  // buffer store for the stream
-        int bytes; // bytes returned from read()
-        // Keep listening to the InputStream until an exception occurs
+        byte[] buffer = new byte[1024];
+        int bytesReceived;
         while (true) {
             try {
                 // Read from the InputStream
-                bytes = mmInStream.available();
-                if(bytes != 0) {
+                bytesReceived = inputStream.available();
+                if(bytesReceived != 0) {
                     buffer = new byte[1024];
                     SystemClock.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
-                    bytes = mmInStream.available(); // how many bytes are ready to be read?
-                    bytes = mmInStream.read(buffer, 0, bytes); // record how many bytes we actually read
-                    mHandler.obtainMessage(BluetoothActivity.MESSAGE_READ, bytes, -1, buffer)
+                    bytesReceived = inputStream.available(); // how many bytes are ready to be read?
+                    bytesReceived = inputStream.read(buffer, 0, bytesReceived); // record how many bytes we actually read
+                    handler.obtainMessage(2, bytesReceived, -1, buffer)
                             .sendToTarget(); // Send the obtained bytes to the UI activity
                 }
             } catch (IOException e) {
@@ -54,20 +51,5 @@ public class ConnectedThread extends Thread {
                 break;
             }
         }
-    }
-
-    /* Call this from the main activity to send data to the remote device */
-    public void write(String input) {
-        byte[] bytes = input.getBytes();           //converts entered String into bytes
-        try {
-            mmOutStream.write(bytes);
-        } catch (IOException e) { }
-    }
-
-    /* Call this from the main activity to shutdown the connection */
-    public void cancel() {
-        try {
-            mmSocket.close();
-        } catch (IOException e) { }
     }
 }

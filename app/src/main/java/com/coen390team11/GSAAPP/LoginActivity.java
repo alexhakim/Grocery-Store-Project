@@ -38,6 +38,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.io.File;
 import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         emailEditText = (TextInputLayout) findViewById(R.id.emailEditText);
         passwordEditText = (TextInputLayout) findViewById(R.id.passwordEditText);
@@ -177,5 +179,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
