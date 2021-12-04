@@ -1,8 +1,8 @@
-# Grocery Store Android Application
+# Grocery Store Android Application (University Project)
 
 ## Rights
 
-This project is not for commercial use and was only created as a university course project.
+This project is not for commercial use.
 All APIs and github libraries used in this project belong to their respectful owners.
 
 ## Objective
