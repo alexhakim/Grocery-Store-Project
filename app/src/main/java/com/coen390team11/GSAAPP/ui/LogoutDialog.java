@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.coen390team11.GSAAPP.LoginActivity;
 import com.coen390team11.GSAAPP.PrimaryActivity;
 import com.coen390team11.GSAAPP.R;
-import com.coen390team11.GSAAPP.TinyDB;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;

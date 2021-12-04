@@ -27,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/bluetooth_status"
+            android:id="@+id/bluetoothStatusTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
@@ -37,54 +37,29 @@
             android:textSize="16sp"/>
     </LinearLayout>
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Incoming barcode:"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/read_buffer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="&lt;Read Barcode>" />
-    </LinearLayout>-->
-
     <Button
-        android:id="@+id/scan"
+        android:id="@+id/turnBluetoothOnButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
         android:text="Turn Bluetooth On" />
 
     <Button
-        android:id="@+id/off"
+        android:id="@+id/turnBluetoothOffButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
         android:text="Turn Bluetooth Off" />
 
     <Button
-        android:id="@+id/discover"
+        android:id="@+id/discoverScannerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#344398"
         android:text="Discover Scanner" />
 
     <ListView
-        android:id="@+id/devices_list_view"
+        android:id="@+id/displayDevicesFoundListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:choiceMode="singleChoice" />
