@@ -28,6 +28,9 @@ import org.json.JSONObject;
 
 public class DetailedRecipeActivity extends AppCompatActivity {
 
+    // Using TheMealDB API in this activity: https://themealdb.com/api.php
+    // All APIs used in this activity belong to their respectful owners.
+
     TextView recipeProductNameTextView, ingredientsTextView, instructionsTextView;
     private RequestQueue requestQueue;
     String tempDescription;

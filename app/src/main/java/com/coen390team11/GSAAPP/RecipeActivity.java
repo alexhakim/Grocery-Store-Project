@@ -56,6 +56,9 @@ import okhttp3.OkHttpClient;
 
 public class RecipeActivity extends AppCompatActivity {
 
+    // Using TheMealDB API in this activity: https://themealdb.com/api.php
+    // All APIs used in this activity belong to their respectful owners.
+
     EditText txt1;
     ListView ls;
     Button btn;
