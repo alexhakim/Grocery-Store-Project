@@ -18,12 +18,10 @@ public class PassArrayList {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     }
-
     public void putArrayList(String key, ArrayList<String> stringList) {
         String[] ArrayListStr = stringList.toArray(new String[stringList.size()]);
         sharedPreferences.edit().putString(key, TextUtils.join("‚‗‚", ArrayListStr)).apply();
     }
-
     public ArrayList<String> getArrayList(String key) {
         return new ArrayList<String>(Arrays.asList(TextUtils.split(sharedPreferences.getString(key, ""), "‚‗‚")));
     }
