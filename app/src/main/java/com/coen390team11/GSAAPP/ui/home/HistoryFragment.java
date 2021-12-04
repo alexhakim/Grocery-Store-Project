@@ -35,7 +35,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.jjoe64.graphview.GraphView;
 
 import java.util.ArrayList;
 
@@ -49,8 +48,6 @@ public class HistoryFragment extends Fragment {
     String timeStampShoppingEvent2 = "";
     String timeStampShoppingEvent3 = "";
     String timeStampShoppingEvent4 = "";
-
-    GraphView graph;
 
     BarChart barChart;
     BarData barData;
