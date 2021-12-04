@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,8 +36,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 
@@ -72,18 +69,6 @@ public class HistoryFragment extends Fragment {
         ArrayList<String> pastShoppingEvents = new ArrayList<String>();
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("subtotals", Context.MODE_PRIVATE);
-
-        /*graph = binding.graph;
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, Float.parseFloat(tinyDB.getString("subtotal0"))),
-                new DataPoint(1, Float.parseFloat(tinyDB.getString("subtotal1"))),
-                new DataPoint(2, Float.parseFloat(tinyDB.getString("subtotal2"))),
-                new DataPoint(3, Float.parseFloat(tinyDB.getString("subtotal3"))),
-                new DataPoint(4, Float.parseFloat(tinyDB.getString("subtotal4")))
-        });
-        graph.addSeries(series);*/
-
-        // -------
 
         barChart = binding.idBarChart;
         barEntriesArrayList = new ArrayList<>();
