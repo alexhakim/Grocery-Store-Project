@@ -2,7 +2,7 @@
 
 ## Rights
 
-This project is not for commercial use.
+This project is not for commercial use and was only created as a university course project.
 All APIs and github libraries used in this project belong to their respectful owners.
 
 ## Objective
