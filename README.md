@@ -5,6 +5,8 @@
 This project is not for commercial use.
 We do not claim any rights concerning APIs, libraries or images used in this project. All APIs, libraries and images used in this project belong to their respectful owners.
 
+Image attribution: Icons made by https://www.freepik.com, Freepik, from https://www.flaticon.com/
+
 ## Objective
 
 The purpose of this project is to develop a grocery store android application, linked to a barcode scanner and development kit. 
