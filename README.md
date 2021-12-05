@@ -3,7 +3,7 @@
 ## Rights
 
 This project is not for commercial use.
-All APIs and libraries used in this project belong to their respectful owners.
+We do not claim any rights concerning APIs, libraries or images used in this project. All APIs, libraries and images used in this project belong to their respectful owners.
 
 ## Objective
 
