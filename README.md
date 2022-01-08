@@ -1,4 +1,4 @@
-# Grocery Store Android Application (University Project)
+# Grocery Store Android Project
 
 ## Rights
 
